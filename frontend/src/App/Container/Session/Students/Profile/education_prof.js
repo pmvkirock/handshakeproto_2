@@ -3,6 +3,7 @@ import { Container, Row, Col, Form, Button } from 'react-bootstrap';
 import axios from 'axios';
 import cookie from 'react-cookies';
 import { connect } from 'react-redux';
+import { loadProfileData } from '../../../../../actions';
 
 class Education extends React.Component {
   constructor(props) {
@@ -69,7 +70,8 @@ class Education extends React.Component {
       toMth: this.state.ttoMth,
       fromYr: this.state.tfromYr,
       toYr: this.state.ttoYr,
-      id: e.target.getAttribute('name')
+      school_id: e.target.getAttribute('name'),
+      user_id: localStorage.getItem('user_id')
     };
     //set the with credentials to true
     axios.defaults.withCredentials = true;
@@ -83,6 +85,11 @@ class Education extends React.Component {
             error: '',
             authFlag: true
           });
+          let data = {
+            user_id: localStorage.getItem('user_id')
+          };
+          console.log(data);
+          this.props.dispatch(loadProfileData(data));
           this.getInfo();
         } else {
           this.setState({
@@ -275,10 +282,10 @@ class Education extends React.Component {
         degree,
         CGPA,
         yop,
-        fromMth,
-        toMth,
-        fromYr,
-        toYr,
+        fromMonth,
+        toMonth,
+        fromYear,
+        toYear,
         _id
       }) => {
         this.setState(prevState => {
@@ -289,10 +296,10 @@ class Education extends React.Component {
             major: prevState.major.concat(major),
             curr_CGPA: prevState.curr_CGPA.concat(CGPA),
             pass_year: prevState.pass_year.concat(yop),
-            fromMth: prevState.fromMth.concat(fromMth),
-            toMth: prevState.toMth.concat(toMth),
-            fromYr: prevState.fromYr.concat(fromYr),
-            toYr: prevState.toYr.concat(toYr),
+            fromMth: prevState.fromMth.concat(fromMonth),
+            toMth: prevState.toMth.concat(toMonth),
+            fromYr: prevState.fromYr.concat(fromYear),
+            toYr: prevState.toYr.concat(toYear),
             idstudent_edu: prevState.idstudent_edu.concat(_id)
           };
         });
@@ -360,12 +367,13 @@ class Education extends React.Component {
         degree,
         CGPA,
         yop,
-        fromMth,
-        toMth,
-        fromYr,
-        toYr
+        fromMonth,
+        toMonth,
+        fromYear,
+        toYear
       }) => {
         i++;
+        console.log(_id);
         return (
           <div key={_id}>
             <div className="edu-details" style={{ paddingTop: 10 + 'px' }}>
@@ -374,7 +382,7 @@ class Education extends React.Component {
                 {degree} - <span>{major}</span>
               </p>
               <p>
-                {fromMth}/{fromYr}-{toMth}/{toYr}
+                {fromMonth}/{fromYear}-{toMonth}/{toYear}
               </p>
               <p>Year of passing: {yop}</p>
               <p>Current CGPA: {CGPA}</p>
@@ -481,7 +489,7 @@ class Education extends React.Component {
                   <Button
                     className="top-10"
                     value={i}
-                    name={this.state.idstudent_edu[i]}
+                    name={_id}
                     onClick={this.updatePers}
                   >
                     Update school
@@ -489,7 +497,7 @@ class Education extends React.Component {
                   <Button
                     className="top-10"
                     value={i}
-                    name={this.state.idstudent_edu[i]}
+                    name={_id}
                     onClick={this.deleteEdu}
                   >
                     Delete school

@@ -29,7 +29,7 @@ var profile = class profile {
         user.state = req.body.state;
         user.country = req.body.country;
         user.save();
-        res.status(200);
+        res.status(200).end("Updated");
       } else {
         res.status(401).end("Invalid Credentials");
       }
@@ -68,49 +68,33 @@ var profile = class profile {
     });
   }
 
-  updateeduinfo(con, req, res) {
-    var sql =
-      `UPDATE 
-      student_edu
-      SET 
-      coll_name = '` +
-      req.body.coll_name +
-      `', 
-      degree = '` +
-      req.body.degree +
-      `',
-      curr_CGPA = '` +
-      req.body.curr_CGPA +
-      `',
-      fromYr = '` +
-      req.body.fromYr +
-      `',
-      fromMth = '` +
-      req.body.fromMth +
-      `',
-      toYr = '` +
-      req.body.toYr +
-      `',
-      toMth = '` +
-      req.body.toMth +
-      `',
-      major = '` +
-      req.body.major +
-      `',
-      pass_year = '` +
-      req.body.pass_year +
-      `' WHERE 
-      idstudent_edu = ` +
-      req.body.id;
-    console.log(sql);
-    con.query(sql, function(err, result, fields) {
-      if (err) throw err;
-      res.writeHead(200, {
-        "Content-Type": "application/json"
-      });
-      console.log(JSON.stringify(result));
-      res.end(JSON.stringify(result));
-    });
+  updateeduinfo(req, res) {
+    Stud_Profile.findOneAndUpdate(
+      { _id: req.body.user_id, "school_info._id": req.body.school_id },
+      {
+        $set: {
+          "school_info.$.name": req.body.coll_name,
+          "school_info.$.degree": req.body.degree,
+          "school_info.$.major": req.body.major,
+          "school_info.$.yop": req.body.pass_year,
+          "school_info.$.CGPA": req.body.curr_CGPA,
+          "school_info.$.fromMonth": req.body.fromMth,
+          "school_info.$.fromYear": req.body.fromYr,
+          "school_info.$.toMonth": req.body.toMth,
+          "school_info.$.toYear": req.body.toYr
+        }
+      },
+      function(err, doc) {
+        if (err) {
+          res.status(500).end("Error Occured");
+        }
+        if (doc) {
+          res.status(200).end("Updated");
+        } else {
+          res.status(401).end("Invalid Credentials");
+        }
+      }
+    );
   }
 
   updateexpinfo(con, req, res) {

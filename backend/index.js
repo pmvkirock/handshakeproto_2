@@ -82,5 +82,11 @@ app.post("/updatePersonal", function(req, res) {
   ins.updatebasicinfo(req, res);
 });
 
+app.post("/updateEduInfo", function(req, res) {
+  console.log("Req Body : ", req.body);
+  var ins = new stud_profile.profile();
+  ins.updateeduinfo(req, res);
+});
+
 //start your server on port 3001
 app.listen(8000, () => console.log("Server Listening on port 8000"));

@@ -209,8 +209,23 @@ class Primary extends React.Component {
   };
 
   componentDidMount() {
-    //console.log(cookie.load('cookie'));
     this.getInfo();
+  }
+
+  componentDidUpdate(prevProps) {
+    if (this.props.getProfileInfo.fname !== prevProps.getProfileInfo.fname) {
+      this.setState({
+        tfirstName: this.props.getProfileInfo.fname,
+        tlastName: this.props.getProfileInfo.lname,
+        tdob: this.props.getProfileInfo.dob,
+        tcity: this.props.getProfileInfo.city,
+        tstate: this.props.getProfileInfo.state,
+        tcountry: this.props.getProfileInfo.country,
+        tphone_num: this.props.getProfileInfo.phone,
+        temail: this.props.getProfileInfo.email,
+        tdegree: ''
+      });
+    }
   }
 
   render() {
