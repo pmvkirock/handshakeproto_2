@@ -1,7 +1,6 @@
 import React from 'react';
 import { Navbar, Nav, Form, FormControl, NavDropdown } from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import cookie from 'react-cookies';
 import { Redirect, Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import {
@@ -18,7 +17,10 @@ class Topnav extends React.Component {
   }
 
   handleLogout = () => {
-    cookie.remove('cookie', { path: '/' });
+    localStorage.removeItem('user_id');
+    localStorage.removeItem('username');
+    localStorage.removeItem('type');
+    localStorage.removeItem('token');
     this.props.dispatch(StudentType());
     this.props.dispatch(Logout());
     this.props.dispatch(updateJobFilter(''));
@@ -28,16 +30,12 @@ class Topnav extends React.Component {
   render() {
     var xnav;
     let redirectVar = null;
-    if (
-      localStorage.getItem('user_id') != '' ||
-      localStorage.getItem('user_id') != undefined
-    ) {
+
+    if (localStorage.getItem('token')) {
+      console.log(localStorage.getItem('user_id'));
       redirectVar = <Redirect to="/stud_prof" />;
     } else redirectVar = <Redirect to="/login" />;
-    if (
-      localStorage.getItem('user_id') != '' ||
-      localStorage.getItem('user_id') != undefined
-    ) {
+    if (localStorage.getItem('token')) {
       var prof_pic = '/profile.png';
       if (this.props.getProfPic != '' && this.props.getProfPic != null) {
         prof_pic =

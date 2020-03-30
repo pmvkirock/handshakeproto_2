@@ -68,6 +68,7 @@ class signupform extends React.Component {
     let redirectVar = null;
     if (this.state.jwt_token.length > 0) {
       var decoded = jwt_decode(this.state.jwt_token.split(' ')[1]);
+      localStorage.setItem('token', this.state.jwt_token);
       localStorage.setItem('user_id', decoded._id);
       localStorage.setItem('username', decoded.username);
       localStorage.setItem('type', decoded.type);

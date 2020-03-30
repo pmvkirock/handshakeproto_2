@@ -136,29 +136,31 @@ export const loadProfileData = data => {
   console.log('Preapring for Launch', data);
   return dispatch => {
     axios.defaults.withCredentials = true;
+    axios.defaults.headers.common['Authorization'] = localStorage.getItem(
+      'token'
+    );
     axios
-      .post('http://localhost:8000/stud_profile', data)
+      .post('http://localhost:8000/stud_profile/stud_profile', data)
       .then(response => {
         console.log('Status Code : ', response.data);
         if (response.status === 200) {
-          if (response.data.status === 'failure') {
-            dispatch(
-              loadProfileDataAsync({
-                authFlag: false,
-                loginStatus: 'failure',
-                error: true
-              })
-            );
-          } else {
-            dispatch(
-              loadProfileDataAsync({
-                authFlag: true,
-                loginStatus: 'success',
-                error: false,
-                ...response.data
-              })
-            );
-          }
+          console.log(response.data);
+          dispatch(
+            loadProfileDataAsync({
+              authFlag: true,
+              loginStatus: 'success',
+              error: false,
+              ...response.data[0]
+            })
+          );
+        } else {
+          dispatch(
+            loadProfileDataAsync({
+              authFlag: false,
+              loginStatus: 'failure',
+              error: true
+            })
+          );
         }
       })
       .catch(error => {

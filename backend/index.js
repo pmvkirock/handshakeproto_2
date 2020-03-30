@@ -1,15 +1,15 @@
 var express = require("express");
 var app = express();
 var cors = require("cors");
-const jwt = require("jsonwebtoken");
 var bodyParser = require("body-parser");
 app.use(bodyParser.json());
 //use cors to allow cross origin resource sharing
 app.use(cors({ origin: "http://localhost:3000", credentials: true }));
+const { checkAuth, frontendURL } = require("../backend/Utils/config");
 
 //Allow Access Control
 app.use(function(req, res, next) {
-  res.setHeader("Access-Control-Allow-Origin", "http://localhost:3000");
+  res.setHeader("Access-Control-Allow-Origin", frontendURL);
   res.setHeader("Access-Control-Allow-Credentials", "true");
   res.setHeader(
     "Access-Control-Allow-Methods",
@@ -70,23 +70,6 @@ app.post("/loginComp", function(req, res) {
   ins.login_comp(req, res);
 });
 
-app.post("/stud_profile", function(req, res) {
-  console.log("Req Body : ", req.body);
-  var ins = new stud_profile.profile();
-  ins.getbasicinfo(req, res);
-});
+app.use("/stud_profile", stud_profile);
 
-app.post("/updatePersonal", function(req, res) {
-  console.log("Req Body : ", req.body);
-  var ins = new stud_profile.profile();
-  ins.updatebasicinfo(req, res);
-});
-
-app.post("/updateEduInfo", function(req, res) {
-  console.log("Req Body : ", req.body);
-  var ins = new stud_profile.profile();
-  ins.updateeduinfo(req, res);
-});
-
-//start your server on port 3001
 app.listen(8000, () => console.log("Server Listening on port 8000"));
