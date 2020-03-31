@@ -1,7 +1,8 @@
 import React from 'react';
 import { Form, Container, Col, Button } from 'react-bootstrap';
-import cookie from 'react-cookies';
 import axios from 'axios';
+import { connect } from 'react-redux';
+import { loadProfileData } from '../../../../../actions';
 
 class skills extends React.Component {
   constructor(props) {
@@ -21,20 +22,20 @@ class skills extends React.Component {
   addSkill = e => {
     e.preventDefault();
     let data = {
-      idstudent: cookie.load('cookie'),
+      user_id: localStorage.getItem('user_id'),
       skill_name: this.state.addSkill
     };
     axios.defaults.withCredentials = true;
     //make a post request with the user data
     axios
-      .post('http://localhost:8000/insertSkill', data)
+      .post('http://localhost:8000/stud_profile/insertSkill', data)
       .then(response => {
         if (response.status === 200) {
           this.setState({
             error: '',
             addSkill: ''
           });
-          this.getInfo();
+          this.props.dispatch(loadProfileData(data));
         } else {
           this.setState({
             error:
@@ -49,39 +50,10 @@ class skills extends React.Component {
         });
       });
   };
-
-  getInfo = () => {
-    axios.defaults.withCredentials = true;
-    //make a post request with the user data
-    axios
-      .get('http://localhost:8000/getSkill?stud_id=' + cookie.load('cookie'))
-      .then(response => {
-        if (response.status === 200) {
-          this.setState({
-            error: '',
-            skills: response.data
-          });
-        } else {
-          this.setState({
-            error:
-              '<p style={{color: red}}>Please enter correct credentials</p>',
-            authFlag: false
-          });
-        }
-      })
-      .catch(e => {
-        this.setState({
-          error: 'Please enter correct credentials' + e
-        });
-      });
-  };
-  componentDidMount() {
-    this.getInfo();
-  }
 
   render() {
-    var x = this.state.skills.map(({ skill_name, idstudent_skills }) => {
-      return <span key={idstudent_skills}>{skill_name}</span>;
+    var x = this.props.getProfileInfo.skill.map(({ _id, skill_name }) => {
+      return <span key={_id}>{skill_name}</span>;
     });
     return (
       <Container className="background top-10 padding-all skills">
@@ -108,4 +80,10 @@ class skills extends React.Component {
   }
 }
 
-export default skills;
+const mapStateToProps = function(state) {
+  return {
+    getProfileInfo: state.getProfileInfo
+  };
+};
+
+export default connect(mapStateToProps)(skills);

@@ -6,6 +6,9 @@ var update_Pers = require("../kafka-backend/services/updatePersonalInfo");
 var update_Edu = require("../kafka-backend/services/updateEduInfo");
 var insert_Edu = require("../kafka-backend/services/insertEduInfo");
 var update_Contact = require("../kafka-backend/services/updateContactInfo");
+var insert_Exp = require("../kafka-backend/services/insertExpInfo");
+var update_Exp = require("../kafka-backend/services/updateExpInfo");
+var insert_Skill = require("../kafka-backend/services/insertSkill");
 
 function handleTopicRequest(topic_name, fname) {
   //var topic_name = 'root_topic';
@@ -45,3 +48,6 @@ handleTopicRequest("update_Pers", update_Pers);
 handleTopicRequest("update_Edu", update_Edu);
 handleTopicRequest("insert_Edu", insert_Edu);
 handleTopicRequest("update_Contact", update_Contact);
+handleTopicRequest("insert_Exp", insert_Exp);
+handleTopicRequest("update_Exp", update_Exp);
+handleTopicRequest("insert_Skill", insert_Skill);

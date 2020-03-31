@@ -7,11 +7,11 @@ var studSchema = new Schema(
     lname: { type: String, required: true },
     email: { type: String, required: true },
     password: { type: String, required: true },
-    phone: { type: Number, required: false },
-    dob: { type: String, required: false },
-    city: { type: String, required: false },
-    state: { type: String, required: false },
-    country: { type: String, required: false },
+    phone: { type: Number },
+    dob: { type: String },
+    city: { type: String },
+    state: { type: String },
+    country: { type: String },
     school_info: [
       {
         name: String,

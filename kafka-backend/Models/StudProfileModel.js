@@ -39,7 +39,11 @@ var studSchema = new Schema(
         toYear: String
       }
     ],
-    skill: [String]
+    skill: [
+      {
+        skill_name: String
+      }
+    ]
   },
   {
     versionKey: false

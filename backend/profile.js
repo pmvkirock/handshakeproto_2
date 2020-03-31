@@ -66,7 +66,6 @@ router.post("/insertEduInfo", checkAuth, (req, res) => {
 });
 
 router.post("/updateContact", checkAuth, (req, res) => {
-  console.log("x");
   kafka.make_request("update_Contact", req.body, function(err, results) {
     console.log("in result");
     console.log(results);
@@ -81,6 +80,50 @@ router.post("/updateContact", checkAuth, (req, res) => {
   });
 });
 
+router.post("/insertExpInfo", checkAuth, (req, res) => {
+  kafka.make_request("insert_Exp", req.body, function(err, results) {
+    console.log("in result");
+    console.log(results);
+    if (err) {
+      res.status(500).end("Error Occured");
+    } else {
+      console.log("Inside else");
+      console.log(results);
+      var JSONStr = JSON.stringify(results);
+      res.status(200).end(JSONStr);
+    }
+  });
+});
+
+router.post("/updateExpInfo", checkAuth, (req, res) => {
+  kafka.make_request("update_Exp", req.body, function(err, results) {
+    console.log("in result");
+    console.log(results);
+    if (err) {
+      res.status(500).end("Error Occured");
+    } else {
+      console.log("Inside else");
+      console.log(results);
+      var JSONStr = JSON.stringify(results);
+      res.status(200).end(JSONStr);
+    }
+  });
+});
+
+router.post("/insertSkill", checkAuth, (req, res) => {
+  kafka.make_request("insert_Skill", req.body, function(err, results) {
+    console.log("in result");
+    console.log(results);
+    if (err) {
+      res.status(500).end("Error Occured");
+    } else {
+      console.log("Inside else");
+      console.log(results);
+      var JSONStr = JSON.stringify(results);
+      res.status(200).end(JSONStr);
+    }
+  });
+});
 /*updatecontactinfo(con, req, res) {
     var obj = req.body.career_obj
       .replace(/\\/g, "\\\\")
