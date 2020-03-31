@@ -1,7 +1,6 @@
 import React from 'react';
 import { Container, Row, Col, Form, Button } from 'react-bootstrap';
 import axios from 'axios';
-import cookie from 'react-cookies';
 import { connect } from 'react-redux';
 import { loadProfileData } from '../../../../../actions';
 
@@ -77,7 +76,7 @@ class Education extends React.Component {
     axios.defaults.withCredentials = true;
     //make a post request with the user data
     axios
-      .post('http://localhost:8000/updateEduInfo', data)
+      .post('http://localhost:8000/stud_profile/updateEduInfo', data)
       .then(response => {
         console.log('Status Code : ', response.status);
         if (response.status === 200) {
@@ -163,13 +162,16 @@ class Education extends React.Component {
       toMth: this.state.ntoMth,
       fromYr: this.state.nfromYr,
       toYr: this.state.ntoYr,
-      stud_id: cookie.load('cookie')
+      stud_id: localStorage.getItem('user_id')
     };
     //set the with credentials to true
     axios.defaults.withCredentials = true;
     //make a post request with the user data
+    axios.defaults.headers.common['Authorization'] = localStorage.getItem(
+      'token'
+    );
     axios
-      .post('http://localhost:8000/insertEduInfo', data)
+      .post('http://localhost:8000/stud_profile/insertEduInfo', data)
       .then(response => {
         console.log('Status Code : ', response.status);
         if (response.status === 200) {
@@ -177,7 +179,7 @@ class Education extends React.Component {
             error: '',
             authFlag: true
           });
-          this.getInfo();
+          this.props.dispatch(loadProfileData(data));
           this.addSchool();
         } else {
           this.setState({

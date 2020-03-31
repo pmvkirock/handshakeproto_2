@@ -1,8 +1,8 @@
 import React from 'react';
 import { Container, Form, Button } from 'react-bootstrap';
 import axios from 'axios';
-import cookie from 'react-cookies';
 import { connect } from 'react-redux';
+import { loadProfileData } from '../../../../../actions';
 
 class Primary extends React.Component {
   constructor(props) {
@@ -50,8 +50,11 @@ class Primary extends React.Component {
     //set the with credentials to true
     axios.defaults.withCredentials = true;
     //make a post request with the user data
+    axios.defaults.headers.common['Authorization'] = localStorage.getItem(
+      'token'
+    );
     axios
-      .post('http://localhost:8000/updatePersonal', data)
+      .post('http://localhost:8000/stud_profile/updatePersonal', data)
       .then(response => {
         console.log('Status Code : ', response.status);
         if (response.status === 200) {
@@ -59,7 +62,7 @@ class Primary extends React.Component {
             error: '',
             authFlag: true
           });
-          this.getInfo();
+          this.props.dispatch(loadProfileData(data));
           this.editpersonalinfo();
         } else {
           this.setState({
@@ -127,90 +130,6 @@ class Primary extends React.Component {
       });
     }
   };
-
-  getInfo = () => {
-    const data = {
-      stud_id: cookie.load('cookie')
-    };
-    axios.defaults.withCredentials = true;
-    //make a post request with the user data
-    axios
-      .post('http://localhost:8000/stud_profile', data)
-      .then(response => {
-        console.log('Status Code : ', response.status);
-        console.log(response.data);
-        if (response.status === 200) {
-          this.setState({
-            error: '',
-            firstName: response.data[0].First_Name,
-            lastName: response.data[0].Last_Name,
-            dob: response.data[0].Dob,
-            city: response.data[0].City,
-            state: response.data[0].State,
-            country: response.data[0].Country,
-            phone_num: response.data[0].phone_num,
-            email: response.data[0].email,
-            prof_pic: response.data[0].prof_pic,
-            tfirstName: response.data[0].First_Name,
-            tlastName: response.data[0].Last_Name,
-            tdob: response.data[0].Dob,
-            tcity: response.data[0].City,
-            tstate: response.data[0].State,
-            tcountry: response.data[0].Country,
-            tphone_num: response.data[0].phone_num,
-            temail: response.data[0].email,
-            tprof_pic: response.data[0].prof_pic
-          });
-        } else {
-          this.setState({
-            error:
-              '<p style={{color: red}}>Please enter correct credentials</p>',
-            authFlag: false
-          });
-        }
-      })
-      .catch(e => {
-        this.setState({
-          error: 'Please enter correct credentials' + e
-        });
-      });
-    axios
-      .post('http://localhost:8000/stud_edu', data)
-      .then(response => {
-        console.log('PRI Status Code : ', response.status);
-        console.log(response.data);
-        var i = 0;
-        if (response.status === 200) {
-          while (i < response.data.length) {
-            if (response.data[i].primary_edu == 'Yes') {
-              break;
-            }
-            i++;
-          }
-          //console.log(response.data[i].degree);
-          this.setState({
-            error: '',
-            coll_name: response.data[i].coll_name,
-            degree: response.data[i].degree
-          });
-        } else {
-          this.setState({
-            error:
-              '<p style={{color: red}}>Please enter correct credentials</p>',
-            authFlag: false
-          });
-        }
-      })
-      .catch(e => {
-        this.setState({
-          error: 'Please enter correct credentials' + e
-        });
-      });
-  };
-
-  componentDidMount() {
-    this.getInfo();
-  }
 
   componentDidUpdate(prevProps) {
     if (this.props.getProfileInfo.fname !== prevProps.getProfileInfo.fname) {

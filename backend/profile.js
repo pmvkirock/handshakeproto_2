@@ -21,53 +21,66 @@ router.post("/stud_profile", checkAuth, (req, res) => {
 });
 
 router.post("/updatePersonal", checkAuth, (req, res) => {
-  Stud_Profile.findOne({ _id: req.body.user_id }, (error, user) => {
-    if (error) {
+  kafka.make_request("update_Pers", req.body, function(err, results) {
+    console.log("in result");
+    console.log(results);
+    if (err) {
       res.status(500).end("Error Occured");
-    }
-    if (user) {
-      user.fname = req.body.firstName;
-      user.lname = req.body.lastName;
-      user.dob = req.body.dob;
-      user.city = req.body.city;
-      user.state = req.body.state;
-      user.country = req.body.country;
-      user.save();
-      res.status(200).end("Updated");
     } else {
-      res.status(401).end("Invalid Credentials");
+      console.log("Inside else");
+      console.log(results);
+      var JSONStr = JSON.stringify(results);
+      res.status(200).end(JSONStr);
     }
   });
 });
 
 router.post("/updateEduInfo", checkAuth, (req, res) => {
-  Stud_Profile.findOneAndUpdate(
-    { _id: req.body.user_id, "school_info._id": req.body.school_id },
-    {
-      $set: {
-        "school_info.$.name": req.body.coll_name,
-        "school_info.$.degree": req.body.degree,
-        "school_info.$.major": req.body.major,
-        "school_info.$.yop": req.body.pass_year,
-        "school_info.$.CGPA": req.body.curr_CGPA,
-        "school_info.$.fromMonth": req.body.fromMth,
-        "school_info.$.fromYear": req.body.fromYr,
-        "school_info.$.toMonth": req.body.toMth,
-        "school_info.$.toYear": req.body.toYr
-      }
-    },
-    function(err, doc) {
-      if (err) {
-        res.status(500).end("Error Occured");
-      }
-      if (doc) {
-        res.status(200).end("Updated");
-      } else {
-        res.status(401).end("Invalid Credentials");
-      }
+  kafka.make_request("update_Edu", req.body, function(err, results) {
+    console.log("in result");
+    console.log(results);
+    if (err) {
+      res.status(500).end("Error Occured");
+    } else {
+      console.log("Inside else");
+      console.log(results);
+      var JSONStr = JSON.stringify(results);
+      res.status(200).end(JSONStr);
     }
-  );
+  });
 });
+
+router.post("/insertEduInfo", checkAuth, (req, res) => {
+  kafka.make_request("insert_Edu", req.body, function(err, results) {
+    console.log("in result");
+    console.log(results);
+    if (err) {
+      res.status(500).end("Error Occured");
+    } else {
+      console.log("Inside else");
+      console.log(results);
+      var JSONStr = JSON.stringify(results);
+      res.status(200).end(JSONStr);
+    }
+  });
+});
+
+router.post("/updateContact", checkAuth, (req, res) => {
+  console.log("x");
+  kafka.make_request("update_Contact", req.body, function(err, results) {
+    console.log("in result");
+    console.log(results);
+    if (err) {
+      res.status(500).end("Error Occured");
+    } else {
+      console.log("Inside else");
+      console.log(results);
+      var JSONStr = JSON.stringify(results);
+      res.status(200).end(JSONStr);
+    }
+  });
+});
+
 /*updatecontactinfo(con, req, res) {
     var obj = req.body.career_obj
       .replace(/\\/g, "\\\\")

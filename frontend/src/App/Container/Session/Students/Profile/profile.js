@@ -56,14 +56,17 @@ class Stud_Profile extends React.Component {
     //set the with credentials to true
     axios.defaults.withCredentials = true;
     //make a post request with the user data
+    axios.defaults.headers.common['Authorization'] = localStorage.getItem(
+      'token'
+    );
     axios
-      .post('http://localhost:8000/updateContact', data)
+      .post('http://localhost:8000/stud_profile/updateContact', data)
       .then(response => {
         console.log('Status Code : ', response.status);
         if (response.status === 200) {
           if (this.state.tcareer_obj != this.state.career_obj) this.editobj();
           else this.editinfo();
-          this.getInfo();
+          this.props.dispatch(loadProfileData(data));
           this.setState({
             error: '',
             authFlag: true
@@ -119,6 +122,20 @@ class Stud_Profile extends React.Component {
     this.getInfo();
   }
 
+  componentDidUpdate(prevProps) {
+    if (
+      this.props.getProfileInfo.phone !== prevProps.getProfileInfo.phone ||
+      this.props.getProfileInfo.obj !== prevProps.getProfileInfo.obj ||
+      this.props.getProfileInfo.email !== prevProps.getProfileInfo.email
+    ) {
+      this.setState({
+        tphone_num: this.props.getProfileInfo.phone,
+        temail: this.props.getProfileInfo.email,
+        tcareer_obj: this.props.getProfileInfo.obj
+      });
+    }
+  }
+
   render() {
     return (
       <Container style={{ width: 80 + '%' }}>
@@ -137,7 +154,7 @@ class Stud_Profile extends React.Component {
               <Container className="background top-10 padding-all skills">
                 <h5>Contact Info</h5>
                 <p>
-                  Mobile No: <span>{this.state.phone_num}</span>
+                  Mobile No: <span>{this.props.getProfileInfo.phone}</span>
                 </p>
                 <p>
                   Email: <span>{this.props.getProfileInfo.email}</span>
@@ -186,7 +203,7 @@ class Stud_Profile extends React.Component {
                 <h5>My Journey</h5>
                 <Form>
                   <Form.Group controlId="exampleForm.ControlTextarea1">
-                    <p>{this.state.career_obj}</p>
+                    <p>{this.props.getProfileInfo.obj}</p>
                     <Button
                       variant="primary"
                       onClick={this.editobj}

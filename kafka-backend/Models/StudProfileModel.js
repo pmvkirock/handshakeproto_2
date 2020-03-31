@@ -12,6 +12,7 @@ var studSchema = new Schema(
     city: { type: String, required: false },
     state: { type: String, required: false },
     country: { type: String, required: false },
+    obj: { type: String, required: false },
     school_info: [
       {
         name: String,

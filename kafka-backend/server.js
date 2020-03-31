@@ -1,9 +1,11 @@
 var connection = new require("./kafka/Connection");
 const Database = require("./config");
 
-//topics files
-//var signin = require('./services/signin.js');
-var Books = require("../kafka-backend/services/getProfile");
+var get_Prof = require("../kafka-backend/services/getProfile");
+var update_Pers = require("../kafka-backend/services/updatePersonalInfo");
+var update_Edu = require("../kafka-backend/services/updateEduInfo");
+var insert_Edu = require("../kafka-backend/services/insertEduInfo");
+var update_Contact = require("../kafka-backend/services/updateContactInfo");
 
 function handleTopicRequest(topic_name, fname) {
   //var topic_name = 'root_topic';
@@ -38,4 +40,8 @@ function handleTopicRequest(topic_name, fname) {
 // Add your TOPICs here
 //first argument is topic name
 //second argument is a function that will handle this topic request
-handleTopicRequest("get_Profile", Books);
+handleTopicRequest("get_Profile", get_Prof);
+handleTopicRequest("update_Pers", update_Pers);
+handleTopicRequest("update_Edu", update_Edu);
+handleTopicRequest("insert_Edu", insert_Edu);
+handleTopicRequest("update_Contact", update_Contact);
