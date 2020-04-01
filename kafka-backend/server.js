@@ -9,6 +9,8 @@ var update_Contact = require("../kafka-backend/services/updateContactInfo");
 var insert_Exp = require("../kafka-backend/services/insertExpInfo");
 var update_Exp = require("../kafka-backend/services/updateExpInfo");
 var insert_Skill = require("../kafka-backend/services/insertSkill");
+var get_Comp_Profile = require("../kafka-backend/services/getCompProfile");
+var update_Comp_Profile = require("../kafka-backend/services/updateCompInfo");
 
 function handleTopicRequest(topic_name, fname) {
   //var topic_name = 'root_topic';
@@ -51,3 +53,5 @@ handleTopicRequest("update_Contact", update_Contact);
 handleTopicRequest("insert_Exp", insert_Exp);
 handleTopicRequest("update_Exp", update_Exp);
 handleTopicRequest("insert_Skill", insert_Skill);
+handleTopicRequest("get_Comp_Profile", get_Comp_Profile);
+handleTopicRequest("update_Comp_Profile", update_Comp_Profile);

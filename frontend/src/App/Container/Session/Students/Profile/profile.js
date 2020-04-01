@@ -120,6 +120,11 @@ class Stud_Profile extends React.Component {
 
   componentDidMount() {
     this.getInfo();
+    this.setState({
+      tphone_num: this.props.getProfileInfo.phone,
+      temail: this.props.getProfileInfo.email,
+      tcareer_obj: this.props.getProfileInfo.obj
+    });
   }
 
   componentDidUpdate(prevProps) {

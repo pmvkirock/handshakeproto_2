@@ -69,7 +69,7 @@ class signupform extends React.Component {
       localStorage.setItem('user_id', decoded._id);
       localStorage.setItem('username', decoded.username);
       localStorage.setItem('type', decoded.type);
-      redirectVar = <Redirect to="/companyhome" />;
+      redirectVar = <Redirect to="/home" />;
     } else redirectVar = <Redirect to="/companylogin" />;
     return (
       <div>

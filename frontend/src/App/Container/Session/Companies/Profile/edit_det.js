@@ -1,7 +1,6 @@
 import React from 'react';
 import { Modal, Form, Button } from 'react-bootstrap';
 import axios from 'axios';
-import cookie from 'react-cookies';
 
 class edit extends React.Component {
   constructor(props) {
@@ -31,14 +30,14 @@ class edit extends React.Component {
       web: this.state.web,
       email: this.state.email,
       owner: this.state.owner,
-      id: cookie.load('cookie'),
+      id: localStorage.getItem('user_id'),
       prof_pic: this.state.tprof_pic
     };
     //set the with credentials to true
     axios.defaults.withCredentials = true;
     //make a post request with the user data
     axios
-      .post('http://localhost:8000/updateCompany', data)
+      .post('http://localhost:8000/comp_profile/updateCompany', data)
       .then(response => {
         console.log('Status Code : ', response.status);
         if (response.status === 200) {
@@ -134,15 +133,15 @@ class edit extends React.Component {
   componentDidMount() {
     this.setState({
       setShow: this.props.show,
-      comp_name: this.props.data[0].company_name,
-      location: this.props.data[0].company_location,
-      des: this.props.data[0].company_description,
-      type: this.props.data[0].company_type,
-      no: this.props.data[0].noofemp,
-      web: this.props.data[0].website,
-      email: this.props.data[0].email,
-      owner: this.props.data[0].ownership,
-      tprof_pic: this.props.data[0].prof_pic
+      comp_name: this.props.data.cname,
+      location: this.props.data.location,
+      des: this.props.data.des,
+      type: this.props.data.company_type,
+      no: this.props.data.noofemp,
+      web: this.props.data.website,
+      email: this.props.data.email,
+      owner: this.props.data.owner_ship,
+      tprof_pic: this.props.data.profile_pic
     });
   }
 

@@ -14,6 +14,7 @@ function handle_request(msg, callback) {
       user.city = msg.city;
       user.state = msg.state;
       user.country = msg.country;
+      user.profile_pic = msg.prof_pic;
       user.save();
       callback(null, user);
     }

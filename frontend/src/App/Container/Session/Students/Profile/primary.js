@@ -131,6 +131,20 @@ class Primary extends React.Component {
     }
   };
 
+  componentDidMount() {
+    this.setState({
+      tfirstName: this.props.getProfileInfo.fname,
+      tlastName: this.props.getProfileInfo.lname,
+      tdob: this.props.getProfileInfo.dob,
+      tcity: this.props.getProfileInfo.city,
+      tstate: this.props.getProfileInfo.state,
+      tcountry: this.props.getProfileInfo.country,
+      tphone_num: this.props.getProfileInfo.phone,
+      temail: this.props.getProfileInfo.email,
+      tdegree: ''
+    });
+  }
+
   componentDidUpdate(prevProps) {
     if (this.props.getProfileInfo.fname !== prevProps.getProfileInfo.fname) {
       this.setState({
@@ -149,14 +163,10 @@ class Primary extends React.Component {
 
   render() {
     var prof_pic = '/profile.png';
-    if (
-      this.state.prof_pic != '' &&
-      this.state.prof_pic != null &&
-      this.state.prof_pic != undefined
-    ) {
+    if (this.props.getProfileInfo.profile_pic) {
       prof_pic =
         `http://localhost:8000/prof_pic/` +
-        this.state.prof_pic.replace('Prof_Pic', 'file') +
+        this.props.getProfileInfo.profile_pic.replace('Prof_Pic', 'file') +
         `.jpeg`;
     }
     return (

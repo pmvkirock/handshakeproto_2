@@ -5,10 +5,13 @@ import { Redirect, Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import {
   StudentType,
+  CompanyType,
   Logout,
   updateJobFilter,
-  updateCityFilter
+  updateCityFilter,
+  loadProfileData
 } from '../../actions';
+import { companyProfileData } from '../../actions/companyprofile';
 
 class Topnav extends React.Component {
   constructor(props) {
@@ -27,21 +30,45 @@ class Topnav extends React.Component {
     this.props.dispatch(updateCityFilter(''));
   };
 
+  componentDidMount() {
+    if (localStorage.getItem('type') == 'Company') {
+      this.props.dispatch(CompanyType());
+      let data = {
+        user_id: localStorage.getItem('user_id')
+      };
+      this.props.dispatch(companyProfileData(data));
+    } else {
+      this.props.dispatch(StudentType());
+      let data = {
+        user_id: localStorage.getItem('user_id')
+      };
+      this.props.dispatch(loadProfileData(data));
+    }
+  }
+
   render() {
     var xnav;
     let redirectVar = null;
 
     if (localStorage.getItem('token')) {
-      console.log(localStorage.getItem('user_id'));
-      redirectVar = <Redirect to="/stud_prof" />;
+      redirectVar = <Redirect to="/home" />;
     } else redirectVar = <Redirect to="/login" />;
     if (localStorage.getItem('token')) {
       var prof_pic = '/profile.png';
-      if (this.props.getProfPic != '' && this.props.getProfPic != null) {
-        prof_pic =
-          `http://localhost:8000/prof_pic/` +
-          this.props.getProfPic.replace('Prof_Pic', 'file') +
-          `.jpeg`;
+      if (this.props.getType == 'Student') {
+        if (this.props.getProfileInfo.profile_pic) {
+          prof_pic =
+            `http://localhost:8000/prof_pic/` +
+            this.props.getProfileInfo.profile_pic.replace('Prof_Pic', 'file') +
+            `.jpeg`;
+        }
+      } else {
+        if (this.props.getCompProfile.prof_pic) {
+          prof_pic =
+            `http://localhost:8000/prof_pic/` +
+            this.props.getCompProfile.prof_pic.replace('prof_pic', 'file') +
+            `.png`;
+        }
       }
       xnav = (
         <Navbar.Collapse id="basic-navbar-nav">
@@ -154,7 +181,11 @@ class Topnav extends React.Component {
 }
 
 const mapStateToProps = function(state) {
-  return {};
+  return {
+    getProfileInfo: state.getProfileInfo,
+    getType: state.getType,
+    getCompProfile: state.getCompProfile
+  };
 };
 
 export default connect(mapStateToProps)(Topnav);

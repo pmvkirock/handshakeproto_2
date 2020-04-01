@@ -13,6 +13,7 @@ var studSchema = new Schema(
     state: { type: String, required: false },
     country: { type: String, required: false },
     obj: { type: String, required: false },
+    profile_pic: { type: String },
     school_info: [
       {
         name: String,

@@ -12,6 +12,7 @@ import getProfPic from './getProfPic';
 import getFName from './getFName';
 import getFilterSkill from './getSkillFilter';
 import getProfileInfo from './getProfileInfo';
+import getCompProfile from './getCompProfile';
 
 const allReducers = combineReducers({
   getType: getType,
@@ -26,7 +27,8 @@ const allReducers = combineReducers({
   getProfPic: getProfPic,
   getFName: getFName,
   getFilterSkill: getFilterSkill,
-  getProfileInfo: getProfileInfo
+  getProfileInfo: getProfileInfo,
+  getCompProfile: getCompProfile
 });
 
 export default allReducers;
