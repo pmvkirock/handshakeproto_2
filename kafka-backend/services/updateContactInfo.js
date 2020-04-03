@@ -10,7 +10,7 @@ function handle_request(msg, callback) {
       .replace(/\$/g, "\\$")
       .replace(/'/g, "\\'")
       .replace(/"/g, '\\"');
-  Stud_Profile.findOne({ _id: msg.user_id }, (error, user) => {
+  Stud_Profile.findOne({ _id: msg.user_id }, async (error, user) => {
     if (error) {
       console.log("error-->");
       callback(error, "Error");
@@ -18,8 +18,17 @@ function handle_request(msg, callback) {
       user.phone = msg.phone_num;
       user.email = msg.email_ID;
       user.obj = obj;
-      user.save();
-      callback(null, user);
+      await user.save();
+      Stud_Profile.find({ _id: msg.user_id }, (error, user) => {
+        if (error) {
+          console.log("error-->");
+          callback(error, "Error");
+        } else {
+          console.log(user);
+          callback(null, user);
+        }
+        console.log("after callback");
+      });
     }
     console.log("after callback");
   });

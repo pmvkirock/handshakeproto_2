@@ -18,13 +18,21 @@ function handle_request(msg, callback) {
         "school_info.$.toYear": msg.toYr
       }
     },
-    (error, user) => {
+    async (error, user) => {
       if (error) {
         console.log("error-->");
         callback(error, "Error");
       } else {
-        console.log(user);
-        callback(null, user);
+        await Stud_Profile.find({ _id: msg.user_id }, (error, user) => {
+          if (error) {
+            console.log("error-->");
+            callback(error, "Error");
+          } else {
+            console.log(user);
+            callback(null, user);
+          }
+          console.log("after callback");
+        });
       }
       console.log("after callback");
     }

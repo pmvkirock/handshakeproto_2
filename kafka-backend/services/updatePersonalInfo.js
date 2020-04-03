@@ -3,7 +3,7 @@ const Stud_Profile = require("../Models/StudProfileModel");
 function handle_request(msg, callback) {
   console.log("Inside book kafka backend");
   console.log(msg.user_id);
-  Stud_Profile.findOne({ _id: msg.user_id }, (error, user) => {
+  Stud_Profile.findOne({ _id: msg.user_id }, async (error, user) => {
     if (error) {
       console.log("error-->");
       callback(error, "Error");
@@ -15,8 +15,17 @@ function handle_request(msg, callback) {
       user.state = msg.state;
       user.country = msg.country;
       user.profile_pic = msg.prof_pic;
-      user.save();
-      callback(null, user);
+      await user.save();
+      Stud_Profile.find({ _id: msg.user_id }, (error, user) => {
+        if (error) {
+          console.log("error-->");
+          callback(error, "Error");
+        } else {
+          console.log(user);
+          callback(null, user);
+        }
+        console.log("after callback");
+      });
     }
     console.log("after callback");
   });

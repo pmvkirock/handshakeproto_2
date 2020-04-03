@@ -1,10 +1,10 @@
 import React from 'react';
 import { Container, Row, Col, Form, Button } from 'react-bootstrap';
-import axios from 'axios';
 import Education from './education_prof';
 import Experience from './job_prof';
 import Primary from './primary';
 import Skills from './skills';
+import { updateStudContact } from '../../../../../actions/updateStudContact';
 import { loadProfileData } from '../../../../../actions';
 import { connect } from 'react-redux';
 
@@ -53,37 +53,10 @@ class Stud_Profile extends React.Component {
       career_obj: this.state.tcareer_obj,
       user_id: localStorage.getItem('user_id')
     };
-    //set the with credentials to true
-    axios.defaults.withCredentials = true;
-    //make a post request with the user data
-    axios.defaults.headers.common['Authorization'] = localStorage.getItem(
-      'token'
-    );
-    axios
-      .post('http://localhost:8000/stud_profile/updateContact', data)
-      .then(response => {
-        console.log('Status Code : ', response.status);
-        if (response.status === 200) {
-          if (this.state.tcareer_obj != this.state.career_obj) this.editobj();
-          else this.editinfo();
-          this.props.dispatch(loadProfileData(data));
-          this.setState({
-            error: '',
-            authFlag: true
-          });
-        } else {
-          this.setState({
-            error:
-              '<p style={{color: red}}>Please enter correct credentials</p>',
-            authFlag: false
-          });
-        }
-      })
-      .catch(e => {
-        this.setState({
-          error: 'Please enter correct credentials' + e
-        });
-      });
+    this.props.dispatch(updateStudContact(data));
+
+    if (this.state.tcareer_obj != this.state.career_obj) this.editobj();
+    else this.editinfo();
   };
 
   editinfo = () => {

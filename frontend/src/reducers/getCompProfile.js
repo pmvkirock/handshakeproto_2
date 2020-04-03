@@ -13,7 +13,7 @@ const initialState = {
 const getProfileInfo = (state = initialState, action) => {
   switch (action.type) {
     case 'CompProfileInfo': {
-      const objret = Object.assign({}, state.getProfileInfo, action.value);
+      const objret = Object.assign({}, state.getCompProfile, action.value);
       return objret;
     }
     default:

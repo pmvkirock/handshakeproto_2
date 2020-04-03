@@ -11,6 +11,8 @@ var update_Exp = require("../kafka-backend/services/updateExpInfo");
 var insert_Skill = require("../kafka-backend/services/insertSkill");
 var get_Comp_Profile = require("../kafka-backend/services/getCompProfile");
 var update_Comp_Profile = require("../kafka-backend/services/updateCompInfo");
+var get_Jobs = require("../kafka-backend/services/getAllJobs");
+var add_Jobs = require("../kafka-backend/services/addJob");
 
 function handleTopicRequest(topic_name, fname) {
   //var topic_name = 'root_topic';
@@ -23,7 +25,7 @@ function handleTopicRequest(topic_name, fname) {
       console.log(message.value);
       var data = JSON.parse(message.value);
       fname.handle_request(data.data, function(err, res) {
-        console.log("after handle" + res);
+        //console.log("after handle" + res);
         var payloads = [
           {
             topic: data.replyTo,
@@ -55,3 +57,5 @@ handleTopicRequest("update_Exp", update_Exp);
 handleTopicRequest("insert_Skill", insert_Skill);
 handleTopicRequest("get_Comp_Profile", get_Comp_Profile);
 handleTopicRequest("update_Comp_Profile", update_Comp_Profile);
+handleTopicRequest("get_All_Jobs", get_Jobs);
+handleTopicRequest("add_Jobs", add_Jobs);

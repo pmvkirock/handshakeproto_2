@@ -20,13 +20,22 @@ function handle_request(msg, callback) {
         }
       }
     },
-    (error, user) => {
+    async (error, user) => {
       if (error) {
         console.log("error-->");
         callback(error, "Error");
       } else {
         console.log(user);
-        callback(null, user);
+        await Stud_Profile.find({ _id: msg.stud_id }, (error, user) => {
+          if (error) {
+            console.log("error-->");
+            callback(error, "Error");
+          } else {
+            console.log(user);
+            callback(null, user);
+          }
+          console.log("after callback");
+        });
       }
       console.log("after callback");
     }

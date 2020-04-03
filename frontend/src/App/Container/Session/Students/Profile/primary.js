@@ -2,7 +2,7 @@ import React from 'react';
 import { Container, Form, Button } from 'react-bootstrap';
 import axios from 'axios';
 import { connect } from 'react-redux';
-import { loadProfileData } from '../../../../../actions';
+import { updateStudPersonal } from '../../../../../actions/updateStudPersonal';
 
 class Primary extends React.Component {
   constructor(props) {
@@ -47,36 +47,7 @@ class Primary extends React.Component {
       user_id: localStorage.getItem('user_id'),
       prof_pic: this.state.tprof_pic
     };
-    //set the with credentials to true
-    axios.defaults.withCredentials = true;
-    //make a post request with the user data
-    axios.defaults.headers.common['Authorization'] = localStorage.getItem(
-      'token'
-    );
-    axios
-      .post('http://localhost:8000/stud_profile/updatePersonal', data)
-      .then(response => {
-        console.log('Status Code : ', response.status);
-        if (response.status === 200) {
-          this.setState({
-            error: '',
-            authFlag: true
-          });
-          this.props.dispatch(loadProfileData(data));
-          this.editpersonalinfo();
-        } else {
-          this.setState({
-            error:
-              '<p style={{color: red}}>Please enter correct credentials</p>',
-            authFlag: false
-          });
-        }
-      })
-      .catch(e => {
-        this.setState({
-          error: 'Please enter correct credentials' + e
-        });
-      });
+    this.props.dispatch(updateStudPersonal(data));
   };
 
   firstNameChange = e => {
@@ -146,7 +117,7 @@ class Primary extends React.Component {
   }
 
   componentDidUpdate(prevProps) {
-    if (this.props.getProfileInfo.fname !== prevProps.getProfileInfo.fname) {
+    if (this.props.getProfileInfo !== prevProps.getProfileInfo) {
       this.setState({
         tfirstName: this.props.getProfileInfo.fname,
         tlastName: this.props.getProfileInfo.lname,

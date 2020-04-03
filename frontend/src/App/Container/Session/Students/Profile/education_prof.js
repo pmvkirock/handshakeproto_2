@@ -2,7 +2,8 @@ import React from 'react';
 import { Container, Row, Col, Form, Button } from 'react-bootstrap';
 import axios from 'axios';
 import { connect } from 'react-redux';
-import { loadProfileData } from '../../../../../actions';
+import { updateEdu } from '../../../../../actions/updatedu';
+import { insertEdu } from '../../../../../actions/insertEdu';
 
 class Education extends React.Component {
   constructor(props) {
@@ -72,37 +73,7 @@ class Education extends React.Component {
       school_id: e.target.getAttribute('name'),
       user_id: localStorage.getItem('user_id')
     };
-    //set the with credentials to true
-    axios.defaults.withCredentials = true;
-    //make a post request with the user data
-    axios
-      .post('http://localhost:8000/stud_profile/updateEduInfo', data)
-      .then(response => {
-        console.log('Status Code : ', response.status);
-        if (response.status === 200) {
-          this.setState({
-            error: '',
-            authFlag: true
-          });
-          let data = {
-            user_id: localStorage.getItem('user_id')
-          };
-          console.log(data);
-          this.props.dispatch(loadProfileData(data));
-          this.getInfo();
-        } else {
-          this.setState({
-            error:
-              '<p style={{color: red}}>Please enter correct credentials</p>',
-            authFlag: false
-          });
-        }
-      })
-      .catch(e => {
-        this.setState({
-          error: 'Please enter correct credentials' + e
-        });
-      });
+    this.props.dispatch(updateEdu(data));
   };
 
   deleteEdu = e => {
@@ -164,36 +135,8 @@ class Education extends React.Component {
       toYr: this.state.ntoYr,
       stud_id: localStorage.getItem('user_id')
     };
-    //set the with credentials to true
-    axios.defaults.withCredentials = true;
-    //make a post request with the user data
-    axios.defaults.headers.common['Authorization'] = localStorage.getItem(
-      'token'
-    );
-    axios
-      .post('http://localhost:8000/stud_profile/insertEduInfo', data)
-      .then(response => {
-        console.log('Status Code : ', response.status);
-        if (response.status === 200) {
-          this.setState({
-            error: '',
-            authFlag: true
-          });
-          this.props.dispatch(loadProfileData(data));
-          this.addSchool();
-        } else {
-          this.setState({
-            error:
-              '<p style={{color: red}}>Please enter correct credentials</p>',
-            authFlag: false
-          });
-        }
-      })
-      .catch(e => {
-        this.setState({
-          error: 'Please enter correct credentials' + e
-        });
-      });
+    this.props.dispatch(insertEdu(data));
+    this.addSchool();
   };
 
   collChange = e => {

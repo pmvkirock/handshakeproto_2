@@ -1,7 +1,7 @@
 import React from 'react';
 import { Modal, Form, Button } from 'react-bootstrap';
 import axios from 'axios';
-import cookie from 'react-cookies';
+import { connect } from 'react-redux';
 
 class edit extends React.Component {
   constructor(props) {
@@ -30,13 +30,15 @@ class edit extends React.Component {
       paid: this.state.paid,
       post: this.state.post,
       salary: this.state.salary,
-      id: cookie.load('cookie')
+      company_name: this.props.getCompProfile.cname,
+      email: this.props.getCompProfile.email,
+      comp_id: localStorage.getItem('user_id')
     };
     //set the with credentials to true
     axios.defaults.withCredentials = true;
     //make a post request with the user data
     axios
-      .post('http://localhost:8000/insertJob', data)
+      .post('http://localhost:8000/jobs/insertJob', data)
       .then(response => {
         console.log('Status Code : ', response.status);
         if (response.status === 200) {
@@ -228,4 +230,10 @@ class edit extends React.Component {
   }
 }
 
-export default edit;
+const mapStateToProps = function(state) {
+  return {
+    getCompProfile: state.getCompProfile
+  };
+};
+
+export default connect(mapStateToProps)(edit);

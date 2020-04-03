@@ -4,6 +4,7 @@ import { Link, Redirect } from 'react-router-dom';
 import axios from 'axios';
 import { connect } from 'react-redux';
 import { StudentType } from '../../../../actions';
+import { companyProfileData } from '../../../../actions/companyprofile';
 import * as jwt_decode from 'jwt-decode';
 
 class signupform extends React.Component {
@@ -69,6 +70,10 @@ class signupform extends React.Component {
       localStorage.setItem('user_id', decoded._id);
       localStorage.setItem('username', decoded.username);
       localStorage.setItem('type', decoded.type);
+      const data = {
+        user_id: decoded._id
+      };
+      this.props.dispatch(companyProfileData(data));
       redirectVar = <Redirect to="/home" />;
     } else redirectVar = <Redirect to="/companylogin" />;
     return (
