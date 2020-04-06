@@ -1,7 +1,6 @@
 import React from 'react';
 import { Modal, Button, Form } from 'react-bootstrap';
 import axios from 'axios';
-import cookie from 'react-cookies';
 
 class apply extends React.Component {
   state = { setShow: false, tprof_pic: '' };
@@ -45,7 +44,7 @@ class apply extends React.Component {
   applyJob = e => {
     e.preventDefault();
     const data = {
-      idstudent: cookie.load('cookie'),
+      idstudent: localStorage.getItem('user_id'),
       idjob: this.props.idjob,
       idcompany: this.props.idcompany,
       resume: this.state.tprof_pic,
@@ -55,7 +54,7 @@ class apply extends React.Component {
     axios.defaults.withCredentials = true;
     //make a post request with the user data
     axios
-      .post('http://localhost:8000/insertAppli', data)
+      .post('http://localhost:8000/jobs/insertAppli', data)
       .then(response => {
         console.log('Status Code : ', response.status);
         if (response.status === 200) {

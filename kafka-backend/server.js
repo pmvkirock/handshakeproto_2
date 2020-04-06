@@ -13,6 +13,9 @@ var get_Comp_Profile = require("../kafka-backend/services/getCompProfile");
 var update_Comp_Profile = require("../kafka-backend/services/updateCompInfo");
 var get_Jobs = require("../kafka-backend/services/getAllJobs");
 var add_Jobs = require("../kafka-backend/services/addJob");
+var insert_Appli = require("../kafka-backend/services/insertAppli");
+var get_Applied = require("../kafka-backend/services/getApplied");
+var update_Applied = require("../kafka-backend/services/updateApplied");
 
 function handleTopicRequest(topic_name, fname) {
   //var topic_name = 'root_topic';
@@ -20,23 +23,23 @@ function handleTopicRequest(topic_name, fname) {
     var consumer = connection.getConsumer(topic_name);
     var producer = connection.getProducer();
     console.log("server is running ");
-    consumer.on("message", function(message) {
+    consumer.on("message", function (message) {
       console.log("message received for " + topic_name + " ", fname);
       console.log(message.value);
       var data = JSON.parse(message.value);
-      fname.handle_request(data.data, function(err, res) {
+      fname.handle_request(data.data, function (err, res) {
         //console.log("after handle" + res);
         var payloads = [
           {
             topic: data.replyTo,
             messages: JSON.stringify({
               correlationId: data.correlationId,
-              data: res
+              data: res,
             }),
-            partition: 0
-          }
+            partition: 0,
+          },
         ];
-        producer.send(payloads, function(err, data) {
+        producer.send(payloads, function (err, data) {
           console.log(data);
         });
         return;
@@ -59,3 +62,6 @@ handleTopicRequest("get_Comp_Profile", get_Comp_Profile);
 handleTopicRequest("update_Comp_Profile", update_Comp_Profile);
 handleTopicRequest("get_All_Jobs", get_Jobs);
 handleTopicRequest("add_Jobs", add_Jobs);
+handleTopicRequest("insert_Appli", insert_Appli);
+handleTopicRequest("get_Applied", get_Applied);
+handleTopicRequest("update_Applied", update_Applied);

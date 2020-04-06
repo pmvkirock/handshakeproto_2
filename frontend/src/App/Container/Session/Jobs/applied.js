@@ -1,8 +1,9 @@
 import React from 'react';
 import { Modal, Button, Container, Row, Col, Form } from 'react-bootstrap';
 import axios from 'axios';
-import cookie from 'react-cookies';
 import { Link } from 'react-router-dom';
+import { connect } from 'react-redux';
+import { getApplied } from '../../../../actions/getApplied';
 
 class apply extends React.Component {
   state = { setShow: false, tprof_pic: '', data: [] };
@@ -18,17 +19,18 @@ class apply extends React.Component {
       this.setState({
         setShow: this.props.show
       });
+
       this.applyJob();
     }
   }
 
-  job_cat = e => {
+  job_cat = (e, idstudent) => {
     e.preventDefault();
     var data = {
       idjob: this.props.idjob,
-      idstudent: this.state.data[0].idstudent,
+      idstudent: idstudent,
       status: e.target.value,
-      idcompany: cookie.load('cookie')
+      idcompany: localStorage.getItem('user_id')
     };
     if (
       data.idstudent != undefined &&
@@ -40,7 +42,7 @@ class apply extends React.Component {
       axios.defaults.withCredentials = true;
       //make a post request with the user data
       axios
-        .post('http://localhost:8000/updateApplied', data)
+        .post('http://localhost:8000/jobs/updateApplied', data)
         .then(response => {
           console.log('Status Code : ', response.status);
           if (response.status === 200) {
@@ -65,81 +67,66 @@ class apply extends React.Component {
   };
 
   applyJob = () => {
-    //set the with credentials to true
-    axios.defaults.withCredentials = true;
-    //make a post request with the user data
-    axios
-      .get(
-        'http://localhost:8000/getApplied?idcompany=' +
-          cookie.load('cookie') +
-          '&idjob=' +
-          this.props.idjob
-      )
-      .then(response => {
-        console.log('Status Code : ', response.status);
-        if (response.status === 200) {
-          this.setState({
-            error: '',
-            authFlag: true,
-            data: response.data
-          });
-        } else {
-          this.setState({
-            error:
-              '<p style={{color: red}}>Please enter correct credentials</p>',
-            authFlag: false
-          });
-        }
-      })
-      .catch(e => {
-        this.setState({
-          error: 'Please enter correct credentials' + e
-        });
-      });
+    var data = {};
+    if (this.props.idjob) {
+      data = {
+        comp_id: localStorage.getItem('user_id'),
+        job_id: this.props.idjob
+      };
+      this.props.dispatch(getApplied(data));
+    } else if (this.props.getAllJobs.jobs[0]._id) {
+      data = {
+        comp_id: localStorage.getItem('user_id'),
+        job_id: this.props.getAllJobs.jobs[0]._id
+      };
+    }
   };
 
   componentDidMount() {
-    this.setState({
-      setShow: this.props.show
-    });
+    this.applyJob();
   }
 
   render() {
-    var printJobs = this.state.data.map(
-      ({
-        idstudent,
-        First_Name,
-        Last_Name,
-        coll_name,
-        degree,
-        major,
-        resume
-      }) => {
+    //console.log(this.props.getApplied.appli[0].idstudent);
+    var printJobs = this.props.getApplied.appli.map(
+      ({ idstudent, status, resume }) => {
         return (
-          <Row key={idstudent} className={'border-tb top-3'}>
+          <Row key={idstudent._id} className={'border-tb top-3'}>
             <Col xl={9}>
               <Container>
-                <Link to={`/student_prof/` + idstudent}>
-                  <h5 className="mbottom-5">{First_Name + ' ' + Last_Name}</h5>
+                <Link to={`/student_prof/` + idstudent._id}>
+                  <h5 className="mbottom-5">
+                    {idstudent.fname + ' ' + idstudent.lname}
+                  </h5>
                 </Link>
-                <h6 className="mbottom-5">{coll_name}</h6>
+                <h6 className="mbottom-5">{idstudent.school_info[0].name}</h6>
                 <Row
                   className="mleft-1 small-font"
                   style={{ paddingBottom: 0 }}
                 >
                   <Col xl={6}>
                     <Row>
-                      <p className="mbottom-5">{degree}</p>
+                      <p className="mbottom-5">
+                        {idstudent.school_info[0].degree}
+                      </p>
                     </Row>
                   </Col>
                   <Col xl={6}>
                     <Row>
-                      <p className="mbottom-5">{major}</p>
+                      <p className="mbottom-5">
+                        {idstudent.school_info[0].major}
+                      </p>
                     </Row>
                   </Col>
                 </Row>
                 <Form.Group controlId="formOwnership">
-                  <Form.Control as="select" onChange={this.job_cat}>
+                  <Form.Control
+                    as="select"
+                    onChange={e => {
+                      this.job_cat(e, idstudent._id);
+                    }}
+                    value={status}
+                  >
                     <option value="Pending">Pending</option>
                     <option value="Reviewed">Reviewed</option>
                     <option value="Declined">Declined</option>
@@ -182,4 +169,14 @@ class apply extends React.Component {
   }
 }
 
-export default apply;
+const mapStateToProps = state => {
+  return {
+    getType: state.getType,
+    getProfileInfo: state.getProfileInfo,
+    getCompInfo: state.getCompInfo,
+    getAllJobs: state.getAllJobs,
+    getApplied: state.getApplied
+  };
+};
+
+export default connect(mapStateToProps)(apply);

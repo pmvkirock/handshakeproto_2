@@ -1,12 +1,13 @@
 /* eslint react/prop-types: 0 */
 
 import React from 'react';
-import { Container, Row, Col, Button } from 'react-bootstrap';
+import { Container, Row, Col, Button, Pagination, Form } from 'react-bootstrap';
 import { connect } from 'react-redux';
 import NewJob from './edit_det';
 import Job from './job';
 import JobDes from './job_des';
 import { getJobData } from '../../../../actions/getJobs';
+import { sortFilter } from '../../../../actions';
 
 class JobCont extends React.Component {
   constructor(props) {
@@ -16,11 +17,13 @@ class JobCont extends React.Component {
       activeJob: '',
       activeComp: '',
       setShow: false,
-      i: 0
+      i: 0,
+      page: 1
     };
   }
 
   handleJob = (job_id, comp_id) => {
+    console.log(this.state);
     this.setState({
       activeJob: job_id,
       activeComp: comp_id
@@ -32,8 +35,45 @@ class JobCont extends React.Component {
     this.setState({ setShow: true });
   };
 
+  setSort = e => {
+    this.props.dispatch(sortFilter(e.target.value));
+  };
+
+  pageSet = page => {
+    const data = {
+      page: page,
+      filter: this.props.getJobFilterPartFull,
+      title: this.props.getJobFilter,
+      city: this.props.getCityFilter,
+      sort: this.props.getSortFilter
+    };
+    this.props.dispatch(getJobData(data));
+    this.setState({
+      page: page
+    });
+  };
+
   getInfo = () => {
-    this.props.dispatch(getJobData());
+    var data = {};
+    if (localStorage.getItem('type') == 'Company') {
+      data = {
+        page: 1,
+        filter: this.props.getJobFilterPartFull,
+        title: '',
+        city: '',
+        sort: '',
+        comp_id: localStorage.getItem('user_id')
+      };
+    } else {
+      data = {
+        page: 1,
+        filter: '',
+        title: '',
+        city: '',
+        sort: ''
+      };
+    }
+    this.props.dispatch(getJobData(data));
   };
 
   componentDidMount() {
@@ -41,12 +81,89 @@ class JobCont extends React.Component {
   }
 
   componentDidUpdate(prevProps) {
-    if (this.props.getJobFilterPartFull !== prevProps.getJobFilterPartFull)
+    if (this.props.getJobFilterPartFull !== prevProps.getJobFilterPartFull) {
+      const data = {
+        page: this.state.page,
+        filter: this.props.getJobFilterPartFull,
+        title: this.props.getJobFilter,
+        city: this.props.getCityFilter,
+        sort: this.props.getSortFilter
+      };
+      if (localStorage.getItem('type') === 'Company') {
+        Object.assign(data, {
+          comp_id: localStorage.getItem('user_id')
+        });
+      }
+      this.props.dispatch(getJobData(data));
       this.setState({ activeJob: '' });
+    }
+    if (this.props.getJobFilter !== prevProps.getJobFilter) {
+      const data = {
+        page: this.state.page,
+        filter: this.props.getJobFilterPartFull,
+        title: this.props.getJobFilter,
+        city: this.props.getCityFilter,
+        sort: this.props.getSortFilter
+      };
+      if (localStorage.getItem('type') === 'Company') {
+        Object.assign(data, {
+          comp_id: localStorage.getItem('user_id')
+        });
+      }
+      this.props.dispatch(getJobData(data));
+      this.setState({ activeJob: '' });
+    }
+    if (this.props.getCityFilter !== prevProps.getCityFilter) {
+      const data = {
+        page: this.state.page,
+        filter: this.props.getJobFilterPartFull,
+        title: this.props.getJobFilter,
+        city: this.props.getCityFilter,
+        sort: this.props.getSortFilter
+      };
+      if (localStorage.getItem('type') === 'Company') {
+        Object.assign(data, {
+          comp_id: localStorage.getItem('user_id')
+        });
+      }
+      this.props.dispatch(getJobData(data));
+      this.setState({ activeJob: '' });
+    }
+    if (this.props.getSortFilter !== prevProps.getSortFilter) {
+      const data = {
+        page: this.state.page,
+        filter: this.props.getJobFilterPartFull,
+        title: this.props.getJobFilter,
+        city: this.props.getCityFilter,
+        sort: this.props.getSortFilter
+      };
+      if (localStorage.getItem('type') === 'Company') {
+        Object.assign(data, {
+          comp_id: localStorage.getItem('user_id')
+        });
+      }
+      this.props.dispatch(getJobData(data));
+      this.setState({ activeJob: '' });
+    }
   }
 
   render() {
     var add = '';
+    let items = [];
+    for (let number = 1; number <= this.props.getAllJobs.pages; number++) {
+      items.push(
+        <Pagination.Item
+          key={number}
+          active={
+            number === this.props.getAllJobs.page ||
+            (this.props.getAllJobs.page === null && number === 1)
+          }
+          onClick={() => this.pageSet(number)}
+        >
+          {number}
+        </Pagination.Item>
+      );
+    }
     if (this.props.getType == 'Company') {
       add = (
         <Button
@@ -82,39 +199,6 @@ class JobCont extends React.Component {
         comp_id
       }) => {
         let showJob;
-        switch (this.props.getJobFilterPartFull) {
-          case 'PartTime':
-            if (paid == 'PartTime') showJob = 'ShowForm';
-            else showJob = 'HideForm';
-            break;
-          case 'FullTime':
-            if (paid == 'FullTime') showJob = 'ShowForm';
-            else showJob = 'HideForm';
-            break;
-          case 'OnCampus':
-            if (job_cat == 'OnCampus') showJob = 'ShowForm';
-            else showJob = 'HideForm';
-            break;
-          case 'Internship':
-            if (job_cat == 'Internship') showJob = 'ShowForm';
-            else showJob = 'HideForm';
-            break;
-          case 'MyJobs':
-            if (comp_id == localStorage.getItem('user_id'))
-              showJob = 'ShowForm';
-            else showJob = 'HideForm';
-            break;
-          case 'None':
-            showJob = 'ShowForm';
-            break;
-          default:
-            showJob = 'ShowForm';
-            break;
-        }
-        let regexJob = new RegExp(this.props.getJobFilter, 'gi');
-        if (title.match(regexJob) == null) showJob = 'HideForm';
-        let regexCity = new RegExp(this.props.getCityFilter, 'gi');
-        if (location.match(regexCity) == null) showJob = 'HideForm';
         return (
           <a
             indexkey={_id}
@@ -143,12 +227,34 @@ class JobCont extends React.Component {
     return (
       <Row className="background top-10">
         <Col xl={4} style={{ overflowY: 'scroll', height: 70 + 'vh' }}>
-          <Row>
-            <Container className="job-listing">
-              <h6>Job Listing</h6>
-            </Container>
-          </Row>
+          <Container className="job-listing">
+            <Row>
+              <Col xl={6}>
+                <p className="job-count intern-type">
+                  {this.props.getAllJobs.limit * this.props.getAllJobs.page} of{' '}
+                  {this.props.getAllJobs.total} Jobs
+                </p>
+              </Col>
+              <Col xl={6}>
+                <Form.Control
+                  as="select"
+                  className="sort-dropdown"
+                  onChange={this.setSort}
+                >
+                  <option>Posting Date - Asc</option>
+                  <option>Posting Date - Dsc</option>
+                  <option>Deadline - Asc</option>
+                  <option>Deadline - Dsc</option>
+                  <option>Location - Asc</option>
+                  <option>Location - Dsc</option>
+                </Form.Control>
+              </Col>
+            </Row>
+          </Container>
+
           {printJobs}
+          <Pagination>{items}</Pagination>
+          <br />
         </Col>
         <Col xl={8} style={{ overflowY: 'scroll', height: 70 + 'vh' }}>
           <JobDes
@@ -172,6 +278,7 @@ const mapStateToProps = function(state) {
     getJobFilterPartFull: state.getJobFilterPartFull,
     getJobFilter: state.getJobFilter,
     getCityFilter: state.getCityFilter,
+    getSortFilter: state.getSortFilter,
     getType: state.getType,
     getAllJobs: state.getAllJobs
   };

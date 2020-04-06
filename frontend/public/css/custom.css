@@ -129,6 +129,7 @@
 .job-listing {
   padding-top: 10px;
   padding-bottom: 10px;
+  margin-bottom: 20px;
 }
 
 .job-listing > h6 {
@@ -187,4 +188,17 @@
 
 .padding-bottom-15 {
   padding-bottom: 15px;
+}
+
+.job-count {
+  padding: 0.375rem 0rem;
+  font-size: 0.9rem !important;
+  margin: 0px;
+}
+.sort-dropdown {
+  font-size: 0.8rem !important;
+  background-color: #ced4da !important;
+  border-radius: 0 !important;
+  padding: 0.375rem 0.75rem;
+  height: 90% !important;
 }

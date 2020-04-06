@@ -57,10 +57,10 @@ class JobDes extends React.Component {
 
   render() {
     var x;
-    console.log(this.state.data.deadline);
     if (this.state.data == undefined) return <div>Loading...</div>;
+    console.log(this.props.comp_id);
     if (this.props.getType == 'Company') {
-      if (this.props.comp_id == localStorage.getItem('user_id')) {
+      if (this.state.data.comp_id == localStorage.getItem('user_id')) {
         x = (
           <Button
             style={{ float: 'right', padding: 5 + 'px' }}

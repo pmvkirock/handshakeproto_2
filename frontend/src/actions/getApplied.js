@@ -2,41 +2,19 @@ import axios from 'axios';
 
 export const loadProfileDataAsync = obj => {
   console.log('Here in Async', obj);
-  return { type: 'getAllJobs', value: obj };
+  return { type: 'getApplied', value: obj };
 };
 
-export const getJobData = data => {
+export const getApplied = data => {
   console.log('Preapring for Launch', data);
   return dispatch => {
     var url;
     console.log(data);
-    if (data.comp_id) {
-      url =
-        'http://localhost:8000/jobs/getAllJobs?limit=10&skip=' +
-        data.page +
-        '&filter=' +
-        data.filter +
-        '&job=' +
-        data.title +
-        '&city=' +
-        data.city +
-        '&sort=' +
-        data.sort +
-        '&comp_id=' +
-        data.comp_id;
-    } else {
-      url =
-        'http://localhost:8000/jobs/getAllJobs?limit=10&skip=' +
-        data.page +
-        '&filter=' +
-        data.filter +
-        '&job=' +
-        data.title +
-        '&city=' +
-        data.city +
-        '&sort=' +
-        data.sort;
-    }
+    url =
+      'http://localhost:8000/jobs/getApplied?comp_id=' +
+      data.comp_id +
+      '&job_id=' +
+      data.job_id;
     axios.defaults.withCredentials = true;
     axios.defaults.headers.common['Authorization'] = localStorage.getItem(
       'token'
@@ -52,11 +30,7 @@ export const getJobData = data => {
               authFlag: true,
               loginStatus: 'success',
               error: false,
-              jobs: [...response.data.docs],
-              total: response.data.total,
-              limit: response.data.limit,
-              page: response.data.page,
-              pages: response.data.pages
+              appli: [...response.data]
             })
           );
         } else {

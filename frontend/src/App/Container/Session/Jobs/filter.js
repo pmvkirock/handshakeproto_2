@@ -71,6 +71,7 @@ class Filter extends React.Component {
         </Button>
       );
     }
+    console.log(myJobs);
     return (
       <Row>
         <Container className="background top-10 padding-all">
@@ -158,7 +159,6 @@ class Filter extends React.Component {
                   >
                     Internship
                   </Button>
-                  {myJobs}
                 </ButtonToolbar>
               </Col>
             </Row>

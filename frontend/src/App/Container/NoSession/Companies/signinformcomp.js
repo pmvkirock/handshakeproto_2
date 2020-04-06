@@ -3,7 +3,7 @@ import { Form, Button } from 'react-bootstrap';
 import { Link, Redirect } from 'react-router-dom';
 import axios from 'axios';
 import { connect } from 'react-redux';
-import { StudentType } from '../../../../actions';
+import { StudentType, getMyJobs } from '../../../../actions';
 import { companyProfileData } from '../../../../actions/companyprofile';
 import * as jwt_decode from 'jwt-decode';
 
@@ -74,6 +74,7 @@ class signupform extends React.Component {
         user_id: decoded._id
       };
       this.props.dispatch(companyProfileData(data));
+      this.props.dispatch(getMyJobs());
       redirectVar = <Redirect to="/home" />;
     } else redirectVar = <Redirect to="/companylogin" />;
     return (

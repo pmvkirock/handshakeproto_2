@@ -60,6 +60,13 @@ export const declined = () => {
   };
 };
 
+export const sortFilter = x => {
+  return {
+    type: 'sortFilter',
+    newState: x
+  };
+};
+
 export const updateJobFilter = x => {
   return {
     type: 'filterJobUpdate',
