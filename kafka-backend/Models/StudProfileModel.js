@@ -1,4 +1,5 @@
 const mongoose = require("mongoose");
+const paginate = require("mongoose-paginate");
 const Schema = mongoose.Schema;
 
 var studSchema = new Schema(
@@ -25,8 +26,8 @@ var studSchema = new Schema(
         fromMonth: String,
         fromYear: String,
         toMonth: String,
-        toYear: String
-      }
+        toYear: String,
+      },
     ],
     work_exp: [
       {
@@ -37,19 +38,20 @@ var studSchema = new Schema(
         fromMonth: String,
         fromYear: String,
         toMonth: String,
-        toYear: String
-      }
+        toYear: String,
+      },
     ],
     skill: [
       {
-        skill_name: String
-      }
-    ]
+        skill_name: String,
+      },
+    ],
   },
   {
-    versionKey: false
+    versionKey: false,
   }
 );
 
+studSchema.plugin(paginate);
 const studModel = mongoose.model("stud_prof", studSchema);
 module.exports = studModel;

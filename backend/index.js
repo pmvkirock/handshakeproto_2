@@ -69,6 +69,7 @@ const stud_profile = require("./profile");
 const comp_profile = require("./company");
 const jobs = require("./jobs");
 const events = require("./events");
+const students = require("./students");
 
 app.post("/signupStud", function (req, res) {
   console.log("Req Body : ", req.body);
@@ -101,5 +102,7 @@ app.use("/comp_profile", comp_profile);
 app.use("/jobs", jobs);
 
 app.use("/events", events);
+
+app.use("/students", students);
 
 app.listen(8000, () => console.log("Server Listening on port 8000"));

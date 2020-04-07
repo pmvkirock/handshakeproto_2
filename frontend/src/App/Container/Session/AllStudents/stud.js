@@ -9,10 +9,7 @@ class Stud extends React.Component {
       x = this.props.prof_pic;
     }
     return (
-      <Row
-        key={this.props.id}
-        className={'top-10 background job-listing ' + this.props.showJob}
-      >
+      <Row key={this.props.id} className={'top-10 background job-listing'}>
         <Col xl={2}>
           <img
             src={x}

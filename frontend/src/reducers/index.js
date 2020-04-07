@@ -18,6 +18,8 @@ import getSortFilter from './getSortFilter';
 import getApplied from './getApplied';
 import getAllEvents from './getAllEvents';
 import getEventsApplied from './getEventsApplied';
+import getAllStudents from './getAllStudents';
+import getOtherStudent from './getOtherStudents';
 
 const allReducers = combineReducers({
   getType: getType,
@@ -38,7 +40,9 @@ const allReducers = combineReducers({
   getSortFilter: getSortFilter,
   getApplied: getApplied,
   getAllEvents: getAllEvents,
-  getEventsApplied: getEventsApplied
+  getEventsApplied: getEventsApplied,
+  getAllStudents: getAllStudents,
+  getOtherStudent: getOtherStudent
 });
 
 export default allReducers;

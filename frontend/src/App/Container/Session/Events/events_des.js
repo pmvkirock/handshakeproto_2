@@ -51,7 +51,7 @@ class JobDes extends React.Component {
               authFlag: true
             });
             this.handleClose();
-            alert('Applied successfully major');
+            alert('Applied successfully to this event');
           } else {
             this.setState({
               error:
@@ -122,7 +122,7 @@ class JobDes extends React.Component {
           style={{ float: 'right', padding: 5 + 'px' }}
           onClick={this.applyJob}
         >
-          Apply Now
+          RSVP Event
         </Button>
       );
     }

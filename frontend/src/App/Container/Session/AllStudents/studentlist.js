@@ -1,96 +1,104 @@
 import React from 'react';
-import { Container } from 'react-bootstrap';
-import axios from 'axios';
+import { Container, Pagination } from 'react-bootstrap';
+import { getStudents } from '../../../../actions/getAllStudents';
 import { connect } from 'react-redux';
 import Stud from './stud';
 
 class studlist extends React.Component {
   state = {
-    data: []
+    data: [],
+    page: 1
+  };
+
+  pageSet = page => {
+    var data = {
+      page: page,
+      name: this.props.getStudFilter,
+      sname: this.props.getSchoolFilter,
+      major: this.props.getMajorFilter,
+      skill: this.props.getFilterSkill
+    };
+
+    this.props.dispatch(getStudents(data));
+    this.setState({
+      page: page
+    });
   };
 
   getInfo = () => {
-    axios.defaults.withCredentials = true;
-    //make a post request with the user data
-    axios
-      .get('http://localhost:8000/getAllStudents')
-      .then(response => {
-        if (response.status === 200) {
-          this.setState({
-            error: '',
-            data: response.data
-          });
-          console.log(this.state.data);
-        } else {
-          this.setState({
-            error:
-              '<p style={{color: red}}>Please enter correct credentials</p>',
-            authFlag: false
-          });
-        }
-      })
-      .catch(e => {
-        this.setState({
-          error: 'Please enter correct credentials' + e
-        });
-      });
+    var data = {
+      page: 1,
+      name: this.props.getStudFilter,
+      sname: this.props.getSchoolFilter,
+      major: this.props.getMajorFilter,
+      skill: this.props.getFilterSkill
+    };
+    this.props.dispatch(getStudents(data));
   };
 
   componentDidMount() {
     this.getInfo();
   }
 
+  componentDidUpdate(prevProps) {
+    if (this.props.getStudFilter !== prevProps.getStudFilter) {
+      this.getInfo();
+    }
+    if (this.props.getSchoolFilter !== prevProps.getSchoolFilter) {
+      this.getInfo();
+    }
+    if (this.props.getMajorFilter !== prevProps.getMajorFilter) {
+      this.getInfo();
+    }
+    if (this.props.getFilterSkill !== prevProps.getFilterSkill) {
+      this.getInfo();
+    }
+  }
+
   render() {
-    var profile = this.state.data.map(
-      ({
-        idstudent,
-        First_Name,
-        Last_Name,
-        coll_name,
-        degree,
-        major,
-        pass_year,
-        skill
-      }) => {
-        let showJob = 'ShowForm';
-
-        let regexfName = new RegExp(this.props.getStudFilter, 'gi');
-        let regexlName = new RegExp(this.props.getStudFilter, 'gi');
-
+    var profile = this.props.getAllStudents.students.map(
+      ({ _id, fname, lname, school_info }) => {
         if (
-          First_Name.match(regexfName) == null &&
-          Last_Name.match(regexlName) == null
-        )
-          showJob = 'HideForm';
-
-        let regexSchool = new RegExp(this.props.getSchoolFilter, 'gi');
-        if (coll_name.match(regexSchool) == null) showJob = 'HideForm';
-
-        let regexMajor = new RegExp(this.props.getMajorFilter, 'gi');
-        if (major.match(regexMajor) == null) showJob = 'HideForm';
-
-        if (skill != null) {
-          console.log(true);
-          let regexSkill = new RegExp(this.props.getFilterSkill, 'gi');
-          if (skill.match(regexSkill) == null) showJob = 'HideForm';
+          localStorage.getItem('type') == 'Company' ||
+          (localStorage.getItem('type') == 'Student' &&
+            localStorage.getItem('user_id') != _id)
+        ) {
+          return (
+            <Stud
+              key={_id}
+              id={_id}
+              First_Name={fname}
+              Last_Name={lname}
+              coll_name={school_info[0].name}
+              degree={school_info[0].degree}
+              major={school_info[0].major}
+              pass_year={school_info[0].yop}
+            />
+          );
         }
-
-        return (
-          <Stud
-            key={idstudent}
-            id={idstudent}
-            First_Name={First_Name}
-            Last_Name={Last_Name}
-            coll_name={coll_name}
-            degree={degree}
-            major={major}
-            pass_year={pass_year}
-            showJob={showJob}
-          />
-        );
       }
     );
-    return <Container>{profile}</Container>;
+    let items = [];
+    for (let number = 1; number <= this.props.getAllStudents.pages; number++) {
+      items.push(
+        <Pagination.Item
+          key={number}
+          active={
+            number === this.props.getAllStudents.page ||
+            (this.props.getAllStudents.page === null && number === 1)
+          }
+          onClick={() => this.pageSet(number)}
+        >
+          {number}
+        </Pagination.Item>
+      );
+    }
+    return (
+      <Container>
+        {profile}
+        <Pagination>{items}</Pagination>
+      </Container>
+    );
   }
 }
 
@@ -99,7 +107,8 @@ const mapStateToProps = state => {
     getStudFilter: state.getStudFilter,
     getSchoolFilter: state.getSchoolFilter,
     getMajorFilter: state.getMajorFilter,
-    getFilterSkill: state.getFilterSkill
+    getFilterSkill: state.getFilterSkill,
+    getAllStudents: state.getAllStudents
   };
 };
 

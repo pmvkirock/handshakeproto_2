@@ -1,9 +1,11 @@
 import React from 'react';
 import { Container, Row, Col, Form } from 'react-bootstrap';
-import axios from 'axios';
+import { connect } from 'react-redux';
 import Education from './education_prof';
 import Experience from './job_prof';
 import Primary from './primary';
+import Skills from './skills';
+import { loadProfileData } from '../../../../../actions/getOtherStudents';
 
 class Stud_Profile extends React.Component {
   constructor(props) {
@@ -20,36 +22,9 @@ class Stud_Profile extends React.Component {
 
   getInfo = () => {
     const data = {
-      stud_id: this.props.match.params.id
+      user_id: this.props.match.params.id
     };
-    axios.defaults.withCredentials = true;
-    //make a post request with the user data
-    axios
-      .post('http://localhost:8000/stud_profile', data)
-      .then(response => {
-        if (response.status === 200) {
-          this.setState({
-            error: '',
-            phone_num: response.data[0].phone_num,
-            email: response.data[0].email_ID,
-            career_obj: response.data[0].Career_obj,
-            tphone_num: response.data[0].phone_num,
-            temail: response.data[0].email_ID,
-            tcareer_obj: response.data[0].Career_obj
-          });
-        } else {
-          this.setState({
-            error:
-              '<p style={{color: red}}>Please enter correct credentials</p>',
-            authFlag: false
-          });
-        }
-      })
-      .catch(e => {
-        this.setState({
-          error: 'Please enter correct credentials' + e
-        });
-      });
+    this.props.dispatch(loadProfileData(data));
   };
 
   componentDidMount() {
@@ -68,24 +43,16 @@ class Stud_Profile extends React.Component {
               <Primary id={this.props.match.params.id} />
             </Row>
             <Row className="all-row">
-              <Container className="background top-10 padding-all skills">
-                <h5>Skills</h5>
-                <p>
-                  <span>HTML</span>
-                  <span>CSS</span>
-                  <span>PHP</span>
-                  <span>Bootstrap</span>
-                </p>
-              </Container>
+              <Skills id={this.props.match.params.id} />
             </Row>
             <Row className="all-row">
               <Container className="background top-10 padding-all skills">
                 <h5>Contact Info</h5>
                 <p>
-                  Mobile No: <span>{this.state.phone_num}</span>
+                  Mobile No: <span>{this.props.getOtherStudent.phone_num}</span>
                 </p>
                 <p>
-                  Email: <span>{this.state.email}</span>
+                  Email: <span>{this.props.getOtherStudent.email}</span>
                 </p>
               </Container>
             </Row>
@@ -100,7 +67,7 @@ class Stud_Profile extends React.Component {
                 <h5>My Journey</h5>
                 <Form>
                   <Form.Group controlId="exampleForm.ControlTextarea1">
-                    <p>{this.state.career_obj}</p>
+                    <p>{this.props.getOtherStudent.obj}</p>
                   </Form.Group>
                 </Form>
               </Container>
@@ -118,4 +85,10 @@ class Stud_Profile extends React.Component {
   }
 }
 
-export default Stud_Profile;
+const mapStateToProps = state => {
+  return {
+    getOtherStudent: state.getOtherStudent
+  };
+};
+
+export default connect(mapStateToProps)(Stud_Profile);
