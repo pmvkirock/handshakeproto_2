@@ -1,12 +1,11 @@
 /* eslint react/prop-types: 0 */
 
 import React from 'react';
-import { Container, Row, Col, Button } from 'react-bootstrap';
-import axios from 'axios';
+import { Container, Row, Col, Button, Pagination, Form } from 'react-bootstrap';
 import { connect } from 'react-redux';
-import cookie from 'react-cookies';
 import NewJob from './edit_det';
-
+import { getAllEvents } from '../../../../actions/getEvents';
+import { sortFilter } from '../../../../actions';
 import Job from './event';
 import JobDes from './events_des';
 
@@ -34,35 +33,53 @@ class JobCont extends React.Component {
     this.setState({ setShow: true });
   };
 
+  setSort = e => {
+    this.props.dispatch(sortFilter(e.target.value));
+  };
+
+  pageSet = page => {
+    var data = {};
+    if (localStorage.getItem('type') == 'Company') {
+      data = {
+        page: page,
+        title: this.props.getEventsFilter,
+        city: this.props.getCityFilter,
+        sort: this.props.getSortFilter,
+        comp_id: localStorage.getItem('user_id')
+      };
+    } else {
+      data = {
+        page: page,
+        title: this.props.getEventsFilter,
+        city: this.props.getCityFilter,
+        sort: this.props.getSortFilter
+      };
+    }
+    this.props.dispatch(getAllEvents(data));
+    this.setState({
+      page: page
+    });
+  };
+
   getInfo = () => {
-    axios.defaults.withCredentials = true;
-    //make a post request with the user data
-    axios
-      .get('http://localhost:8000/getAllEvents')
-      .then(response => {
-        if (response.status === 200) {
-          this.setState({
-            error: '',
-            data: response.data
-          });
-          console.log(this.state.data);
-          this.setState({
-            activeJob: this.state.data[0].idjob,
-            activeComp: this.state.data[0].idcompany
-          });
-        } else {
-          this.setState({
-            error:
-              '<p style={{color: red}}>Please enter correct credentials</p>',
-            authFlag: false
-          });
-        }
-      })
-      .catch(e => {
-        this.setState({
-          error: 'Please enter correct credentials' + e
-        });
-      });
+    var data = {};
+    if (localStorage.getItem('type') == 'Company') {
+      data = {
+        page: 1,
+        title: '',
+        city: '',
+        sort: '',
+        comp_id: localStorage.getItem('user_id')
+      };
+    } else {
+      data = {
+        page: 1,
+        title: '',
+        city: '',
+        sort: ''
+      };
+    }
+    this.props.dispatch(getAllEvents(data));
   };
 
   componentDidMount() {
@@ -70,12 +87,70 @@ class JobCont extends React.Component {
   }
 
   componentDidUpdate(prevProps) {
-    if (this.props.getJobFilterPartFull !== prevProps.getJobFilterPartFull)
+    if (this.props.getEventsFilter !== prevProps.getEventsFilter) {
+      const data = {
+        page: this.state.page,
+        title: this.props.getEventsFilter,
+        city: this.props.getCityFilter,
+        sort: this.props.getSortFilter
+      };
+      if (localStorage.getItem('type') === 'Company') {
+        Object.assign(data, {
+          comp_id: localStorage.getItem('user_id')
+        });
+      }
+      this.props.dispatch(getAllEvents(data));
       this.setState({ activeJob: '' });
+    }
+    if (this.props.getCityFilter !== prevProps.getCityFilter) {
+      const data = {
+        page: this.state.page,
+        title: this.props.getEventsFilter,
+        city: this.props.getCityFilter,
+        sort: this.props.getSortFilter
+      };
+      if (localStorage.getItem('type') === 'Company') {
+        Object.assign(data, {
+          comp_id: localStorage.getItem('user_id')
+        });
+      }
+      this.props.dispatch(getAllEvents(data));
+      this.setState({ activeJob: '' });
+    }
+    if (this.props.getSortFilter !== prevProps.getSortFilter) {
+      const data = {
+        page: this.state.page,
+        title: this.props.getEventsFilter,
+        city: this.props.getCityFilter,
+        sort: this.props.getSortFilter
+      };
+      if (localStorage.getItem('type') === 'Company') {
+        Object.assign(data, {
+          comp_id: localStorage.getItem('user_id')
+        });
+      }
+      this.props.dispatch(getAllEvents(data));
+      this.setState({ activeJob: '' });
+    }
   }
 
   render() {
     var add = '';
+    let items = [];
+    for (let number = 1; number <= this.props.getAllEvents.pages; number++) {
+      items.push(
+        <Pagination.Item
+          key={number}
+          active={
+            number === this.props.getAllEvents.page ||
+            (this.props.getAllEvents.page === null && number === 1)
+          }
+          onClick={() => this.pageSet(number)}
+        >
+          {number}
+        </Pagination.Item>
+      );
+    }
     if (this.props.getType == 'Company') {
       add = (
         <Button
@@ -95,11 +170,11 @@ class JobCont extends React.Component {
         </Button>
       );
     }
-    var printJobs = this.state.data.map(
+    var printJobs = this.props.getAllEvents.events.map(
       ({
-        idevents,
-        event_name,
-        event_des,
+        _id,
+        title,
+        desc,
         time,
         date,
         location,
@@ -109,34 +184,18 @@ class JobCont extends React.Component {
         idcompany
       }) => {
         let showJob;
-        switch (this.props.getJobFilterPartFull) {
-          case 'MyJobs':
-            if (idcompany == cookie.load('cookie')) showJob = 'ShowForm';
-            else showJob = 'HideForm';
-            break;
-          case 'None':
-            showJob = 'ShowForm';
-            break;
-          default:
-            showJob = 'ShowForm';
-            break;
-        }
-        let regexJob = new RegExp(this.props.getEventsFilter, 'gi');
-        if (event_name.match(regexJob) == null) showJob = 'HideForm';
-        let regexCity = new RegExp(this.props.getCityFilter, 'gi');
-        if (location.match(regexCity) == null) showJob = 'HideForm';
         return (
           <a
-            indexkey={idevents}
-            onClick={() => this.handleJob(idevents, idcompany)}
+            indexkey={_id}
+            onClick={() => this.handleJob(_id, idcompany)}
             className="jobCont"
-            key={idevents}
+            key={_id}
             href={'#'}
           >
             <Job
-              data-key={idevents}
-              event_name={event_name}
-              event_des={event_des}
+              data-key={_id}
+              event_name={title}
+              event_des={desc}
               location={location}
               time={time}
               date={date.split('T')[0]}
@@ -152,12 +211,30 @@ class JobCont extends React.Component {
     return (
       <Row className="background top-10">
         <Col xl={4} style={{ overflowY: 'scroll', height: 70 + 'vh' }}>
-          <Row>
-            <Container className="job-listing">
-              <h6>Job Listing</h6>
-            </Container>
-          </Row>
+          <Container className="job-listing">
+            <Row>
+              <Col xl={6}>
+                <p className="job-count intern-type">
+                  {this.props.getAllEvents.limit * this.props.getAllEvents.page}{' '}
+                  of {this.props.getAllEvents.total} Events
+                </p>
+              </Col>
+              <Col xl={6}>
+                <Form.Control
+                  as="select"
+                  className="sort-dropdown"
+                  onChange={this.setSort}
+                >
+                  <option>Posting Date - Asc</option>
+                  <option>Posting Date - Dsc</option>
+                  <option>Location - Asc</option>
+                  <option>Location - Dsc</option>
+                </Form.Control>
+              </Col>
+            </Row>
+          </Container>
           {printJobs}
+          <Pagination>{items}</Pagination>
         </Col>
         <Col xl={8} style={{ overflowY: 'scroll', height: 70 + 'vh' }}>
           <JobDes
@@ -181,7 +258,9 @@ const mapStateToProps = function(state) {
     getJobFilterPartFull: state.getJobFilterPartFull,
     getCityFilter: state.getCityFilter,
     getEventsFilter: state.getEventsFilter,
-    getType: state.getType
+    getType: state.getType,
+    getAllEvents: state.getAllEvents,
+    getSortFilter: state.getSortFilter
   };
 };
 

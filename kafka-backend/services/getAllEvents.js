@@ -1,4 +1,4 @@
-const Job_Model = require("../Models/JobModel");
+const Event_Model = require("../Models/EventModel");
 
 async function handle_request(msg, callback) {
   console.log("Inside book kafka backend");
@@ -16,16 +16,6 @@ async function handle_request(msg, callback) {
     case "Location - Dsc":
       options = Object.assign(options, {
         sort: { location: -1 },
-      });
-      break;
-    case "Deadline - Asc":
-      options = Object.assign(options, {
-        sort: { deadline: 1 },
-      });
-      break;
-    case "Deadline - Dsc":
-      options = Object.assign(options, {
-        sort: { deadline: -1 },
       });
       break;
     case "Posting Date - Asc":
@@ -55,37 +45,13 @@ async function handle_request(msg, callback) {
       location: { $regex: ".*" + msg.city + ".*" },
     });
   }
-  switch (msg.filter) {
-    case "PartTime":
-      filter = Object.assign(filter, {
-        paid: msg.filter,
-      });
-      break;
-    case "FullTime":
-      filter = Object.assign(filter, {
-        paid: msg.filter,
-      });
-      break;
-    case "OnCampus":
-      filter = Object.assign(filter, {
-        job_cat: msg.filter,
-      });
-      break;
-    case "Internship":
-      filter = Object.assign(filter, {
-        job_cat: msg.filter,
-      });
-      break;
-    default:
-      break;
-  }
   if (msg.comp_id) {
     filter = Object.assign(filter, {
-      comp_id: msg.comp_id,
+      idcompany: msg.comp_id,
     });
   }
   console.log(filter);
-  const jobs = await Job_Model.paginate(filter, options);
+  const jobs = await Event_Model.paginate(filter, options);
   callback(null, jobs);
 }
 

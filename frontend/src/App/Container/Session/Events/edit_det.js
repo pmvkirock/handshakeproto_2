@@ -1,7 +1,7 @@
 import React from 'react';
 import { Modal, Form, Button } from 'react-bootstrap';
 import axios from 'axios';
-import cookie from 'react-cookies';
+import { connect } from 'react-redux';
 
 class edit extends React.Component {
   constructor(props) {
@@ -14,27 +14,31 @@ class edit extends React.Component {
       time: '',
       date: '',
       eligibility: '',
-      deadline: ''
+      deadline: '',
+      company_name: '',
+      email: '',
+      comp_id: ''
     };
   }
 
   updatePers = e => {
     e.preventDefault();
     const data = {
-      event_name: this.state.event_name,
+      title: this.state.event_name,
       location: this.state.location,
-      deadline: this.state.deadline,
       event_des: this.state.event_des,
       time: this.state.time,
       date: this.state.date,
       eligibility: this.state.eligibility,
-      id: cookie.load('cookie')
+      company_name: this.props.getCompProfile.cname,
+      email: this.props.getCompProfile.email,
+      comp_id: localStorage.getItem('user_id')
     };
     //set the with credentials to true
     axios.defaults.withCredentials = true;
     //make a post request with the user data
     axios
-      .post('http://localhost:8000/insertEvent', data)
+      .post('http://localhost:8000/events/insertEvent', data)
       .then(response => {
         console.log('Status Code : ', response.status);
         if (response.status === 200) {
@@ -154,15 +158,6 @@ class edit extends React.Component {
                 onChange={this.location}
               />
             </Form.Group>
-            <Form.Group controlId="formType">
-              <Form.Label>Application Deadline</Form.Label>
-              <Form.Control
-                type="text"
-                placeholder="Enter Application Deadline"
-                value={this.state.deadline}
-                onChange={this.deadline}
-              />
-            </Form.Group>
             <Form.Group controlId="formCnt">
               <Form.Label>Time</Form.Label>
               <Form.Control
@@ -214,4 +209,10 @@ class edit extends React.Component {
   }
 }
 
-export default edit;
+const mapStateToProps = function(state) {
+  return {
+    getCompProfile: state.getCompProfile
+  };
+};
+
+export default connect(mapStateToProps)(edit);

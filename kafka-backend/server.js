@@ -16,6 +16,10 @@ var add_Jobs = require("../kafka-backend/services/addJob");
 var insert_Appli = require("../kafka-backend/services/insertAppli");
 var get_Applied = require("../kafka-backend/services/getApplied");
 var update_Applied = require("../kafka-backend/services/updateApplied");
+var get_Events = require("../kafka-backend/services/getAllEvents");
+var insert_Events_Appli = require("../kafka-backend/services/insertEventAppli");
+var get_Events_Applied = require("../kafka-backend/services/getEventsApplied");
+var add_Events = require("../kafka-backend/services/addEvent");
 
 function handleTopicRequest(topic_name, fname) {
   //var topic_name = 'root_topic';
@@ -65,3 +69,7 @@ handleTopicRequest("add_Jobs", add_Jobs);
 handleTopicRequest("insert_Appli", insert_Appli);
 handleTopicRequest("get_Applied", get_Applied);
 handleTopicRequest("update_Applied", update_Applied);
+handleTopicRequest("get_All_Events", get_Events);
+handleTopicRequest("insert_Events_Appli", insert_Events_Appli);
+handleTopicRequest("get_Events_Applied", get_Events_Applied);
+handleTopicRequest("add_Events", add_Events);

@@ -1,8 +1,8 @@
 import React from 'react';
 import { Modal, Button, Container, Row, Col } from 'react-bootstrap';
-import axios from 'axios';
-import cookie from 'react-cookies';
 import { Link } from 'react-router-dom';
+import { connect } from 'react-redux';
+import { getApplied } from '../../../../actions/getEventsApplied';
 
 class apply extends React.Component {
   state = { setShow: false, tprof_pic: '', data: [] };
@@ -23,77 +23,59 @@ class apply extends React.Component {
   }
 
   applyJob = () => {
-    //set the with credentials to true
-    axios.defaults.withCredentials = true;
-    //make a post request with the user data
-    axios
-      .get(
-        'http://localhost:8000/getAppliedEvents?idcompany=' +
-          cookie.load('cookie') +
-          '&idevents=' +
-          this.props.idjob
-      )
-      .then(response => {
-        console.log('Status Code : ', response.status);
-        if (response.status === 200) {
-          this.setState({
-            error: '',
-            authFlag: true,
-            data: response.data
-          });
-        } else {
-          this.setState({
-            error:
-              '<p style={{color: red}}>Please enter correct credentials</p>',
-            authFlag: false
-          });
-        }
-      })
-      .catch(e => {
-        this.setState({
-          error: 'Please enter correct credentials' + e
-        });
-      });
+    var data = {};
+    if (this.props.idjob) {
+      data = {
+        comp_id: localStorage.getItem('user_id'),
+        job_id: this.props.idjob
+      };
+      this.props.dispatch(getApplied(data));
+    } else if (this.props.getAllEvents.events[0]._id) {
+      data = {
+        comp_id: localStorage.getItem('user_id'),
+        job_id: this.props.getAllEvents.events[0]._id
+      };
+      this.props.dispatch(getApplied(data));
+    }
   };
 
   componentDidMount() {
-    this.setState({
-      setShow: this.props.show
-    });
+    this.applyJob();
   }
 
   render() {
-    var printJobs = this.state.data.map(
-      ({ idstudent, First_Name, Last_Name, coll_name, degree, major }) => {
-        return (
-          <Row key={idstudent} className={'border-tb top-3'}>
-            <Col xl={12}>
-              <Container>
-                <Link to={`/student_prof/` + idstudent}>
-                  <h5 className="mbottom-5">{First_Name + ' ' + Last_Name}</h5>
-                </Link>
-                <h6 className="mbottom-5">{coll_name}</h6>
-                <Row
-                  className="mleft-1 small-font"
-                  style={{ paddingBottom: 0 }}
-                >
-                  <Col xl={6}>
-                    <Row>
-                      <p className="mbottom-5">{degree}</p>
-                    </Row>
-                  </Col>
-                  <Col xl={6}>
-                    <Row>
-                      <p className="mbottom-5">{major}</p>
-                    </Row>
-                  </Col>
-                </Row>
-              </Container>
-            </Col>
-          </Row>
-        );
-      }
-    );
+    var printJobs = this.props.getEventsApplied.appli.map(({ idstudent }) => {
+      return (
+        <Row key={idstudent} className={'border-tb top-3'}>
+          <Col xl={12}>
+            <Container>
+              <Link to={`/student_prof/` + idstudent}>
+                <h5 className="mbottom-5">
+                  {idstudent.fname + ' ' + idstudent.lname}
+                </h5>
+              </Link>
+              <h6 className="mbottom-5">{idstudent.school_info[0].name}</h6>
+              <Row className="mleft-1 small-font" style={{ paddingBottom: 0 }}>
+                <Col xl={6}>
+                  <Row>
+                    <p className="mbottom-5">
+                      {idstudent.school_info[0].degree}
+                    </p>
+                  </Row>
+                </Col>
+                <Col xl={6}>
+                  <Row>
+                    <p className="mbottom-5">
+                      {idstudent.school_info[0].major}
+                    </p>
+                  </Row>
+                </Col>
+              </Row>
+            </Container>
+          </Col>
+        </Row>
+      );
+    });
     return (
       <Modal show={this.state.setShow} onHide={this.handleClose}>
         <Modal.Header closeButton>
@@ -110,4 +92,14 @@ class apply extends React.Component {
   }
 }
 
-export default apply;
+const mapStateToProps = state => {
+  return {
+    getType: state.getType,
+    getProfileInfo: state.getProfileInfo,
+    getCompInfo: state.getCompInfo,
+    getAllEvents: state.getAllEvents,
+    getEventsApplied: state.getEventsApplied
+  };
+};
+
+export default connect(mapStateToProps)(apply);

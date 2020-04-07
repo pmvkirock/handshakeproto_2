@@ -2,7 +2,6 @@ import React from 'react';
 import { Container, Button } from 'react-bootstrap';
 import Applyjobs from './applyevents';
 import Applied from './applied';
-import cookie from 'react-cookies';
 import { connect } from 'react-redux';
 
 import axios from 'axios';
@@ -31,16 +30,19 @@ class JobDes extends React.Component {
   applyJob = e => {
     e.preventDefault();
     const data = {
-      idstudent: cookie.load('cookie'),
+      idstudent: localStorage.getItem('user_id'),
       idjob: this.props.idjob,
       idcompany: this.props.idcompany
     };
-    if (this.props.getMajor == this.state.data[0].eligibility) {
+    if (
+      this.props.getProfileInfo.school_info[0].major ==
+      this.state.data.eligibility
+    ) {
       //set the with credentials to true
       axios.defaults.withCredentials = true;
       //make a post request with the user data
       axios
-        .post('http://localhost:8000/insertAppliEvents', data)
+        .post('http://localhost:8000/events/insertAppliEvents', data)
         .then(response => {
           console.log('Status Code : ', response.status);
           if (response.status === 200) {
@@ -69,72 +71,40 @@ class JobDes extends React.Component {
   };
 
   getInfo = () => {
-    axios.defaults.withCredentials = true;
-    //make a post request with the user data
-    console.log('Hello' + this.props.idjob);
-    if (this.props.idjob == '' || this.props.idjob == undefined) {
-      axios.defaults.withCredentials = true;
-      //make a post request with the user data
-      axios
-        .get('http://localhost:8000/getAllEvents')
-        .then(response => {
-          if (response.status === 200) {
-            this.setState({
-              error: '',
-              data: response.data
-            });
-          } else {
-            this.setState({
-              error:
-                '<p style={{color: red}}>Please enter correct credentials</p>',
-              authFlag: false
-            });
-          }
-        })
-        .catch(e => {
-          this.setState({
-            error: 'Please enter correct credentials' + e
-          });
-        });
+    if (this.props.idjob == '') {
+      this.setState({
+        error: '',
+        data: this.props.getAllEvents.events[0]
+      });
     } else {
-      axios
-        .get('http://localhost:8000/getEvents?idevents=' + this.props.idjob)
-        .then(response => {
-          if (response.status === 200) {
-            this.setState({
-              error: '',
-              data: response.data
-            });
-            console.log(this.state.data);
-          } else {
-            this.setState({
-              error:
-                '<p style={{color: red}}>Please enter correct credentials</p>',
-              authFlag: false
-            });
-          }
-        })
-        .catch(e => {
+      for (let i = 0; i < this.props.getAllEvents.events.length; i++) {
+        if (this.props.getAllEvents.events[i]._id == this.props.idjob)
           this.setState({
-            error: 'Please enter correct credentials' + e
+            error: '',
+            data: this.props.getAllEvents.events[i]
           });
-        });
+      }
     }
   };
 
   componentDidMount() {
-    this.getInfo();
+    this.setState({
+      error: '',
+      data: this.props.getAllEvents.events[0]
+    });
   }
 
   componentDidUpdate(prevProps) {
     if (this.props.idjob !== prevProps.idjob) this.getInfo();
+    if (this.props.getAllEvents !== prevProps.getAllEvents) this.getInfo();
   }
 
   render() {
     var x;
-    if (this.state.data[0] == undefined) return <div>Loading...</div>;
+    console.log(this.state.data);
+    if (this.state.data == undefined) return <div>Loading...</div>;
     if (this.props.getType == 'Company') {
-      if (this.props.idcompany == cookie.load('cookie')) {
+      if (this.state.data.idcompany == localStorage.getItem('user_id')) {
         x = (
           <Button
             style={{ float: 'right', padding: 5 + 'px' }}
@@ -156,18 +126,18 @@ class JobDes extends React.Component {
         </Button>
       );
     }
+    var date = [];
+    if (this.state.data.date) date = this.state.data.date.split('T');
     return (
       <Container className="padding-all">
-        <h4>{this.state.data[0].event_name}</h4>
-        <p className="margin-b-2">{this.state.data[0].company_name}</p>
+        <h4>{this.state.data.title}</h4>
+        <p className="margin-b-2">{this.state.data.company_name}</p>
         <p className="intern-type margin-b-2">
-          Eligibility - {this.state.data[0].eligibility}
+          Eligibility - {this.state.data.eligibility}
         </p>
-        <p className="intern-type margin-b-2">
-          {this.state.data[0].location}, CA
-        </p>
+        <p className="intern-type margin-b-2">{this.state.data.location}, CA</p>
         <p className="intern-type">
-          {this.state.data[0].date.split('T')[0]} - {this.state.data[0].time}
+          {date[0]} - {this.state.data.time}
         </p>
         <div
           className="border-all padding-all"
@@ -175,22 +145,22 @@ class JobDes extends React.Component {
         >
           <p className="margin-b-2">
             <span style={{ marginTop: 10 + 'px' }}>
-              Application Closes on {this.state.data[0].deadline}
+              Application Closes on {this.state.data.date}
             </span>{' '}
             {x}
           </p>
         </div>
-        <p style={{ marginTop: 10 + 'px' }}>{this.state.data[0].event_des}</p>
+        <p style={{ marginTop: 10 + 'px' }}>{this.state.data.desc}</p>
         <Applyjobs
           show={this.state.setShow}
           handleClose={this.handleClose}
-          idcompany={this.state.data[0].idcompany}
+          idcompany={this.state.data.idcompany}
           idjob={this.props.idjob}
         />
         <Applied
           show={this.state.setShowApplied}
           handleClose={this.handleCloseApplied}
-          idcompany={this.state.data[0].idcompany}
+          idcompany={this.state.data.idcompany}
           idjob={this.props.idjob}
         />
       </Container>
@@ -201,7 +171,9 @@ class JobDes extends React.Component {
 const mapStateToProps = state => {
   return {
     getType: state.getType,
-    getMajor: state.getMajor
+    getMajor: state.getMajor,
+    getAllEvents: state.getAllEvents,
+    getProfileInfo: state.getProfileInfo
   };
 };
 

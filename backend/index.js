@@ -9,7 +9,7 @@ app.use(cors({ origin: "http://localhost:3000", credentials: true }));
 const { checkAuth, frontendURL } = require("../backend/Utils/config");
 
 //Allow Access Control
-app.use(function(req, res, next) {
+app.use(function (req, res, next) {
   res.setHeader("Access-Control-Allow-Origin", frontendURL);
   res.setHeader("Access-Control-Allow-Credentials", "true");
   res.setHeader(
@@ -31,7 +31,7 @@ var options = {
   useNewUrlParser: true,
   useUnifiedTopology: true,
   poolSize: 500,
-  bufferMaxEntries: 0
+  bufferMaxEntries: 0,
 };
 
 mongoose.connect(mongoDB, options, (err, res) => {
@@ -47,10 +47,10 @@ const multer = require("multer");
 
 storage = multer.diskStorage({
   destination: "./public/uploads/",
-  filename: function(req, file, cb) {
+  filename: function (req, file, cb) {
     console.log(file);
     cb(null, `${new Date()}-${file.fieldname}.${file.mimetype.split("/")[1]}`);
-  }
+  },
 });
 
 upload = multer({ storage });
@@ -58,7 +58,7 @@ upload = multer({ storage });
 app.post("/files", upload.single("file"), (req, res) => {
   console.log("Req Body : ", req.body);
   res.writeHead(200, {
-    "Content-Type": "application/json"
+    "Content-Type": "application/json",
   });
   res.end(`${new Date()}-${req.body.name}`);
 });
@@ -68,26 +68,27 @@ const login = require("./login");
 const stud_profile = require("./profile");
 const comp_profile = require("./company");
 const jobs = require("./jobs");
+const events = require("./events");
 
-app.post("/signupStud", function(req, res) {
+app.post("/signupStud", function (req, res) {
   console.log("Req Body : ", req.body);
   var ins = new insert.insert();
   ins.insert_stud(req.body, res);
 });
 
-app.post("/signupComp", function(req, res) {
+app.post("/signupComp", function (req, res) {
   console.log("Req Body : ", req.body);
   var ins = new insert.insert();
   ins.insert_comp(req.body, res);
 });
 
-app.post("/loginStud", function(req, res) {
+app.post("/loginStud", function (req, res) {
   console.log("Req Body : ", req.body);
   var ins = new login.login();
   ins.login_stud(req, res);
 });
 
-app.post("/loginComp", function(req, res) {
+app.post("/loginComp", function (req, res) {
   console.log("Req Body : ", req.body);
   var ins = new login.login();
   ins.login_comp(req, res);
@@ -98,5 +99,7 @@ app.use("/stud_profile", stud_profile);
 app.use("/comp_profile", comp_profile);
 
 app.use("/jobs", jobs);
+
+app.use("/events", events);
 
 app.listen(8000, () => console.log("Server Listening on port 8000"));

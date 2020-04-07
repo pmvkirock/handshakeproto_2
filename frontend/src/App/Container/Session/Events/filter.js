@@ -9,11 +9,7 @@ import {
 } from 'react-bootstrap';
 import { connect } from 'react-redux';
 import {
-  PartTime,
-  FullTime,
   Logout,
-  OnCampus,
-  Internship,
   updateEventsFilter,
   updateCityFilter,
   getMyJobs
@@ -71,6 +67,7 @@ class Filter extends React.Component {
         </Button>
       );
     }
+    console.log(myJobs);
     return (
       <Row>
         <Container className="background top-10 padding-all">
@@ -102,7 +99,6 @@ class Filter extends React.Component {
                   >
                     All Events
                   </Button>
-                  {myJobs}
                 </ButtonToolbar>
               </Col>
             </Row>

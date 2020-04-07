@@ -16,6 +16,8 @@ import getCompProfile from './getCompProfile';
 import getAllJobs from './getAllJobs';
 import getSortFilter from './getSortFilter';
 import getApplied from './getApplied';
+import getAllEvents from './getAllEvents';
+import getEventsApplied from './getEventsApplied';
 
 const allReducers = combineReducers({
   getType: getType,
@@ -34,7 +36,9 @@ const allReducers = combineReducers({
   getCompProfile: getCompProfile,
   getAllJobs: getAllJobs,
   getSortFilter: getSortFilter,
-  getApplied: getApplied
+  getApplied: getApplied,
+  getAllEvents: getAllEvents,
+  getEventsApplied: getEventsApplied
 });
 
 export default allReducers;
