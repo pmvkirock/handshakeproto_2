@@ -20,6 +20,8 @@ import getAllEvents from './getAllEvents';
 import getEventsApplied from './getEventsApplied';
 import getAllStudents from './getAllStudents';
 import getOtherStudent from './getOtherStudents';
+import getMyJobs from './getStudentJobs';
+import getMyEvents from './getStudentEvents';
 
 const allReducers = combineReducers({
   getType: getType,
@@ -42,7 +44,9 @@ const allReducers = combineReducers({
   getAllEvents: getAllEvents,
   getEventsApplied: getEventsApplied,
   getAllStudents: getAllStudents,
-  getOtherStudent: getOtherStudent
+  getOtherStudent: getOtherStudent,
+  getMyJobs: getMyJobs,
+  getMyEvents: getMyEvents
 });
 
 export default allReducers;

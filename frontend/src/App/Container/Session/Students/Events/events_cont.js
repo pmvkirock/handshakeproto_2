@@ -2,12 +2,12 @@
 
 import React from 'react';
 import { Container, Row, Col } from 'react-bootstrap';
-import axios from 'axios';
 import { connect } from 'react-redux';
-import cookie from 'react-cookies';
 
 import Job from './event';
 import JobDes from './events_des';
+
+import { getEventData } from '../../../../../actions/getStudentEvents';
 
 class JobCont extends React.Component {
   constructor(props) {
@@ -34,38 +34,11 @@ class JobCont extends React.Component {
   };
 
   getInfo = () => {
-    axios.defaults.withCredentials = true;
-    //make a post request with the user data
-    axios
-      .get(
-        `http://localhost:8000/getMyEvents?idstudent='` +
-          cookie.load('cookie') +
-          `'`
-      )
-      .then(response => {
-        if (response.status === 200) {
-          this.setState({
-            error: '',
-            data: response.data
-          });
-          console.log(this.state.data);
-          this.setState({
-            activeJob: this.state.data[0].idjob,
-            activeComp: this.state.data[0].idcompany
-          });
-        } else {
-          this.setState({
-            error:
-              '<p style={{color: red}}>Please enter correct credentials</p>',
-            authFlag: false
-          });
-        }
-      })
-      .catch(e => {
-        this.setState({
-          error: 'Please enter correct credentials' + e
-        });
-      });
+    var data = {
+      user_id: localStorage.getItem('user_id')
+    };
+
+    this.props.dispatch(getEventData(data));
   };
 
   componentDidMount() {
@@ -78,38 +51,27 @@ class JobCont extends React.Component {
   }
 
   render() {
-    var printJobs = this.state.data.map(
-      ({
-        idevents,
-        event_name,
-        event_des,
-        time,
-        date,
-        location,
-        eligibility,
-        company_name,
-        email,
-        idcompany
-      }) => {
+    var printJobs = this.props.getMyEvents.events.map(
+      ({ idjob, idcompany }) => {
         let showJob;
         return (
           <a
-            indexkey={idevents}
-            onClick={() => this.handleJob(idevents, idcompany)}
+            indexkey={idjob._id}
+            onClick={() => this.handleJob(idjob._id, idcompany)}
             className="jobCont"
-            key={idevents}
+            key={idjob._id}
             href={'#'}
           >
             <Job
-              data-key={idevents}
-              event_name={event_name}
-              event_des={event_des}
-              location={location}
-              time={time}
-              date={date.split('T')[0]}
-              eligibility={eligibility}
-              company_name={company_name}
-              email={email}
+              data-key={idjob._id}
+              event_name={idjob.title}
+              event_des={idjob.desc}
+              location={idjob.location}
+              time={idjob.time}
+              date={idjob.date}
+              eligibility={idjob.eligibility}
+              company_name={idjob.company_name}
+              email={idjob.email}
               show={showJob}
             />
           </a>
@@ -141,8 +103,9 @@ const mapStateToProps = function(state) {
   return {
     getJobFilterPartFull: state.getJobFilterPartFull,
     getCityFilter: state.getCityFilter,
-    getEventsFilter: state.getEventsFilter,
-    getType: state.getType
+    getMyEvents: state.getMyEvents,
+    getType: state.getType,
+    getSortFilter: state.getSortFilter
   };
 };
 

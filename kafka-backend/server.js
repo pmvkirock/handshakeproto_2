@@ -21,6 +21,8 @@ var insert_Events_Appli = require("../kafka-backend/services/insertEventAppli");
 var get_Events_Applied = require("../kafka-backend/services/getEventsApplied");
 var add_Events = require("../kafka-backend/services/addEvent");
 var get_All_Students = require("../kafka-backend/services/getAllStudents");
+var get_My_Jobs = require("../kafka-backend/services/getMyJobs");
+var get_My_Events = require("../kafka-backend/services/getMyEvents");
 
 function handleTopicRequest(topic_name, fname) {
   //var topic_name = 'root_topic';
@@ -76,3 +78,5 @@ handleTopicRequest("get_Events_Applied", get_Events_Applied);
 handleTopicRequest("add_Events", add_Events);
 handleTopicRequest("get_All_Students", get_All_Students);
 handleTopicRequest("get_Other_Students", get_Prof);
+handleTopicRequest("get_My_Jobs", get_My_Jobs);
+handleTopicRequest("get_My_Events", get_My_Events);

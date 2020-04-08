@@ -49,6 +49,20 @@ class Topnav extends React.Component {
   render() {
     var xnav;
     let redirectVar = null;
+    let Applications = null,
+      eventsApp = null;
+    if (this.props.getType == 'Student') {
+      Applications = (
+        <NavDropdown.Item>
+          <Link to="/myapp">My Applications</Link>
+        </NavDropdown.Item>
+      );
+      eventsApp = (
+        <NavDropdown.Item>
+          <Link to="/myevents">My Events</Link>
+        </NavDropdown.Item>
+      );
+    }
 
     if (localStorage.getItem('token')) {
       redirectVar = <Redirect to="/home" />;
@@ -103,12 +117,8 @@ class Topnav extends React.Component {
               <NavDropdown.Item>
                 <Link to="/stud_prof">Profile</Link>
               </NavDropdown.Item>
-              <NavDropdown.Item>
-                <Link to="/myapp">My Applications</Link>
-              </NavDropdown.Item>
-              <NavDropdown.Item>
-                <Link to="/myevents">My Events</Link>
-              </NavDropdown.Item>
+              {Applications}
+              {eventsApp}
               <NavDropdown.Divider />
               <NavDropdown.Item>
                 <Link to="/" onClick={this.handleLogout}>

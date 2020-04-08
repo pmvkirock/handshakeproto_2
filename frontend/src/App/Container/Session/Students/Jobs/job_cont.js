@@ -2,10 +2,8 @@
 
 import React from 'react';
 import { Container, Row, Col } from 'react-bootstrap';
-import axios from 'axios';
 import { connect } from 'react-redux';
-import cookie from 'react-cookies';
-
+import { getJobData } from '../../../../../actions/getStudentJobs';
 import Job from './job';
 import JobDes from './job_des';
 
@@ -34,37 +32,11 @@ class JobCont extends React.Component {
   };
 
   getInfo = () => {
-    axios.defaults.withCredentials = true;
-    //make a post request with the user data
-    axios
-      .get(
-        'http://localhost:8000/getAppliedJobs?idstudent=' +
-          cookie.load('cookie')
-      )
-      .then(response => {
-        if (response.status === 200) {
-          this.setState({
-            error: '',
-            data: response.data
-          });
-          console.log(this.state.data);
-          this.setState({
-            activeJob: this.state.data[0].idjob,
-            activeComp: this.state.data[0].idcompany
-          });
-        } else {
-          this.setState({
-            error:
-              '<p style={{color: red}}>Please enter correct credentials</p>',
-            authFlag: false
-          });
-        }
-      })
-      .catch(e => {
-        this.setState({
-          error: 'Please enter correct credentials' + e
-        });
-      });
+    var data = {
+      user_id: localStorage.getItem('user_id')
+    };
+
+    this.props.dispatch(getJobData(data));
   };
 
   componentDidMount() {
@@ -77,21 +49,8 @@ class JobCont extends React.Component {
   }
 
   render() {
-    var printJobs = this.state.data.map(
-      ({
-        idjob,
-        job_title,
-        deadline,
-        location,
-        salary,
-        job_des,
-        job_cat,
-        paid,
-        company_name,
-        email,
-        idcompany,
-        status
-      }) => {
+    var printJobs = this.props.getMyJobs.jobs.map(
+      ({ status, idjob, idcompany }) => {
         let showJob;
         switch (this.props.getJobFilterPartFull) {
           case 'Pending':
@@ -114,28 +73,28 @@ class JobCont extends React.Component {
             break;
         }
         let regexJob = new RegExp(this.props.getJobFilter, 'gi');
-        if (job_title.match(regexJob) == null) showJob = 'HideForm';
+        if (idjob.title.match(regexJob) == null) showJob = 'HideForm';
         let regexCity = new RegExp(this.props.getCityFilter, 'gi');
-        if (location.match(regexCity) == null) showJob = 'HideForm';
+        if (idjob.location.match(regexCity) == null) showJob = 'HideForm';
         return (
           <a
-            indexkey={idjob}
-            onClick={() => this.handleJob(idjob, idcompany)}
+            indexkey={idjob._id}
+            onClick={() => this.handleJob(idjob._id, idcompany)}
             className="jobCont"
             key={idjob}
             href={'#'}
           >
             <Job
-              data-key={idjob}
-              job_title={job_title}
-              deadline={deadline}
-              location={location}
-              salary={salary}
-              job_des={job_des}
-              job_cat={job_cat}
-              paid={paid}
-              company_name={company_name}
-              email={email}
+              data-key={idjob._id}
+              job_title={idjob.title}
+              deadline={idjob.deadline}
+              location={idjob.location}
+              salary={idjob.salary}
+              job_des={idjob.desc}
+              job_cat={idjob.job_cat}
+              paid={idjob.paid}
+              company_name={idjob.company_name}
+              email={idjob.email}
               show={showJob}
               status={status}
             />
@@ -169,7 +128,8 @@ const mapStateToProps = function(state) {
     getJobFilterPartFull: state.getJobFilterPartFull,
     getJobFilter: state.getJobFilter,
     getCityFilter: state.getCityFilter,
-    getType: state.getType
+    getType: state.getType,
+    getMyJobs: state.getMyJobs
   };
 };
 

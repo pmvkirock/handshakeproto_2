@@ -63,4 +63,20 @@ router.get("/getEventsApplied", checkAuth, (req, res) => {
   });
 });
 
+router.get("/getMyEvents", checkAuth, (req, res) => {
+  console.log(req.body);
+  kafka.make_request("get_My_Events", req.query, function (err, results) {
+    console.log("in result");
+    console.log(results);
+    if (err) {
+      res.status(500).end("Error Occured");
+    } else {
+      console.log("Inside else");
+      console.log(results);
+      var JSONStr = JSON.stringify(results);
+      res.status(200).end(JSONStr);
+    }
+  });
+});
+
 module.exports = router;
