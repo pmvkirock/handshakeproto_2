@@ -5,7 +5,12 @@ var bodyParser = require("body-parser");
 app.use(bodyParser.json());
 //use cors to allow cross origin resource sharing
 app.use("/prof_pic", express.static("public/uploads"));
-app.use(cors({ origin: "http://localhost:3000", credentials: true }));
+app.use(
+  cors({
+    origin: "http://ec2-3-19-208-31.us-east-2.compute.amazonaws.com:3000",
+    credentials: true,
+  })
+);
 const { checkAuth, frontendURL } = require("../backend/Utils/config");
 
 //Allow Access Control

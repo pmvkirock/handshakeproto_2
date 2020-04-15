@@ -1,0 +1,528 @@
+[2020-03-31 17:27:59,902] INFO Registered kafka:type=kafka.Log4jController MBean (kafka.utils.Log4jControllerRegistration$)
+[2020-03-31 17:28:01,334] INFO starting (kafka.server.KafkaServer)
+[2020-03-31 17:28:01,336] INFO Connecting to zookeeper on localhost:2181 (kafka.server.KafkaServer)
+[2020-03-31 17:28:01,414] INFO [ZooKeeperClient] Initializing a new session to localhost:2181. (kafka.zookeeper.ZooKeeperClient)
+[2020-03-31 17:28:01,429] INFO Client environment:zookeeper.version=3.4.10-39d3a4f269333c922ed3db283be479f9deacaa0f, built on 03/23/2017 10:13 GMT (org.apache.zookeeper.ZooKeeper)
+[2020-03-31 17:28:01,429] INFO Client environment:host.name=hackpad (org.apache.zookeeper.ZooKeeper)
+[2020-03-31 17:28:01,429] INFO Client environment:java.version=11.0.6 (org.apache.zookeeper.ZooKeeper)
+[2020-03-31 17:28:01,430] INFO Client environment:java.vendor=Ubuntu (org.apache.zookeeper.ZooKeeper)
+[2020-03-31 17:28:01,430] INFO Client environment:java.home=/usr/lib/jvm/java-11-openjdk-amd64 (org.apache.zookeeper.ZooKeeper)
+[2020-03-31 17:28:01,430] INFO Client environment:java.class.path=/home/pranav/CMPE_273/kafka_2.11-1.1.0/bin/../libs/aopalliance-repackaged-2.5.0-b32.jar:/home/pranav/CMPE_273/kafka_2.11-1.1.0/bin/../libs/argparse4j-0.7.0.jar:/home/pranav/CMPE_273/kafka_2.11-1.1.0/bin/../libs/commons-lang3-3.5.jar:/home/pranav/CMPE_273/kafka_2.11-1.1.0/bin/../libs/connect-api-1.1.0.jar:/home/pranav/CMPE_273/kafka_2.11-1.1.0/bin/../libs/connect-file-1.1.0.jar:/home/pranav/CMPE_273/kafka_2.11-1.1.0/bin/../libs/connect-json-1.1.0.jar:/home/pranav/CMPE_273/kafka_2.11-1.1.0/bin/../libs/connect-runtime-1.1.0.jar:/home/pranav/CMPE_273/kafka_2.11-1.1.0/bin/../libs/connect-transforms-1.1.0.jar:/home/pranav/CMPE_273/kafka_2.11-1.1.0/bin/../libs/guava-20.0.jar:/home/pranav/CMPE_273/kafka_2.11-1.1.0/bin/../libs/hk2-api-2.5.0-b32.jar:/home/pranav/CMPE_273/kafka_2.11-1.1.0/bin/../libs/hk2-locator-2.5.0-b32.jar:/home/pranav/CMPE_273/kafka_2.11-1.1.0/bin/../libs/hk2-utils-2.5.0-b32.jar:/home/pranav/CMPE_273/kafka_2.11-1.1.0/bin/../libs/jackson-annotations-2.9.4.jar:/home/pranav/CMPE_273/kafka_2.11-1.1.0/bin/../libs/jackson-core-2.9.4.jar:/home/pranav/CMPE_273/kafka_2.11-1.1.0/bin/../libs/jackson-databind-2.9.4.jar:/home/pranav/CMPE_273/kafka_2.11-1.1.0/bin/../libs/jackson-jaxrs-base-2.9.4.jar:/home/pranav/CMPE_273/kafka_2.11-1.1.0/bin/../libs/jackson-jaxrs-json-provider-2.9.4.jar:/home/pranav/CMPE_273/kafka_2.11-1.1.0/bin/../libs/jackson-module-jaxb-annotations-2.9.4.jar:/home/pranav/CMPE_273/kafka_2.11-1.1.0/bin/../libs/javassist-3.20.0-GA.jar:/home/pranav/CMPE_273/kafka_2.11-1.1.0/bin/../libs/javassist-3.21.0-GA.jar:/home/pranav/CMPE_273/kafka_2.11-1.1.0/bin/../libs/javax.annotation-api-1.2.jar:/home/pranav/CMPE_273/kafka_2.11-1.1.0/bin/../libs/javax.inject-1.jar:/home/pranav/CMPE_273/kafka_2.11-1.1.0/bin/../libs/javax.inject-2.5.0-b32.jar:/home/pranav/CMPE_273/kafka_2.11-1.1.0/bin/../libs/javax.servlet-api-3.1.0.jar:/home/pranav/CMPE_273/kafka_2.11-1.1.0/bin/../libs/javax.ws.rs-api-2.0.1.jar:/home/pranav/CMPE_273/kafka_2.11-1.1.0/bin/../libs/jersey-client-2.25.1.jar:/home/pranav/CMPE_273/kafka_2.11-1.1.0/bin/../libs/jersey-common-2.25.1.jar:/home/pranav/CMPE_273/kafka_2.11-1.1.0/bin/../libs/jersey-container-servlet-2.25.1.jar:/home/pranav/CMPE_273/kafka_2.11-1.1.0/bin/../libs/jersey-container-servlet-core-2.25.1.jar:/home/pranav/CMPE_273/kafka_2.11-1.1.0/bin/../libs/jersey-guava-2.25.1.jar:/home/pranav/CMPE_273/kafka_2.11-1.1.0/bin/../libs/jersey-media-jaxb-2.25.1.jar:/home/pranav/CMPE_273/kafka_2.11-1.1.0/bin/../libs/jersey-server-2.25.1.jar:/home/pranav/CMPE_273/kafka_2.11-1.1.0/bin/../libs/jetty-client-9.2.24.v20180105.jar:/home/pranav/CMPE_273/kafka_2.11-1.1.0/bin/../libs/jetty-continuation-9.2.24.v20180105.jar:/home/pranav/CMPE_273/kafka_2.11-1.1.0/bin/../libs/jetty-http-9.2.24.v20180105.jar:/home/pranav/CMPE_273/kafka_2.11-1.1.0/bin/../libs/jetty-io-9.2.24.v20180105.jar:/home/pranav/CMPE_273/kafka_2.11-1.1.0/bin/../libs/jetty-security-9.2.24.v20180105.jar:/home/pranav/CMPE_273/kafka_2.11-1.1.0/bin/../libs/jetty-server-9.2.24.v20180105.jar:/home/pranav/CMPE_273/kafka_2.11-1.1.0/bin/../libs/jetty-servlet-9.2.24.v20180105.jar:/home/pranav/CMPE_273/kafka_2.11-1.1.0/bin/../libs/jetty-servlets-9.2.24.v20180105.jar:/home/pranav/CMPE_273/kafka_2.11-1.1.0/bin/../libs/jetty-util-9.2.24.v20180105.jar:/home/pranav/CMPE_273/kafka_2.11-1.1.0/bin/../libs/jopt-simple-5.0.4.jar:/home/pranav/CMPE_273/kafka_2.11-1.1.0/bin/../libs/kafka_2.11-1.1.0.jar:/home/pranav/CMPE_273/kafka_2.11-1.1.0/bin/../libs/kafka_2.11-1.1.0-sources.jar:/home/pranav/CMPE_273/kafka_2.11-1.1.0/bin/../libs/kafka_2.11-1.1.0-test-sources.jar:/home/pranav/CMPE_273/kafka_2.11-1.1.0/bin/../libs/kafka-clients-1.1.0.jar:/home/pranav/CMPE_273/kafka_2.11-1.1.0/bin/../libs/kafka-log4j-appender-1.1.0.jar:/home/pranav/CMPE_273/kafka_2.11-1.1.0/bin/../libs/kafka-streams-1.1.0.jar:/home/pranav/CMPE_273/kafka_2.11-1.1.0/bin/../libs/kafka-streams-examples-1.1.0.jar:/home/pranav/CMPE_273/kafka_2.11-1.1.0/bin/../libs/kafka-streams-test-utils-1.1.0.jar:/home/pranav/CMPE_273/kafka_2.11-1.1.0/bin/../libs/kafka-tools-1.1.0.jar:/home/pranav/CMPE_273/kafka_2.11-1.1.0/bin/../libs/log4j-1.2.17.jar:/home/pranav/CMPE_273/kafka_2.11-1.1.0/bin/../libs/lz4-java-1.4.jar:/home/pranav/CMPE_273/kafka_2.11-1.1.0/bin/../libs/maven-artifact-3.5.2.jar:/home/pranav/CMPE_273/kafka_2.11-1.1.0/bin/../libs/metrics-core-2.2.0.jar:/home/pranav/CMPE_273/kafka_2.11-1.1.0/bin/../libs/osgi-resource-locator-1.0.1.jar:/home/pranav/CMPE_273/kafka_2.11-1.1.0/bin/../libs/plexus-utils-3.1.0.jar:/home/pranav/CMPE_273/kafka_2.11-1.1.0/bin/../libs/reflections-0.9.11.jar:/home/pranav/CMPE_273/kafka_2.11-1.1.0/bin/../libs/rocksdbjni-5.7.3.jar:/home/pranav/CMPE_273/kafka_2.11-1.1.0/bin/../libs/scala-library-2.11.12.jar:/home/pranav/CMPE_273/kafka_2.11-1.1.0/bin/../libs/scala-logging_2.11-3.7.2.jar:/home/pranav/CMPE_273/kafka_2.11-1.1.0/bin/../libs/scala-reflect-2.11.12.jar:/home/pranav/CMPE_273/kafka_2.11-1.1.0/bin/../libs/slf4j-api-1.7.25.jar:/home/pranav/CMPE_273/kafka_2.11-1.1.0/bin/../libs/slf4j-log4j12-1.7.25.jar:/home/pranav/CMPE_273/kafka_2.11-1.1.0/bin/../libs/snappy-java-1.1.7.1.jar:/home/pranav/CMPE_273/kafka_2.11-1.1.0/bin/../libs/validation-api-1.1.0.Final.jar:/home/pranav/CMPE_273/kafka_2.11-1.1.0/bin/../libs/zkclient-0.10.jar:/home/pranav/CMPE_273/kafka_2.11-1.1.0/bin/../libs/zookeeper-3.4.10.jar (org.apache.zookeeper.ZooKeeper)
+[2020-03-31 17:28:01,432] INFO Client environment:java.library.path=/usr/java/packages/lib:/usr/lib/x86_64-linux-gnu/jni:/lib/x86_64-linux-gnu:/usr/lib/x86_64-linux-gnu:/usr/lib/jni:/lib:/usr/lib (org.apache.zookeeper.ZooKeeper)
+[2020-03-31 17:28:01,432] INFO Client environment:java.io.tmpdir=/tmp (org.apache.zookeeper.ZooKeeper)
+[2020-03-31 17:28:01,433] INFO Client environment:java.compiler=<NA> (org.apache.zookeeper.ZooKeeper)
+[2020-03-31 17:28:01,433] INFO Client environment:os.name=Linux (org.apache.zookeeper.ZooKeeper)
+[2020-03-31 17:28:01,433] INFO Client environment:os.arch=amd64 (org.apache.zookeeper.ZooKeeper)
+[2020-03-31 17:28:01,433] INFO Client environment:os.version=5.3.0-42-generic (org.apache.zookeeper.ZooKeeper)
+[2020-03-31 17:28:01,434] INFO Client environment:user.name=pranav (org.apache.zookeeper.ZooKeeper)
+[2020-03-31 17:28:01,434] INFO Client environment:user.home=/home/pranav (org.apache.zookeeper.ZooKeeper)
+[2020-03-31 17:28:01,434] INFO Client environment:user.dir=/home/pranav/CMPE_273/kafka_2.11-1.1.0 (org.apache.zookeeper.ZooKeeper)
+[2020-03-31 17:28:01,437] INFO Initiating client connection, connectString=localhost:2181 sessionTimeout=6000 watcher=kafka.zookeeper.ZooKeeperClient$ZooKeeperClientWatcher$@6d07a63d (org.apache.zookeeper.ZooKeeper)
+[2020-03-31 17:28:01,479] INFO [ZooKeeperClient] Waiting until connected. (kafka.zookeeper.ZooKeeperClient)
+[2020-03-31 17:28:01,480] INFO Opening socket connection to server localhost/127.0.0.1:2181. Will not attempt to authenticate using SASL (unknown error) (org.apache.zookeeper.ClientCnxn)
+[2020-03-31 17:28:01,494] INFO Socket connection established to localhost/127.0.0.1:2181, initiating session (org.apache.zookeeper.ClientCnxn)
+[2020-03-31 17:28:01,662] INFO Session establishment complete on server localhost/127.0.0.1:2181, sessionid = 0x17132d0dc3c0000, negotiated timeout = 6000 (org.apache.zookeeper.ClientCnxn)
+[2020-03-31 17:28:01,672] INFO [ZooKeeperClient] Connected. (kafka.zookeeper.ZooKeeperClient)
+[2020-03-31 17:28:02,784] INFO Cluster ID = nGjhqil3T7yCXlbvU6YjQQ (kafka.server.KafkaServer)
+[2020-03-31 17:28:03,003] INFO KafkaConfig values: 
+	advertised.host.name = null
+	advertised.listeners = null
+	advertised.port = null
+	alter.config.policy.class.name = null
+	alter.log.dirs.replication.quota.window.num = 11
+	alter.log.dirs.replication.quota.window.size.seconds = 1
+	authorizer.class.name = 
+	auto.create.topics.enable = true
+	auto.leader.rebalance.enable = true
+	background.threads = 10
+	broker.id = 0
+	broker.id.generation.enable = true
+	broker.rack = null
+	compression.type = producer
+	connections.max.idle.ms = 600000
+	controlled.shutdown.enable = true
+	controlled.shutdown.max.retries = 3
+	controlled.shutdown.retry.backoff.ms = 5000
+	controller.socket.timeout.ms = 30000
+	create.topic.policy.class.name = null
+	default.replication.factor = 1
+	delegation.token.expiry.check.interval.ms = 3600000
+	delegation.token.expiry.time.ms = 86400000
+	delegation.token.master.key = null
+	delegation.token.max.lifetime.ms = 604800000
+	delete.records.purgatory.purge.interval.requests = 1
+	delete.topic.enable = true
+	fetch.purgatory.purge.interval.requests = 1000
+	group.initial.rebalance.delay.ms = 0
+	group.max.session.timeout.ms = 300000
+	group.min.session.timeout.ms = 6000
+	host.name = 
+	inter.broker.listener.name = null
+	inter.broker.protocol.version = 1.1-IV0
+	leader.imbalance.check.interval.seconds = 300
+	leader.imbalance.per.broker.percentage = 10
+	listener.security.protocol.map = PLAINTEXT:PLAINTEXT,SSL:SSL,SASL_PLAINTEXT:SASL_PLAINTEXT,SASL_SSL:SASL_SSL
+	listeners = null
+	log.cleaner.backoff.ms = 15000
+	log.cleaner.dedupe.buffer.size = 134217728
+	log.cleaner.delete.retention.ms = 86400000
+	log.cleaner.enable = true
+	log.cleaner.io.buffer.load.factor = 0.9
+	log.cleaner.io.buffer.size = 524288
+	log.cleaner.io.max.bytes.per.second = 1.7976931348623157E308
+	log.cleaner.min.cleanable.ratio = 0.5
+	log.cleaner.min.compaction.lag.ms = 0
+	log.cleaner.threads = 1
+	log.cleanup.policy = [delete]
+	log.dir = /tmp/kafka-logs
+	log.dirs = /home/pranav/CMPE_273/kafka_2.11-1.1.0/kafka_logs
+	log.flush.interval.messages = 9223372036854775807
+	log.flush.interval.ms = null
+	log.flush.offset.checkpoint.interval.ms = 60000
+	log.flush.scheduler.interval.ms = 9223372036854775807
+	log.flush.start.offset.checkpoint.interval.ms = 60000
+	log.index.interval.bytes = 4096
+	log.index.size.max.bytes = 10485760
+	log.message.format.version = 1.1-IV0
+	log.message.timestamp.difference.max.ms = 9223372036854775807
+	log.message.timestamp.type = CreateTime
+	log.preallocate = false
+	log.retention.bytes = -1
+	log.retention.check.interval.ms = 300000
+	log.retention.hours = 168
+	log.retention.minutes = null
+	log.retention.ms = null
+	log.roll.hours = 168
+	log.roll.jitter.hours = 0
+	log.roll.jitter.ms = null
+	log.roll.ms = null
+	log.segment.bytes = 1073741824
+	log.segment.delete.delay.ms = 60000
+	max.connections.per.ip = 2147483647
+	max.connections.per.ip.overrides = 
+	max.incremental.fetch.session.cache.slots = 1000
+	message.max.bytes = 1000012
+	metric.reporters = []
+	metrics.num.samples = 2
+	metrics.recording.level = INFO
+	metrics.sample.window.ms = 30000
+	min.insync.replicas = 1
+	num.io.threads = 8
+	num.network.threads = 3
+	num.partitions = 1
+	num.recovery.threads.per.data.dir = 1
+	num.replica.alter.log.dirs.threads = null
+	num.replica.fetchers = 1
+	offset.metadata.max.bytes = 4096
+	offsets.commit.required.acks = -1
+	offsets.commit.timeout.ms = 5000
+	offsets.load.buffer.size = 5242880
+	offsets.retention.check.interval.ms = 600000
+	offsets.retention.minutes = 1440
+	offsets.topic.compression.codec = 0
+	offsets.topic.num.partitions = 50
+	offsets.topic.replication.factor = 1
+	offsets.topic.segment.bytes = 104857600
+	password.encoder.cipher.algorithm = AES/CBC/PKCS5Padding
+	password.encoder.iterations = 4096
+	password.encoder.key.length = 128
+	password.encoder.keyfactory.algorithm = null
+	password.encoder.old.secret = null
+	password.encoder.secret = null
+	port = 9092
+	principal.builder.class = null
+	producer.purgatory.purge.interval.requests = 1000
+	queued.max.request.bytes = -1
+	queued.max.requests = 500
+	quota.consumer.default = 9223372036854775807
+	quota.producer.default = 9223372036854775807
+	quota.window.num = 11
+	quota.window.size.seconds = 1
+	replica.fetch.backoff.ms = 1000
+	replica.fetch.max.bytes = 1048576
+	replica.fetch.min.bytes = 1
+	replica.fetch.response.max.bytes = 10485760
+	replica.fetch.wait.max.ms = 500
+	replica.high.watermark.checkpoint.interval.ms = 5000
+	replica.lag.time.max.ms = 10000
+	replica.socket.receive.buffer.bytes = 65536
+	replica.socket.timeout.ms = 30000
+	replication.quota.window.num = 11
+	replication.quota.window.size.seconds = 1
+	request.timeout.ms = 30000
+	reserved.broker.max.id = 1000
+	sasl.enabled.mechanisms = [GSSAPI]
+	sasl.jaas.config = null
+	sasl.kerberos.kinit.cmd = /usr/bin/kinit
+	sasl.kerberos.min.time.before.relogin = 60000
+	sasl.kerberos.principal.to.local.rules = [DEFAULT]
+	sasl.kerberos.service.name = null
+	sasl.kerberos.ticket.renew.jitter = 0.05
+	sasl.kerberos.ticket.renew.window.factor = 0.8
+	sasl.mechanism.inter.broker.protocol = GSSAPI
+	security.inter.broker.protocol = PLAINTEXT
+	socket.receive.buffer.bytes = 102400
+	socket.request.max.bytes = 104857600
+	socket.send.buffer.bytes = 102400
+	ssl.cipher.suites = []
+	ssl.client.auth = none
+	ssl.enabled.protocols = [TLSv1.2, TLSv1.1, TLSv1]
+	ssl.endpoint.identification.algorithm = null
+	ssl.key.password = null
+	ssl.keymanager.algorithm = SunX509
+	ssl.keystore.location = null
+	ssl.keystore.password = null
+	ssl.keystore.type = JKS
+	ssl.protocol = TLS
+	ssl.provider = null
+	ssl.secure.random.implementation = null
+	ssl.trustmanager.algorithm = PKIX
+	ssl.truststore.location = null
+	ssl.truststore.password = null
+	ssl.truststore.type = JKS
+	transaction.abort.timed.out.transaction.cleanup.interval.ms = 60000
+	transaction.max.timeout.ms = 900000
+	transaction.remove.expired.transaction.cleanup.interval.ms = 3600000
+	transaction.state.log.load.buffer.size = 5242880
+	transaction.state.log.min.isr = 1
+	transaction.state.log.num.partitions = 50
+	transaction.state.log.replication.factor = 1
+	transaction.state.log.segment.bytes = 104857600
+	transactional.id.expiration.ms = 604800000
+	unclean.leader.election.enable = false
+	zookeeper.connect = localhost:2181
+	zookeeper.connection.timeout.ms = 6000
+	zookeeper.max.in.flight.requests = 10
+	zookeeper.session.timeout.ms = 6000
+	zookeeper.set.acl = false
+	zookeeper.sync.time.ms = 2000
+ (kafka.server.KafkaConfig)
+[2020-03-31 17:28:03,012] INFO KafkaConfig values: 
+	advertised.host.name = null
+	advertised.listeners = null
+	advertised.port = null
+	alter.config.policy.class.name = null
+	alter.log.dirs.replication.quota.window.num = 11
+	alter.log.dirs.replication.quota.window.size.seconds = 1
+	authorizer.class.name = 
+	auto.create.topics.enable = true
+	auto.leader.rebalance.enable = true
+	background.threads = 10
+	broker.id = 0
+	broker.id.generation.enable = true
+	broker.rack = null
+	compression.type = producer
+	connections.max.idle.ms = 600000
+	controlled.shutdown.enable = true
+	controlled.shutdown.max.retries = 3
+	controlled.shutdown.retry.backoff.ms = 5000
+	controller.socket.timeout.ms = 30000
+	create.topic.policy.class.name = null
+	default.replication.factor = 1
+	delegation.token.expiry.check.interval.ms = 3600000
+	delegation.token.expiry.time.ms = 86400000
+	delegation.token.master.key = null
+	delegation.token.max.lifetime.ms = 604800000
+	delete.records.purgatory.purge.interval.requests = 1
+	delete.topic.enable = true
+	fetch.purgatory.purge.interval.requests = 1000
+	group.initial.rebalance.delay.ms = 0
+	group.max.session.timeout.ms = 300000
+	group.min.session.timeout.ms = 6000
+	host.name = 
+	inter.broker.listener.name = null
+	inter.broker.protocol.version = 1.1-IV0
+	leader.imbalance.check.interval.seconds = 300
+	leader.imbalance.per.broker.percentage = 10
+	listener.security.protocol.map = PLAINTEXT:PLAINTEXT,SSL:SSL,SASL_PLAINTEXT:SASL_PLAINTEXT,SASL_SSL:SASL_SSL
+	listeners = null
+	log.cleaner.backoff.ms = 15000
+	log.cleaner.dedupe.buffer.size = 134217728
+	log.cleaner.delete.retention.ms = 86400000
+	log.cleaner.enable = true
+	log.cleaner.io.buffer.load.factor = 0.9
+	log.cleaner.io.buffer.size = 524288
+	log.cleaner.io.max.bytes.per.second = 1.7976931348623157E308
+	log.cleaner.min.cleanable.ratio = 0.5
+	log.cleaner.min.compaction.lag.ms = 0
+	log.cleaner.threads = 1
+	log.cleanup.policy = [delete]
+	log.dir = /tmp/kafka-logs
+	log.dirs = /home/pranav/CMPE_273/kafka_2.11-1.1.0/kafka_logs
+	log.flush.interval.messages = 9223372036854775807
+	log.flush.interval.ms = null
+	log.flush.offset.checkpoint.interval.ms = 60000
+	log.flush.scheduler.interval.ms = 9223372036854775807
+	log.flush.start.offset.checkpoint.interval.ms = 60000
+	log.index.interval.bytes = 4096
+	log.index.size.max.bytes = 10485760
+	log.message.format.version = 1.1-IV0
+	log.message.timestamp.difference.max.ms = 9223372036854775807
+	log.message.timestamp.type = CreateTime
+	log.preallocate = false
+	log.retention.bytes = -1
+	log.retention.check.interval.ms = 300000
+	log.retention.hours = 168
+	log.retention.minutes = null
+	log.retention.ms = null
+	log.roll.hours = 168
+	log.roll.jitter.hours = 0
+	log.roll.jitter.ms = null
+	log.roll.ms = null
+	log.segment.bytes = 1073741824
+	log.segment.delete.delay.ms = 60000
+	max.connections.per.ip = 2147483647
+	max.connections.per.ip.overrides = 
+	max.incremental.fetch.session.cache.slots = 1000
+	message.max.bytes = 1000012
+	metric.reporters = []
+	metrics.num.samples = 2
+	metrics.recording.level = INFO
+	metrics.sample.window.ms = 30000
+	min.insync.replicas = 1
+	num.io.threads = 8
+	num.network.threads = 3
+	num.partitions = 1
+	num.recovery.threads.per.data.dir = 1
+	num.replica.alter.log.dirs.threads = null
+	num.replica.fetchers = 1
+	offset.metadata.max.bytes = 4096
+	offsets.commit.required.acks = -1
+	offsets.commit.timeout.ms = 5000
+	offsets.load.buffer.size = 5242880
+	offsets.retention.check.interval.ms = 600000
+	offsets.retention.minutes = 1440
+	offsets.topic.compression.codec = 0
+	offsets.topic.num.partitions = 50
+	offsets.topic.replication.factor = 1
+	offsets.topic.segment.bytes = 104857600
+	password.encoder.cipher.algorithm = AES/CBC/PKCS5Padding
+	password.encoder.iterations = 4096
+	password.encoder.key.length = 128
+	password.encoder.keyfactory.algorithm = null
+	password.encoder.old.secret = null
+	password.encoder.secret = null
+	port = 9092
+	principal.builder.class = null
+	producer.purgatory.purge.interval.requests = 1000
+	queued.max.request.bytes = -1
+	queued.max.requests = 500
+	quota.consumer.default = 9223372036854775807
+	quota.producer.default = 9223372036854775807
+	quota.window.num = 11
+	quota.window.size.seconds = 1
+	replica.fetch.backoff.ms = 1000
+	replica.fetch.max.bytes = 1048576
+	replica.fetch.min.bytes = 1
+	replica.fetch.response.max.bytes = 10485760
+	replica.fetch.wait.max.ms = 500
+	replica.high.watermark.checkpoint.interval.ms = 5000
+	replica.lag.time.max.ms = 10000
+	replica.socket.receive.buffer.bytes = 65536
+	replica.socket.timeout.ms = 30000
+	replication.quota.window.num = 11
+	replication.quota.window.size.seconds = 1
+	request.timeout.ms = 30000
+	reserved.broker.max.id = 1000
+	sasl.enabled.mechanisms = [GSSAPI]
+	sasl.jaas.config = null
+	sasl.kerberos.kinit.cmd = /usr/bin/kinit
+	sasl.kerberos.min.time.before.relogin = 60000
+	sasl.kerberos.principal.to.local.rules = [DEFAULT]
+	sasl.kerberos.service.name = null
+	sasl.kerberos.ticket.renew.jitter = 0.05
+	sasl.kerberos.ticket.renew.window.factor = 0.8
+	sasl.mechanism.inter.broker.protocol = GSSAPI
+	security.inter.broker.protocol = PLAINTEXT
+	socket.receive.buffer.bytes = 102400
+	socket.request.max.bytes = 104857600
+	socket.send.buffer.bytes = 102400
+	ssl.cipher.suites = []
+	ssl.client.auth = none
+	ssl.enabled.protocols = [TLSv1.2, TLSv1.1, TLSv1]
+	ssl.endpoint.identification.algorithm = null
+	ssl.key.password = null
+	ssl.keymanager.algorithm = SunX509
+	ssl.keystore.location = null
+	ssl.keystore.password = null
+	ssl.keystore.type = JKS
+	ssl.protocol = TLS
+	ssl.provider = null
+	ssl.secure.random.implementation = null
+	ssl.trustmanager.algorithm = PKIX
+	ssl.truststore.location = null
+	ssl.truststore.password = null
+	ssl.truststore.type = JKS
+	transaction.abort.timed.out.transaction.cleanup.interval.ms = 60000
+	transaction.max.timeout.ms = 900000
+	transaction.remove.expired.transaction.cleanup.interval.ms = 3600000
+	transaction.state.log.load.buffer.size = 5242880
+	transaction.state.log.min.isr = 1
+	transaction.state.log.num.partitions = 50
+	transaction.state.log.replication.factor = 1
+	transaction.state.log.segment.bytes = 104857600
+	transactional.id.expiration.ms = 604800000
+	unclean.leader.election.enable = false
+	zookeeper.connect = localhost:2181
+	zookeeper.connection.timeout.ms = 6000
+	zookeeper.max.in.flight.requests = 10
+	zookeeper.session.timeout.ms = 6000
+	zookeeper.set.acl = false
+	zookeeper.sync.time.ms = 2000
+ (kafka.server.KafkaConfig)
+[2020-03-31 17:28:03,052] INFO [ThrottledRequestReaper-Fetch]: Starting (kafka.server.ClientQuotaManager$ThrottledRequestReaper)
+[2020-03-31 17:28:03,052] INFO [ThrottledRequestReaper-Produce]: Starting (kafka.server.ClientQuotaManager$ThrottledRequestReaper)
+[2020-03-31 17:28:03,053] INFO [ThrottledRequestReaper-Request]: Starting (kafka.server.ClientQuotaManager$ThrottledRequestReaper)
+[2020-03-31 17:28:03,100] INFO Loading logs. (kafka.log.LogManager)
+[2020-03-31 17:28:03,360] WARN [Log partition=post_book-0, dir=/home/pranav/CMPE_273/kafka_2.11-1.1.0/kafka_logs] Found a corrupted index file corresponding to log file /home/pranav/CMPE_273/kafka_2.11-1.1.0/kafka_logs/post_book-0/00000000000000000000.log due to Corrupt index found, index file (/home/pranav/CMPE_273/kafka_2.11-1.1.0/kafka_logs/post_book-0/00000000000000000000.index) has non-zero size but the last offset is 0 which is no greater than the base offset 0.}, recovering segment and rebuilding index files... (kafka.log.Log)
+[2020-03-31 17:28:03,412] INFO [ProducerStateManager partition=post_book-0] Writing producer snapshot at offset 1 (kafka.log.ProducerStateManager)
+[2020-03-31 17:28:03,423] INFO [Log partition=post_book-0, dir=/home/pranav/CMPE_273/kafka_2.11-1.1.0/kafka_logs] Recovering unflushed segment 0 (kafka.log.Log)
+[2020-03-31 17:28:03,425] INFO [ProducerStateManager partition=post_book-0] Writing producer snapshot at offset 1 (kafka.log.ProducerStateManager)
+[2020-03-31 17:28:03,432] INFO [Log partition=post_book-0, dir=/home/pranav/CMPE_273/kafka_2.11-1.1.0/kafka_logs] Loading producer state from offset 1 with message format version 2 (kafka.log.Log)
+[2020-03-31 17:28:03,434] INFO [ProducerStateManager partition=post_book-0] Loading producer state from snapshot file '/home/pranav/CMPE_273/kafka_2.11-1.1.0/kafka_logs/post_book-0/00000000000000000001.snapshot' (kafka.log.ProducerStateManager)
+[2020-03-31 17:28:03,440] INFO [Log partition=post_book-0, dir=/home/pranav/CMPE_273/kafka_2.11-1.1.0/kafka_logs] Completed load of log with 1 segments, log start offset 0 and log end offset 1 in 162 ms (kafka.log.Log)
+[2020-03-31 17:28:03,456] WARN [Log partition=response_topic-0, dir=/home/pranav/CMPE_273/kafka_2.11-1.1.0/kafka_logs] Found a corrupted index file corresponding to log file /home/pranav/CMPE_273/kafka_2.11-1.1.0/kafka_logs/response_topic-0/00000000000000000000.log due to Corrupt index found, index file (/home/pranav/CMPE_273/kafka_2.11-1.1.0/kafka_logs/response_topic-0/00000000000000000000.index) has non-zero size but the last offset is 0 which is no greater than the base offset 0.}, recovering segment and rebuilding index files... (kafka.log.Log)
+[2020-03-31 17:28:03,715] INFO [ProducerStateManager partition=response_topic-0] Writing producer snapshot at offset 126 (kafka.log.ProducerStateManager)
+[2020-03-31 17:28:03,716] INFO [Log partition=response_topic-0, dir=/home/pranav/CMPE_273/kafka_2.11-1.1.0/kafka_logs] Recovering unflushed segment 0 (kafka.log.Log)
+[2020-03-31 17:28:03,740] INFO [ProducerStateManager partition=response_topic-0] Writing producer snapshot at offset 126 (kafka.log.ProducerStateManager)
+[2020-03-31 17:28:03,744] INFO [Log partition=response_topic-0, dir=/home/pranav/CMPE_273/kafka_2.11-1.1.0/kafka_logs] Loading producer state from offset 126 with message format version 2 (kafka.log.Log)
+[2020-03-31 17:28:03,746] INFO [ProducerStateManager partition=response_topic-0] Loading producer state from snapshot file '/home/pranav/CMPE_273/kafka_2.11-1.1.0/kafka_logs/response_topic-0/00000000000000000126.snapshot' (kafka.log.ProducerStateManager)
+[2020-03-31 17:28:03,748] INFO [Log partition=response_topic-0, dir=/home/pranav/CMPE_273/kafka_2.11-1.1.0/kafka_logs] Completed load of log with 1 segments, log start offset 0 and log end offset 126 in 293 ms (kafka.log.Log)
+[2020-03-31 17:28:03,781] WARN [Log partition=insert_Edu-0, dir=/home/pranav/CMPE_273/kafka_2.11-1.1.0/kafka_logs] Found a corrupted index file corresponding to log file /home/pranav/CMPE_273/kafka_2.11-1.1.0/kafka_logs/insert_Edu-0/00000000000000000000.log due to Corrupt index found, index file (/home/pranav/CMPE_273/kafka_2.11-1.1.0/kafka_logs/insert_Edu-0/00000000000000000000.index) has non-zero size but the last offset is 0 which is no greater than the base offset 0.}, recovering segment and rebuilding index files... (kafka.log.Log)
+[2020-03-31 17:28:03,797] INFO [ProducerStateManager partition=insert_Edu-0] Writing producer snapshot at offset 1 (kafka.log.ProducerStateManager)
+[2020-03-31 17:28:03,799] INFO [Log partition=insert_Edu-0, dir=/home/pranav/CMPE_273/kafka_2.11-1.1.0/kafka_logs] Recovering unflushed segment 0 (kafka.log.Log)
+[2020-03-31 17:28:03,802] INFO [ProducerStateManager partition=insert_Edu-0] Writing producer snapshot at offset 1 (kafka.log.ProducerStateManager)
+[2020-03-31 17:28:03,804] INFO [Log partition=insert_Edu-0, dir=/home/pranav/CMPE_273/kafka_2.11-1.1.0/kafka_logs] Loading producer state from offset 1 with message format version 2 (kafka.log.Log)
+[2020-03-31 17:28:03,806] INFO [ProducerStateManager partition=insert_Edu-0] Loading producer state from snapshot file '/home/pranav/CMPE_273/kafka_2.11-1.1.0/kafka_logs/insert_Edu-0/00000000000000000001.snapshot' (kafka.log.ProducerStateManager)
+[2020-03-31 17:28:03,808] INFO [Log partition=insert_Edu-0, dir=/home/pranav/CMPE_273/kafka_2.11-1.1.0/kafka_logs] Completed load of log with 1 segments, log start offset 0 and log end offset 1 in 29 ms (kafka.log.Log)
+[2020-03-31 17:28:03,835] WARN [Log partition=get_Profile-0, dir=/home/pranav/CMPE_273/kafka_2.11-1.1.0/kafka_logs] Found a corrupted index file corresponding to log file /home/pranav/CMPE_273/kafka_2.11-1.1.0/kafka_logs/get_Profile-0/00000000000000000000.log due to Corrupt index found, index file (/home/pranav/CMPE_273/kafka_2.11-1.1.0/kafka_logs/get_Profile-0/00000000000000000000.index) has non-zero size but the last offset is 0 which is no greater than the base offset 0.}, recovering segment and rebuilding index files... (kafka.log.Log)
+[2020-03-31 17:28:04,029] INFO [ProducerStateManager partition=get_Profile-0] Writing producer snapshot at offset 103 (kafka.log.ProducerStateManager)
+[2020-03-31 17:28:04,030] INFO [Log partition=get_Profile-0, dir=/home/pranav/CMPE_273/kafka_2.11-1.1.0/kafka_logs] Recovering unflushed segment 0 (kafka.log.Log)
+[2020-03-31 17:28:04,043] INFO [ProducerStateManager partition=get_Profile-0] Writing producer snapshot at offset 103 (kafka.log.ProducerStateManager)
+[2020-03-31 17:28:04,045] INFO [Log partition=get_Profile-0, dir=/home/pranav/CMPE_273/kafka_2.11-1.1.0/kafka_logs] Loading producer state from offset 103 with message format version 2 (kafka.log.Log)
+[2020-03-31 17:28:04,047] INFO [ProducerStateManager partition=get_Profile-0] Loading producer state from snapshot file '/home/pranav/CMPE_273/kafka_2.11-1.1.0/kafka_logs/get_Profile-0/00000000000000000103.snapshot' (kafka.log.ProducerStateManager)
+[2020-03-31 17:28:04,048] INFO [Log partition=get_Profile-0, dir=/home/pranav/CMPE_273/kafka_2.11-1.1.0/kafka_logs] Completed load of log with 1 segments, log start offset 0 and log end offset 103 in 217 ms (kafka.log.Log)
+[2020-03-31 17:28:04,118] WARN [Log partition=update_Exp-0, dir=/home/pranav/CMPE_273/kafka_2.11-1.1.0/kafka_logs] Found a corrupted index file corresponding to log file /home/pranav/CMPE_273/kafka_2.11-1.1.0/kafka_logs/update_Exp-0/00000000000000000000.log due to Corrupt index found, index file (/home/pranav/CMPE_273/kafka_2.11-1.1.0/kafka_logs/update_Exp-0/00000000000000000000.index) has non-zero size but the last offset is 0 which is no greater than the base offset 0.}, recovering segment and rebuilding index files... (kafka.log.Log)
+[2020-03-31 17:28:04,159] INFO [ProducerStateManager partition=update_Exp-0] Writing producer snapshot at offset 3 (kafka.log.ProducerStateManager)
+[2020-03-31 17:28:04,161] INFO [Log partition=update_Exp-0, dir=/home/pranav/CMPE_273/kafka_2.11-1.1.0/kafka_logs] Recovering unflushed segment 0 (kafka.log.Log)
+[2020-03-31 17:28:04,164] INFO [ProducerStateManager partition=update_Exp-0] Writing producer snapshot at offset 3 (kafka.log.ProducerStateManager)
+[2020-03-31 17:28:04,167] INFO [Log partition=update_Exp-0, dir=/home/pranav/CMPE_273/kafka_2.11-1.1.0/kafka_logs] Loading producer state from offset 3 with message format version 2 (kafka.log.Log)
+[2020-03-31 17:28:04,168] INFO [ProducerStateManager partition=update_Exp-0] Loading producer state from snapshot file '/home/pranav/CMPE_273/kafka_2.11-1.1.0/kafka_logs/update_Exp-0/00000000000000000003.snapshot' (kafka.log.ProducerStateManager)
+[2020-03-31 17:28:04,169] INFO [Log partition=update_Exp-0, dir=/home/pranav/CMPE_273/kafka_2.11-1.1.0/kafka_logs] Completed load of log with 1 segments, log start offset 0 and log end offset 3 in 56 ms (kafka.log.Log)
+[2020-03-31 17:28:04,205] WARN [Log partition=insert_Exp-0, dir=/home/pranav/CMPE_273/kafka_2.11-1.1.0/kafka_logs] Found a corrupted index file corresponding to log file /home/pranav/CMPE_273/kafka_2.11-1.1.0/kafka_logs/insert_Exp-0/00000000000000000000.log due to Corrupt index found, index file (/home/pranav/CMPE_273/kafka_2.11-1.1.0/kafka_logs/insert_Exp-0/00000000000000000000.index) has non-zero size but the last offset is 0 which is no greater than the base offset 0.}, recovering segment and rebuilding index files... (kafka.log.Log)
+[2020-03-31 17:28:04,208] INFO [ProducerStateManager partition=insert_Exp-0] Writing producer snapshot at offset 1 (kafka.log.ProducerStateManager)
+[2020-03-31 17:28:04,220] INFO [Log partition=insert_Exp-0, dir=/home/pranav/CMPE_273/kafka_2.11-1.1.0/kafka_logs] Recovering unflushed segment 0 (kafka.log.Log)
+[2020-03-31 17:28:04,222] INFO [ProducerStateManager partition=insert_Exp-0] Writing producer snapshot at offset 1 (kafka.log.ProducerStateManager)
+[2020-03-31 17:28:04,224] INFO [Log partition=insert_Exp-0, dir=/home/pranav/CMPE_273/kafka_2.11-1.1.0/kafka_logs] Loading producer state from offset 1 with message format version 2 (kafka.log.Log)
+[2020-03-31 17:28:04,225] INFO [ProducerStateManager partition=insert_Exp-0] Loading producer state from snapshot file '/home/pranav/CMPE_273/kafka_2.11-1.1.0/kafka_logs/insert_Exp-0/00000000000000000001.snapshot' (kafka.log.ProducerStateManager)
+[2020-03-31 17:28:04,226] INFO [Log partition=insert_Exp-0, dir=/home/pranav/CMPE_273/kafka_2.11-1.1.0/kafka_logs] Completed load of log with 1 segments, log start offset 0 and log end offset 1 in 24 ms (kafka.log.Log)
+[2020-03-31 17:28:04,251] WARN [Log partition=update_Pers-0, dir=/home/pranav/CMPE_273/kafka_2.11-1.1.0/kafka_logs] Found a corrupted index file corresponding to log file /home/pranav/CMPE_273/kafka_2.11-1.1.0/kafka_logs/update_Pers-0/00000000000000000000.log due to Corrupt index found, index file (/home/pranav/CMPE_273/kafka_2.11-1.1.0/kafka_logs/update_Pers-0/00000000000000000000.index) has non-zero size but the last offset is 0 which is no greater than the base offset 0.}, recovering segment and rebuilding index files... (kafka.log.Log)
+[2020-03-31 17:28:04,257] INFO [ProducerStateManager partition=update_Pers-0] Writing producer snapshot at offset 6 (kafka.log.ProducerStateManager)
+[2020-03-31 17:28:04,258] INFO [Log partition=update_Pers-0, dir=/home/pranav/CMPE_273/kafka_2.11-1.1.0/kafka_logs] Recovering unflushed segment 0 (kafka.log.Log)
+[2020-03-31 17:28:04,261] INFO [ProducerStateManager partition=update_Pers-0] Writing producer snapshot at offset 6 (kafka.log.ProducerStateManager)
+[2020-03-31 17:28:04,263] INFO [Log partition=update_Pers-0, dir=/home/pranav/CMPE_273/kafka_2.11-1.1.0/kafka_logs] Loading producer state from offset 6 with message format version 2 (kafka.log.Log)
+[2020-03-31 17:28:04,264] INFO [ProducerStateManager partition=update_Pers-0] Loading producer state from snapshot file '/home/pranav/CMPE_273/kafka_2.11-1.1.0/kafka_logs/update_Pers-0/00000000000000000006.snapshot' (kafka.log.ProducerStateManager)
+[2020-03-31 17:28:04,265] INFO [Log partition=update_Pers-0, dir=/home/pranav/CMPE_273/kafka_2.11-1.1.0/kafka_logs] Completed load of log with 1 segments, log start offset 0 and log end offset 6 in 16 ms (kafka.log.Log)
+[2020-03-31 17:28:04,301] WARN [Log partition=update_Contact-0, dir=/home/pranav/CMPE_273/kafka_2.11-1.1.0/kafka_logs] Found a corrupted index file corresponding to log file /home/pranav/CMPE_273/kafka_2.11-1.1.0/kafka_logs/update_Contact-0/00000000000000000000.log due to Corrupt index found, index file (/home/pranav/CMPE_273/kafka_2.11-1.1.0/kafka_logs/update_Contact-0/00000000000000000000.index) has non-zero size but the last offset is 0 which is no greater than the base offset 0.}, recovering segment and rebuilding index files... (kafka.log.Log)
+[2020-03-31 17:28:04,321] INFO [ProducerStateManager partition=update_Contact-0] Writing producer snapshot at offset 10 (kafka.log.ProducerStateManager)
+[2020-03-31 17:28:04,323] INFO [Log partition=update_Contact-0, dir=/home/pranav/CMPE_273/kafka_2.11-1.1.0/kafka_logs] Recovering unflushed segment 0 (kafka.log.Log)
+[2020-03-31 17:28:04,326] INFO [ProducerStateManager partition=update_Contact-0] Writing producer snapshot at offset 10 (kafka.log.ProducerStateManager)
+[2020-03-31 17:28:04,328] INFO [Log partition=update_Contact-0, dir=/home/pranav/CMPE_273/kafka_2.11-1.1.0/kafka_logs] Loading producer state from offset 10 with message format version 2 (kafka.log.Log)
+[2020-03-31 17:28:04,329] INFO [ProducerStateManager partition=update_Contact-0] Loading producer state from snapshot file '/home/pranav/CMPE_273/kafka_2.11-1.1.0/kafka_logs/update_Contact-0/00000000000000000010.snapshot' (kafka.log.ProducerStateManager)
+[2020-03-31 17:28:04,330] INFO [Log partition=update_Contact-0, dir=/home/pranav/CMPE_273/kafka_2.11-1.1.0/kafka_logs] Completed load of log with 1 segments, log start offset 0 and log end offset 10 in 32 ms (kafka.log.Log)
+[2020-03-31 17:28:04,379] WARN [Log partition=update_contact-0, dir=/home/pranav/CMPE_273/kafka_2.11-1.1.0/kafka_logs] Found a corrupted index file corresponding to log file /home/pranav/CMPE_273/kafka_2.11-1.1.0/kafka_logs/update_contact-0/00000000000000000000.log due to Corrupt index found, index file (/home/pranav/CMPE_273/kafka_2.11-1.1.0/kafka_logs/update_contact-0/00000000000000000000.index) has non-zero size but the last offset is 0 which is no greater than the base offset 0.}, recovering segment and rebuilding index files... (kafka.log.Log)
+[2020-03-31 17:28:04,382] INFO [ProducerStateManager partition=update_contact-0] Writing producer snapshot at offset 1 (kafka.log.ProducerStateManager)
+[2020-03-31 17:28:04,383] INFO [Log partition=update_contact-0, dir=/home/pranav/CMPE_273/kafka_2.11-1.1.0/kafka_logs] Recovering unflushed segment 0 (kafka.log.Log)
+[2020-03-31 17:28:04,385] INFO [ProducerStateManager partition=update_contact-0] Writing producer snapshot at offset 1 (kafka.log.ProducerStateManager)
+[2020-03-31 17:28:04,387] INFO [Log partition=update_contact-0, dir=/home/pranav/CMPE_273/kafka_2.11-1.1.0/kafka_logs] Loading producer state from offset 1 with message format version 2 (kafka.log.Log)
+[2020-03-31 17:28:04,388] INFO [ProducerStateManager partition=update_contact-0] Loading producer state from snapshot file '/home/pranav/CMPE_273/kafka_2.11-1.1.0/kafka_logs/update_contact-0/00000000000000000001.snapshot' (kafka.log.ProducerStateManager)
+[2020-03-31 17:28:04,388] INFO [Log partition=update_contact-0, dir=/home/pranav/CMPE_273/kafka_2.11-1.1.0/kafka_logs] Completed load of log with 1 segments, log start offset 0 and log end offset 1 in 11 ms (kafka.log.Log)
+[2020-03-31 17:28:04,413] WARN [Log partition=insert_Skill-0, dir=/home/pranav/CMPE_273/kafka_2.11-1.1.0/kafka_logs] Found a corrupted index file corresponding to log file /home/pranav/CMPE_273/kafka_2.11-1.1.0/kafka_logs/insert_Skill-0/00000000000000000000.log due to Corrupt index found, index file (/home/pranav/CMPE_273/kafka_2.11-1.1.0/kafka_logs/insert_Skill-0/00000000000000000000.index) has non-zero size but the last offset is 0 which is no greater than the base offset 0.}, recovering segment and rebuilding index files... (kafka.log.Log)
+[2020-03-31 17:28:04,459] INFO [ProducerStateManager partition=insert_Skill-0] Writing producer snapshot at offset 3 (kafka.log.ProducerStateManager)
+[2020-03-31 17:28:04,460] INFO [Log partition=insert_Skill-0, dir=/home/pranav/CMPE_273/kafka_2.11-1.1.0/kafka_logs] Recovering unflushed segment 0 (kafka.log.Log)
+[2020-03-31 17:28:04,463] INFO [ProducerStateManager partition=insert_Skill-0] Writing producer snapshot at offset 3 (kafka.log.ProducerStateManager)
+[2020-03-31 17:28:04,465] INFO [Log partition=insert_Skill-0, dir=/home/pranav/CMPE_273/kafka_2.11-1.1.0/kafka_logs] Loading producer state from offset 3 with message format version 2 (kafka.log.Log)
+[2020-03-31 17:28:04,467] INFO [ProducerStateManager partition=insert_Skill-0] Loading producer state from snapshot file '/home/pranav/CMPE_273/kafka_2.11-1.1.0/kafka_logs/insert_Skill-0/00000000000000000003.snapshot' (kafka.log.ProducerStateManager)
+[2020-03-31 17:28:04,467] INFO [Log partition=insert_Skill-0, dir=/home/pranav/CMPE_273/kafka_2.11-1.1.0/kafka_logs] Completed load of log with 1 segments, log start offset 0 and log end offset 3 in 58 ms (kafka.log.Log)
+[2020-03-31 17:28:04,514] WARN [Log partition=update_Edu-0, dir=/home/pranav/CMPE_273/kafka_2.11-1.1.0/kafka_logs] Found a corrupted index file corresponding to log file /home/pranav/CMPE_273/kafka_2.11-1.1.0/kafka_logs/update_Edu-0/00000000000000000000.log due to Corrupt index found, index file (/home/pranav/CMPE_273/kafka_2.11-1.1.0/kafka_logs/update_Edu-0/00000000000000000000.index) has non-zero size but the last offset is 0 which is no greater than the base offset 0.}, recovering segment and rebuilding index files... (kafka.log.Log)
+[2020-03-31 17:28:04,533] INFO [ProducerStateManager partition=update_Edu-0] Writing producer snapshot at offset 3 (kafka.log.ProducerStateManager)
+[2020-03-31 17:28:04,534] INFO [Log partition=update_Edu-0, dir=/home/pranav/CMPE_273/kafka_2.11-1.1.0/kafka_logs] Recovering unflushed segment 0 (kafka.log.Log)
+[2020-03-31 17:28:04,538] INFO [ProducerStateManager partition=update_Edu-0] Writing producer snapshot at offset 3 (kafka.log.ProducerStateManager)
+[2020-03-31 17:28:04,540] INFO [Log partition=update_Edu-0, dir=/home/pranav/CMPE_273/kafka_2.11-1.1.0/kafka_logs] Loading producer state from offset 3 with message format version 2 (kafka.log.Log)
+[2020-03-31 17:28:04,542] INFO [ProducerStateManager partition=update_Edu-0] Loading producer state from snapshot file '/home/pranav/CMPE_273/kafka_2.11-1.1.0/kafka_logs/update_Edu-0/00000000000000000003.snapshot' (kafka.log.ProducerStateManager)
+[2020-03-31 17:28:04,543] INFO [Log partition=update_Edu-0, dir=/home/pranav/CMPE_273/kafka_2.11-1.1.0/kafka_logs] Completed load of log with 1 segments, log start offset 0 and log end offset 3 in 32 ms (kafka.log.Log)
+[2020-03-31 17:28:04,555] INFO Logs loading complete in 1455 ms. (kafka.log.LogManager)
+[2020-03-31 17:28:04,580] INFO Starting log cleanup with a period of 300000 ms. (kafka.log.LogManager)
+[2020-03-31 17:28:04,582] INFO Starting log flusher with a default period of 9223372036854775807 ms. (kafka.log.LogManager)
+[2020-03-31 17:28:04,907] INFO Awaiting socket connections on 0.0.0.0:9092. (kafka.network.Acceptor)
+[2020-03-31 17:28:04,966] INFO [SocketServer brokerId=0] Started 1 acceptor threads (kafka.network.SocketServer)
+[2020-03-31 17:28:04,981] INFO [ExpirationReaper-0-Produce]: Starting (kafka.server.DelayedOperationPurgatory$ExpiredOperationReaper)
+[2020-03-31 17:28:04,982] INFO [ExpirationReaper-0-Fetch]: Starting (kafka.server.DelayedOperationPurgatory$ExpiredOperationReaper)
+[2020-03-31 17:28:04,983] INFO [ExpirationReaper-0-DeleteRecords]: Starting (kafka.server.DelayedOperationPurgatory$ExpiredOperationReaper)
+[2020-03-31 17:28:04,998] INFO [LogDirFailureHandler]: Starting (kafka.server.ReplicaManager$LogDirFailureHandler)
+[2020-03-31 17:28:05,027] INFO Creating /brokers/ids/0 (is it secure? false) (kafka.zk.KafkaZkClient)
+[2020-03-31 17:28:05,124] INFO Result of znode creation at /brokers/ids/0 is: OK (kafka.zk.KafkaZkClient)
+[2020-03-31 17:28:05,124] INFO Registered broker 0 at path /brokers/ids/0 with addresses: ArrayBuffer(EndPoint(hackpad,9092,ListenerName(PLAINTEXT),PLAINTEXT)) (kafka.zk.KafkaZkClient)
+[2020-03-31 17:28:05,327] INFO [ExpirationReaper-0-topic]: Starting (kafka.server.DelayedOperationPurgatory$ExpiredOperationReaper)
+[2020-03-31 17:28:05,335] INFO [ExpirationReaper-0-Heartbeat]: Starting (kafka.server.DelayedOperationPurgatory$ExpiredOperationReaper)
+[2020-03-31 17:28:05,337] INFO [ExpirationReaper-0-Rebalance]: Starting (kafka.server.DelayedOperationPurgatory$ExpiredOperationReaper)
+[2020-03-31 17:28:05,351] INFO Creating /controller (is it secure? false) (kafka.zk.KafkaZkClient)
+[2020-03-31 17:28:05,404] INFO Result of znode creation at /controller is: OK (kafka.zk.KafkaZkClient)
+[2020-03-31 17:28:05,423] INFO [GroupCoordinator 0]: Starting up. (kafka.coordinator.group.GroupCoordinator)
+[2020-03-31 17:28:05,428] INFO [GroupCoordinator 0]: Startup complete. (kafka.coordinator.group.GroupCoordinator)
+[2020-03-31 17:28:05,451] INFO [GroupMetadataManager brokerId=0] Removed 0 expired offsets in 24 milliseconds. (kafka.coordinator.group.GroupMetadataManager)
+[2020-03-31 17:28:05,607] INFO [ProducerId Manager 0]: Acquired new producerId block (brokerId:0,blockStartProducerId:0,blockEndProducerId:999) by writing to Zk with path version 1 (kafka.coordinator.transaction.ProducerIdManager)
+[2020-03-31 17:28:05,666] INFO [TransactionCoordinator id=0] Starting up. (kafka.coordinator.transaction.TransactionCoordinator)
+[2020-03-31 17:28:05,672] INFO [TransactionCoordinator id=0] Startup complete. (kafka.coordinator.transaction.TransactionCoordinator)
+[2020-03-31 17:28:05,685] INFO [Transaction Marker Channel Manager 0]: Starting (kafka.coordinator.transaction.TransactionMarkerChannelManager)
+[2020-03-31 17:28:05,781] INFO [/config/changes-event-process-thread]: Starting (kafka.common.ZkNodeChangeNotificationListener$ChangeEventProcessThread)
+[2020-03-31 17:28:05,826] INFO Kafka version : 1.1.0 (org.apache.kafka.common.utils.AppInfoParser)
+[2020-03-31 17:28:05,826] INFO Kafka commitId : fdcf75ea326b8e07 (org.apache.kafka.common.utils.AppInfoParser)
+[2020-03-31 17:28:05,830] INFO [KafkaServer id=0] started (kafka.server.KafkaServer)
+[2020-03-31 17:37:22,395] INFO [ReplicaFetcherManager on broker 0] Removed fetcher for partitions get_Profile-0 (kafka.server.ReplicaFetcherManager)
+[2020-03-31 17:37:22,424] INFO Replica loaded for partition get_Profile-0 with initial high watermark 103 (kafka.cluster.Replica)
+[2020-03-31 17:37:22,428] INFO [Partition get_Profile-0 broker=0] get_Profile-0 starts at Leader Epoch 0 from offset 103. Previous Leader Epoch was: -1 (kafka.cluster.Partition)
+[2020-03-31 17:37:22,443] INFO [ReplicaAlterLogDirsManager on broker 0] Added fetcher for partitions List() (kafka.server.ReplicaAlterLogDirsManager)
+[2020-03-31 17:37:23,867] INFO [ReplicaFetcherManager on broker 0] Removed fetcher for partitions update_Pers-0 (kafka.server.ReplicaFetcherManager)
+[2020-03-31 17:37:23,874] INFO [Partition update_Pers-0 broker=0] No checkpointed highwatermark is found for partition update_Pers-0 (kafka.cluster.Partition)
+[2020-03-31 17:37:23,874] INFO Replica loaded for partition update_Pers-0 with initial high watermark 0 (kafka.cluster.Replica)
+[2020-03-31 17:37:23,875] INFO [Partition update_Pers-0 broker=0] update_Pers-0 starts at Leader Epoch 0 from offset 6. Previous Leader Epoch was: -1 (kafka.cluster.Partition)
+[2020-03-31 17:37:23,883] INFO [ReplicaAlterLogDirsManager on broker 0] Added fetcher for partitions List() (kafka.server.ReplicaAlterLogDirsManager)
+[2020-03-31 17:37:25,418] INFO [ReplicaFetcherManager on broker 0] Removed fetcher for partitions update_Edu-0 (kafka.server.ReplicaFetcherManager)
+[2020-03-31 17:37:25,419] INFO [Partition update_Edu-0 broker=0] No checkpointed highwatermark is found for partition update_Edu-0 (kafka.cluster.Partition)
+[2020-03-31 17:37:25,419] INFO Replica loaded for partition update_Edu-0 with initial high watermark 0 (kafka.cluster.Replica)
+[2020-03-31 17:37:25,420] INFO [Partition update_Edu-0 broker=0] update_Edu-0 starts at Leader Epoch 0 from offset 3. Previous Leader Epoch was: -1 (kafka.cluster.Partition)
+[2020-03-31 17:37:25,420] INFO [ReplicaAlterLogDirsManager on broker 0] Added fetcher for partitions List() (kafka.server.ReplicaAlterLogDirsManager)
+[2020-03-31 17:37:26,911] INFO [ReplicaFetcherManager on broker 0] Removed fetcher for partitions insert_Edu-0 (kafka.server.ReplicaFetcherManager)
+[2020-03-31 17:37:26,913] INFO [Partition insert_Edu-0 broker=0] No checkpointed highwatermark is found for partition insert_Edu-0 (kafka.cluster.Partition)
+[2020-03-31 17:37:26,913] INFO Replica loaded for partition insert_Edu-0 with initial high watermark 0 (kafka.cluster.Replica)
+[2020-03-31 17:37:26,914] INFO [Partition insert_Edu-0 broker=0] insert_Edu-0 starts at Leader Epoch 0 from offset 1. Previous Leader Epoch was: -1 (kafka.cluster.Partition)
+[2020-03-31 17:37:26,914] INFO [ReplicaAlterLogDirsManager on broker 0] Added fetcher for partitions List() (kafka.server.ReplicaAlterLogDirsManager)
+[2020-03-31 17:37:28,441] INFO [ReplicaFetcherManager on broker 0] Removed fetcher for partitions update_Contact-0 (kafka.server.ReplicaFetcherManager)
+[2020-03-31 17:37:28,445] INFO [Partition update_Contact-0 broker=0] No checkpointed highwatermark is found for partition update_Contact-0 (kafka.cluster.Partition)
+[2020-03-31 17:37:28,446] INFO Replica loaded for partition update_Contact-0 with initial high watermark 0 (kafka.cluster.Replica)
+[2020-03-31 17:37:28,446] INFO [Partition update_Contact-0 broker=0] update_Contact-0 starts at Leader Epoch 0 from offset 10. Previous Leader Epoch was: -1 (kafka.cluster.Partition)
+[2020-03-31 17:37:28,448] INFO [ReplicaAlterLogDirsManager on broker 0] Added fetcher for partitions List() (kafka.server.ReplicaAlterLogDirsManager)
+[2020-03-31 17:37:29,942] INFO [ReplicaFetcherManager on broker 0] Removed fetcher for partitions insert_Exp-0 (kafka.server.ReplicaFetcherManager)
+[2020-03-31 17:37:29,950] INFO [Partition insert_Exp-0 broker=0] No checkpointed highwatermark is found for partition insert_Exp-0 (kafka.cluster.Partition)
+[2020-03-31 17:37:29,951] INFO Replica loaded for partition insert_Exp-0 with initial high watermark 0 (kafka.cluster.Replica)
+[2020-03-31 17:37:29,951] INFO [Partition insert_Exp-0 broker=0] insert_Exp-0 starts at Leader Epoch 0 from offset 1. Previous Leader Epoch was: -1 (kafka.cluster.Partition)
+[2020-03-31 17:37:29,957] INFO [ReplicaAlterLogDirsManager on broker 0] Added fetcher for partitions List() (kafka.server.ReplicaAlterLogDirsManager)
+[2020-03-31 17:37:31,459] INFO [ReplicaFetcherManager on broker 0] Removed fetcher for partitions update_Exp-0 (kafka.server.ReplicaFetcherManager)
+[2020-03-31 17:37:31,463] INFO [Partition update_Exp-0 broker=0] No checkpointed highwatermark is found for partition update_Exp-0 (kafka.cluster.Partition)
+[2020-03-31 17:37:31,464] INFO Replica loaded for partition update_Exp-0 with initial high watermark 0 (kafka.cluster.Replica)
+[2020-03-31 17:37:31,464] INFO [Partition update_Exp-0 broker=0] update_Exp-0 starts at Leader Epoch 0 from offset 3. Previous Leader Epoch was: -1 (kafka.cluster.Partition)
+[2020-03-31 17:37:31,466] INFO [ReplicaAlterLogDirsManager on broker 0] Added fetcher for partitions List() (kafka.server.ReplicaAlterLogDirsManager)
+[2020-03-31 17:37:32,986] INFO [ReplicaFetcherManager on broker 0] Removed fetcher for partitions insert_Skill-0 (kafka.server.ReplicaFetcherManager)
+[2020-03-31 17:37:32,989] INFO [Partition insert_Skill-0 broker=0] No checkpointed highwatermark is found for partition insert_Skill-0 (kafka.cluster.Partition)
+[2020-03-31 17:37:32,989] INFO Replica loaded for partition insert_Skill-0 with initial high watermark 0 (kafka.cluster.Replica)
+[2020-03-31 17:37:32,989] INFO [Partition insert_Skill-0 broker=0] insert_Skill-0 starts at Leader Epoch 0 from offset 3. Previous Leader Epoch was: -1 (kafka.cluster.Partition)
+[2020-03-31 17:37:32,990] INFO [ReplicaAlterLogDirsManager on broker 0] Added fetcher for partitions List() (kafka.server.ReplicaAlterLogDirsManager)
+[2020-03-31 17:38:05,425] INFO [GroupMetadataManager brokerId=0] Removed 0 expired offsets in 0 milliseconds. (kafka.coordinator.group.GroupMetadataManager)
+[2020-03-31 17:46:27,998] WARN Client session timed out, have not heard from server in 5980ms for sessionid 0x17132d0dc3c0000 (org.apache.zookeeper.ClientCnxn)
+[2020-03-31 17:46:27,999] INFO Client session timed out, have not heard from server in 5980ms for sessionid 0x17132d0dc3c0000, closing socket connection and attempting reconnect (org.apache.zookeeper.ClientCnxn)
+[2020-03-31 17:46:29,733] INFO Opening socket connection to server localhost/127.0.0.1:2181. Will not attempt to authenticate using SASL (unknown error) (org.apache.zookeeper.ClientCnxn)
+[2020-03-31 17:46:29,734] INFO Socket connection established to localhost/127.0.0.1:2181, initiating session (org.apache.zookeeper.ClientCnxn)
+[2020-03-31 17:46:29,840] INFO Session establishment complete on server localhost/127.0.0.1:2181, sessionid = 0x17132d0dc3c0000, negotiated timeout = 6000 (org.apache.zookeeper.ClientCnxn)
+[2020-03-31 17:48:05,525] INFO [GroupMetadataManager brokerId=0] Removed 0 expired offsets in 0 milliseconds. (kafka.coordinator.group.GroupMetadataManager)
+[2020-03-31 17:58:05,525] INFO [GroupMetadataManager brokerId=0] Removed 0 expired offsets in 0 milliseconds. (kafka.coordinator.group.GroupMetadataManager)

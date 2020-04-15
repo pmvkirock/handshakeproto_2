@@ -1,0 +1,4 @@
+[2020-03-30 07:01:54,341] WARN fsync-ing the write ahead log in SyncThread:0 took 1060ms which will adversely effect operation latency. See the ZooKeeper troubleshooting guide (org.apache.zookeeper.server.persistence.FileTxnLog)
+[2020-03-30 07:01:58,505] WARN fsync-ing the write ahead log in SyncThread:0 took 1013ms which will adversely effect operation latency. See the ZooKeeper troubleshooting guide (org.apache.zookeeper.server.persistence.FileTxnLog)
+[2020-03-30 07:13:09,056] WARN fsync-ing the write ahead log in SyncThread:0 took 1261ms which will adversely effect operation latency. See the ZooKeeper troubleshooting guide (org.apache.zookeeper.server.persistence.FileTxnLog)
+[2020-03-30 07:28:10,511] WARN fsync-ing the write ahead log in SyncThread:0 took 1204ms which will adversely effect operation latency. See the ZooKeeper troubleshooting guide (org.apache.zookeeper.server.persistence.FileTxnLog)

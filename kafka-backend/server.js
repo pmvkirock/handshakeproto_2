@@ -25,6 +25,8 @@ var get_My_Jobs = require("../kafka-backend/services/getMyJobs");
 var get_My_Events = require("../kafka-backend/services/getMyEvents");
 var send_Message = require("../kafka-backend/services/sendMessage");
 var get_All_Message = require("../kafka-backend/services/getAllMessage");
+var login_stud = require("../kafka-backend/services/loginStud.js");
+var login_comp = require("../kafka-backend/services/loginComp.js");
 
 function handleTopicRequest(topic_name, fname) {
   //var topic_name = 'root_topic';
@@ -84,3 +86,5 @@ handleTopicRequest("get_My_Jobs", get_My_Jobs);
 handleTopicRequest("get_My_Events", get_My_Events);
 handleTopicRequest("send_Message", send_Message);
 handleTopicRequest("get_All_Message", get_All_Message);
+handleTopicRequest("login_stud", login_stud);
+handleTopicRequest("login_comp", login_comp);
