@@ -7,7 +7,8 @@ import { Provider } from 'react-redux';
 import thunk from 'redux-thunk';
 import axios from 'axios';
 
-axios.defaults.baseURL = 'http://localhost:8000';
+axios.defaults.baseURL =
+  'http://ec2-3-16-187-247.us-east-2.compute.amazonaws.com:8000';
 
 const Store = createStore(
   allReducer,
