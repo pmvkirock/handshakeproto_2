@@ -14,10 +14,10 @@ var jobSchema = new Schema(
     posting_date: { type: Date, default: Date.now },
     company_name: { type: String },
     email: { type: String },
-    comp_id: { type: String }
+    comp_id: { type: String },
   },
   {
-    versionKey: false
+    versionKey: false,
   }
 );
 

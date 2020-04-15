@@ -9,6 +9,7 @@ import Jobs from './Session/Jobs';
 import Students from './Session/AllStudents/container';
 import Stud_Prof from './Session/AllStudents/Profile/profile';
 import Company_Prof from './Session/Companies/Profile/container';
+import Messages from './Session/Messages';
 import MyApp from './Session/Students/Jobs';
 import Events from './Session/Events';
 import MyEvents from './Session/Students/Events';
@@ -28,14 +29,7 @@ class bodyCont extends React.Component {
       prof = <Company_Prof />;
     }
     return (
-      <div
-        style={{
-          display: 'flex',
-          flexDirection: 'column',
-          flex: 1,
-          height: 100 + '%'
-        }}
-      >
+      <div>
         <Route path="/" component={Topnav} />
         <div className="custom-body">
           <div className="container">
@@ -52,6 +46,7 @@ class bodyCont extends React.Component {
             <Route path="/events" component={Events} />
             <Route path="/myapp" component={MyApp} />
             <Route path="/myevents" component={MyEvents} />
+            <Route path="/messages" component={Messages} />
           </div>
         </div>
       </div>

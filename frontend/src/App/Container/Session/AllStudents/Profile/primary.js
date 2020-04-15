@@ -1,35 +1,65 @@
 import React from 'react';
-import { Container } from 'react-bootstrap';
+import { Container, Button, Modal, Form } from 'react-bootstrap';
 import { connect } from 'react-redux';
+import axios from 'axios';
 
 class Primary extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      hideForm: 'HideForm',
-      hideProfileForm: 'HideForm',
-
-      firstName: '',
-      lastName: '',
-      dob: '',
-      city: '',
-      state: '',
-      country: '',
-      phone_num: '',
-      email: '',
-      coll_name: '',
-      degree: '',
-      data: [],
-      prof_pic: ''
+      message: false,
+      content: ''
     };
   }
 
-  getInfo = () => {};
+  handleClose = () => this.setState({ message: false });
+  handleShow = () => this.setState({ message: true });
 
-  componentDidMount() {
-    //console.log(cookie.load('cookie'));
-    this.getInfo();
-  }
+  setContent = e => {
+    this.setState({ content: e.target.value });
+  };
+
+  sendMessage = () => {
+    var data = {
+      senderid: localStorage.getItem('user_id'),
+      recieverid: this.props.getOtherStudent._id,
+      type: localStorage.getItem('type'),
+      recievername:
+        this.props.getOtherStudent.fname +
+        ' ' +
+        this.props.getOtherStudent.lname,
+      content: this.state.content
+    };
+    if (localStorage.getItem('type') == 'Company') {
+      data = Object.assign(data, {
+        sendername: this.props.getCompProfile.cname
+      });
+    } else {
+      data = Object.assign(data, {
+        sendername:
+          this.props.getProfileInfo.fname +
+          ' ' +
+          this.props.getProfileInfo.lname
+      });
+    }
+    axios.defaults.withCredentials = true;
+    //make a post request with the user data
+    axios
+      .post('http://localhost:8000/messages/sendMessage', data)
+      .then(response => {
+        console.log('Status Code : ', response.status);
+        if (response.status === 200) {
+          alert('Message Sent');
+        } else {
+          alert('Error');
+        }
+      })
+      .catch(e => {
+        this.setState({
+          error: 'Please enter correct credentials' + e
+        });
+      });
+  };
 
   render() {
     let picture = '';
@@ -62,6 +92,30 @@ class Primary extends React.Component {
             ', ' +
             this.props.getOtherStudent.country}
         </p>
+        <Button onClick={this.handleShow}>Message</Button>
+        <Modal show={this.state.message} onHide={this.handleClose}>
+          <Modal.Header closeButton>
+            <Modal.Title>Send Message</Modal.Title>
+          </Modal.Header>
+
+          <Modal.Body>
+            <div className={'top-10'}>
+              <Form.Control
+                as="textarea"
+                rows="3"
+                value={this.state.content}
+                onChange={this.setContent}
+              />
+            </div>
+          </Modal.Body>
+
+          <Modal.Footer>
+            <Button variant="secondary">Close</Button>
+            <Button onClick={this.sendMessage} variant="primary">
+              Save changes
+            </Button>
+          </Modal.Footer>
+        </Modal>
       </Container>
     );
   }
@@ -69,7 +123,9 @@ class Primary extends React.Component {
 
 const mapStateToProps = state => {
   return {
-    getOtherStudent: state.getOtherStudent
+    getOtherStudent: state.getOtherStudent,
+    getCompProfile: state.getCompProfile,
+    getProfileInfo: state.getProfileInfo
   };
 };
 

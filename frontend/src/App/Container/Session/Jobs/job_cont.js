@@ -225,7 +225,7 @@ class JobCont extends React.Component {
       }
     );
     return (
-      <Row className="background top-10">
+      <Row className="background top-10 box-shadow">
         <Col xl={4} style={{ overflowY: 'scroll', height: 70 + 'vh' }}>
           <Container className="job-listing">
             <Row>

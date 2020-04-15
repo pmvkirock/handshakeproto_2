@@ -23,6 +23,8 @@ var add_Events = require("../kafka-backend/services/addEvent");
 var get_All_Students = require("../kafka-backend/services/getAllStudents");
 var get_My_Jobs = require("../kafka-backend/services/getMyJobs");
 var get_My_Events = require("../kafka-backend/services/getMyEvents");
+var send_Message = require("../kafka-backend/services/sendMessage");
+var get_All_Message = require("../kafka-backend/services/getAllMessage");
 
 function handleTopicRequest(topic_name, fname) {
   //var topic_name = 'root_topic';
@@ -80,3 +82,5 @@ handleTopicRequest("get_All_Students", get_All_Students);
 handleTopicRequest("get_Other_Students", get_Prof);
 handleTopicRequest("get_My_Jobs", get_My_Jobs);
 handleTopicRequest("get_My_Events", get_My_Events);
+handleTopicRequest("send_Message", send_Message);
+handleTopicRequest("get_All_Message", get_All_Message);

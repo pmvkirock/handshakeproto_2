@@ -104,6 +104,9 @@ class Topnav extends React.Component {
             <Nav.Link className="custom-nav">
               <Link to="/all_students">Students</Link>
             </Nav.Link>
+            <Nav.Link className="custom-nav">
+              <Link to="/messages">Messages</Link>
+            </Nav.Link>
             <NavDropdown
               title={
                 <img
@@ -152,7 +155,7 @@ class Topnav extends React.Component {
       );
     }
     return (
-      <div className="container">
+      <div className="container-fluid" style={{ width: 90 + '%' }}>
         {redirectVar}
         <Navbar expand="lg" style={{ backgroundColor: '#FFF' }}>
           <Navbar.Brand style={{ marginRight: 30 + 'px' }}>

@@ -22,6 +22,7 @@ import getAllStudents from './getAllStudents';
 import getOtherStudent from './getOtherStudents';
 import getMyJobs from './getStudentJobs';
 import getMyEvents from './getStudentEvents';
+import getAllMessages from './getMessages';
 
 const allReducers = combineReducers({
   getType: getType,
@@ -46,7 +47,8 @@ const allReducers = combineReducers({
   getAllStudents: getAllStudents,
   getOtherStudent: getOtherStudent,
   getMyJobs: getMyJobs,
-  getMyEvents: getMyEvents
+  getMyEvents: getMyEvents,
+  getAllMessages: getAllMessages
 });
 
 export default allReducers;

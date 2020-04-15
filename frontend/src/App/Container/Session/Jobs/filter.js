@@ -74,7 +74,7 @@ class Filter extends React.Component {
     console.log(myJobs);
     return (
       <Row>
-        <Container className="background top-10 padding-all">
+        <Container className="background top-10 padding-all box-shadow">
           <Form>
             <Row>
               <Col>
