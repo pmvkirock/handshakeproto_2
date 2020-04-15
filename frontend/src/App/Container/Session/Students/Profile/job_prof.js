@@ -123,7 +123,7 @@ class Education extends React.Component {
     axios.defaults.withCredentials = true;
     //make a post request with the user data
     axios
-      .post('http://localhost:8000/stud_profile/insertExpInfo', data)
+      .post('stud_profile/insertExpInfo', data)
       .then(response => {
         console.log('Status Code : ', response.status);
         if (response.status === 200) {
@@ -165,7 +165,7 @@ class Education extends React.Component {
     axios.defaults.withCredentials = true;
     //make a post request with the user data
     axios
-      .post('http://localhost:8000/stud_profile/updateExpInfo', data)
+      .post('stud_profile/updateExpInfo', data)
       .then(response => {
         console.log('Status Code : ', response.status);
         if (response.status === 200) {

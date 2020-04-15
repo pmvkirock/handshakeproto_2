@@ -11,7 +11,7 @@ export const getApplied = data => {
     var url;
     console.log(data);
     url =
-      'http://localhost:8000/events/getEventsApplied?comp_id=' +
+      'events/getEventsApplied?comp_id=' +
       data.comp_id +
       '&job_id=' +
       data.job_id;

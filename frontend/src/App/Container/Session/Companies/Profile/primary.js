@@ -4,6 +4,7 @@ import Desc from './description';
 import Contact from './contact';
 import { companyProfileData } from '../../../../../actions/companyprofile';
 import { connect } from 'react-redux';
+import config from '../../../../../config';
 
 class Primary extends React.Component {
   constructor(props) {
@@ -30,7 +31,7 @@ class Primary extends React.Component {
       pic = '/profile.png';
     } else {
       pic =
-        `http://localhost:8000/prof_pic/` +
+        `${config.apiURL}/prof_pic/` +
         this.props.getCompProfile.prof_pic.replace('prof_pic', 'file') +
         `.png`;
     }

@@ -12,6 +12,7 @@ import {
   loadProfileData
 } from '../../actions';
 import { companyProfileData } from '../../actions/companyprofile';
+import config from '../../config';
 
 class Topnav extends React.Component {
   constructor(props) {
@@ -72,14 +73,14 @@ class Topnav extends React.Component {
       if (this.props.getType == 'Student') {
         if (this.props.getProfileInfo.profile_pic) {
           prof_pic =
-            `http://localhost:8000/prof_pic/` +
+            `${config.apiURL}/prof_pic/` +
             this.props.getProfileInfo.profile_pic.replace('Prof_Pic', 'file') +
             `.jpeg`;
         }
       } else {
         if (this.props.getCompProfile.prof_pic) {
           prof_pic =
-            `http://localhost:8000/prof_pic/` +
+            `${config.apiURL}/prof_pic/` +
             this.props.getCompProfile.prof_pic.replace('prof_pic', 'file') +
             `.png`;
         }

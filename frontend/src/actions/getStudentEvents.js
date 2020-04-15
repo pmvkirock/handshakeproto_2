@@ -11,7 +11,7 @@ export const getEventData = data => {
     var url;
     console.log(data);
     if (data.user_id) {
-      url = 'http://localhost:8000/events/getMyEvents?user_id=' + data.user_id;
+      url = 'events/getMyEvents?user_id=' + data.user_id;
     }
     axios.defaults.withCredentials = true;
     axios.defaults.headers.common['Authorization'] = localStorage.getItem(

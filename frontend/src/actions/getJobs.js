@@ -12,7 +12,7 @@ export const getJobData = data => {
     console.log(data);
     if (data.comp_id) {
       url =
-        'http://localhost:8000/jobs/getAllJobs?limit=10&skip=' +
+        'jobs/getAllJobs?limit=10&skip=' +
         data.page +
         '&filter=' +
         data.filter +
@@ -26,7 +26,7 @@ export const getJobData = data => {
         data.comp_id;
     } else {
       url =
-        'http://localhost:8000/jobs/getAllJobs?limit=10&skip=' +
+        'jobs/getAllJobs?limit=10&skip=' +
         data.page +
         '&filter=' +
         data.filter +

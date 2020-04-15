@@ -147,7 +147,7 @@ export const loadProfileData = data => {
       'token'
     );
     axios
-      .post('http://localhost:8000/stud_profile/stud_profile', data)
+      .post('stud_profile/stud_profile', data)
       .then(response => {
         console.log('Status Code : ', response.data);
         if (response.status === 200) {

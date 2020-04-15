@@ -11,7 +11,7 @@ export const getStudents = data => {
     var url;
     console.log(data);
     url =
-      'http://localhost:8000/students/getAllStudents?limit=10&skip=' +
+      'students/getAllStudents?limit=10&skip=' +
       data.page +
       '&name=' +
       data.name +

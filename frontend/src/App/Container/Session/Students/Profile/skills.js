@@ -28,7 +28,7 @@ class skills extends React.Component {
     axios.defaults.withCredentials = true;
     //make a post request with the user data
     axios
-      .post('http://localhost:8000/stud_profile/insertSkill', data)
+      .post('stud_profile/insertSkill', data)
       .then(response => {
         if (response.status === 200) {
           this.setState({

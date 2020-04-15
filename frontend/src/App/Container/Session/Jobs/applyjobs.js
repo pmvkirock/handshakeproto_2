@@ -1,6 +1,7 @@
 import React from 'react';
 import { Modal, Button, Form } from 'react-bootstrap';
 import axios from 'axios';
+import config from '../../../../config';
 
 class apply extends React.Component {
   state = { setShow: false, tprof_pic: '' };
@@ -31,7 +32,7 @@ class apply extends React.Component {
     data.append('file', event.target.files[0]);
     data.append('name', 'resume');
     axios
-      .post('http://localhost:8000/files', data)
+      .post(`${config.apiURL}/files`, data)
       .then(response => {
         console.log(response);
         this.setState({
@@ -54,7 +55,7 @@ class apply extends React.Component {
     axios.defaults.withCredentials = true;
     //make a post request with the user data
     axios
-      .post('http://localhost:8000/jobs/insertAppli', data)
+      .post('jobs/insertAppli', data)
       .then(response => {
         console.log('Status Code : ', response.status);
         if (response.status === 200) {

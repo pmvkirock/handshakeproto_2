@@ -11,8 +11,7 @@ export const getAllMessages = data => {
     var url;
     console.log(data);
     if (data.user_id) {
-      url =
-        'http://localhost:8000/messages/getAllMessage?user_id=' + data.user_id;
+      url = 'messages/getAllMessage?user_id=' + data.user_id;
     }
     axios.defaults.withCredentials = true;
     axios.defaults.headers.common['Authorization'] = localStorage.getItem(

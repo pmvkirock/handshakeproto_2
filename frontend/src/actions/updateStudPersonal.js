@@ -13,7 +13,7 @@ export const updateStudPersonal = data => {
       'token'
     );
     axios
-      .post('http://localhost:8000/stud_profile/updatePersonal', data)
+      .post('stud_profile/updatePersonal', data)
       .then(response => {
         console.log('Status Code : ', response.data);
         if (response.status === 200) {

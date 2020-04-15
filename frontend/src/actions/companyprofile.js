@@ -13,7 +13,7 @@ export const companyProfileData = data => {
       'token'
     );
     axios
-      .post('http://localhost:8000/comp_profile/comp_profile', data)
+      .post('comp_profile/comp_profile', data)
       .then(response => {
         console.log('Status Code : ', response.data);
         if (response.status === 200) {

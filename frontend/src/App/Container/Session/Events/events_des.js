@@ -42,7 +42,7 @@ class JobDes extends React.Component {
       axios.defaults.withCredentials = true;
       //make a post request with the user data
       axios
-        .post('http://localhost:8000/events/insertAppliEvents', data)
+        .post('events/insertAppliEvents', data)
         .then(response => {
           console.log('Status Code : ', response.status);
           if (response.status === 200) {

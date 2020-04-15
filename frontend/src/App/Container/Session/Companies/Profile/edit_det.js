@@ -37,7 +37,7 @@ class edit extends React.Component {
     axios.defaults.withCredentials = true;
     //make a post request with the user data
     axios
-      .post('http://localhost:8000/comp_profile/updateCompany', data)
+      .post('comp_profile/updateCompany', data)
       .then(response => {
         console.log('Status Code : ', response.status);
         if (response.status === 200) {
@@ -114,7 +114,7 @@ class edit extends React.Component {
     data.append('file', event.target.files[0]);
     data.append('name', 'prof_pic');
     axios
-      .post('http://localhost:8000/files', data)
+      .post('files', data)
       .then(response => {
         console.log(response);
         this.setState({

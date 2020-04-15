@@ -3,6 +3,7 @@ import { Container, Form, Button } from 'react-bootstrap';
 import axios from 'axios';
 import { connect } from 'react-redux';
 import { updateStudPersonal } from '../../../../../actions/updateStudPersonal';
+import config from '../../../../../config';
 
 class Primary extends React.Component {
   constructor(props) {
@@ -80,7 +81,7 @@ class Primary extends React.Component {
     data.append('file', event.target.files[0]);
     data.append('name', 'Prof_Pic');
     axios
-      .post('http://localhost:8000/files', data)
+      .post(`files`, data)
       .then(response => {
         console.log(response);
         this.setState({
@@ -136,7 +137,7 @@ class Primary extends React.Component {
     var prof_pic = '/profile.png';
     if (this.props.getProfileInfo.profile_pic) {
       prof_pic =
-        `http://localhost:8000/prof_pic/` +
+        `${config.apiURL}/prof_pic/` +
         this.props.getProfileInfo.profile_pic.replace('Prof_Pic', 'file') +
         `.jpeg`;
     }

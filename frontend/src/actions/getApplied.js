@@ -10,11 +10,7 @@ export const getApplied = data => {
   return dispatch => {
     var url;
     console.log(data);
-    url =
-      'http://localhost:8000/jobs/getApplied?comp_id=' +
-      data.comp_id +
-      '&job_id=' +
-      data.job_id;
+    url = 'jobs/getApplied?comp_id=' + data.comp_id + '&job_id=' + data.job_id;
     axios.defaults.withCredentials = true;
     axios.defaults.headers.common['Authorization'] = localStorage.getItem(
       'token'

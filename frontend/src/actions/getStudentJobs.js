@@ -11,7 +11,7 @@ export const getJobData = data => {
     var url;
     console.log(data);
     if (data.user_id) {
-      url = 'http://localhost:8000/jobs/getMyJobs?user_id=' + data.user_id;
+      url = 'jobs/getMyJobs?user_id=' + data.user_id;
     }
     axios.defaults.withCredentials = true;
     axios.defaults.headers.common['Authorization'] = localStorage.getItem(

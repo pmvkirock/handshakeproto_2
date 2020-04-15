@@ -5,6 +5,9 @@ import { createStore, applyMiddleware, compose } from 'redux';
 import allReducer from './reducers';
 import { Provider } from 'react-redux';
 import thunk from 'redux-thunk';
+import axios from 'axios';
+
+axios.defaults.baseURL = 'http://localhost:8000';
 
 const Store = createStore(
   allReducer,

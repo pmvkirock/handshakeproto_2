@@ -12,7 +12,7 @@ export const getAllEvents = data => {
     console.log(data);
     if (data.comp_id) {
       url =
-        'http://localhost:8000/events/getAllEvents?limit=10&skip=' +
+        'events/getAllEvents?limit=10&skip=' +
         data.page +
         '&job=' +
         data.title +
@@ -24,7 +24,7 @@ export const getAllEvents = data => {
         data.comp_id;
     } else {
       url =
-        'http://localhost:8000/events/getAllEvents?limit=10&skip=' +
+        'events/getAllEvents?limit=10&skip=' +
         data.page +
         '&job=' +
         data.title +
