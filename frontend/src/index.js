@@ -8,7 +8,7 @@ import thunk from 'redux-thunk';
 import axios from 'axios';
 
 axios.defaults.baseURL =
-  'http://ec2-3-16-187-247.us-east-2.compute.amazonaws.com:8000';
+  'http://ec2-3-19-208-31.us-east-2.compute.amazonaws.com:8000';
 
 const Store = createStore(
   allReducer,

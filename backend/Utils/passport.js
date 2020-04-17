@@ -11,13 +11,13 @@ function auth() {
   console.log(secret);
   var opts = {
     jwtFromRequest: ExtractJwt.fromAuthHeaderWithScheme("jwt"),
-    secretOrKey: secret
+    secretOrKey: secret,
   };
   passport.use(
     new JwtStrategy(opts, (jwt_payload, callback) => {
       const user_id = jwt_payload._id;
       const type = jwt_payload.type;
-      console.log(jwt_payload);
+      //console.log(jwt_payload);
       if (type == "Student") {
         Stud_Profile.findById(user_id, (err, results) => {
           if (err) {

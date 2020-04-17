@@ -1,9 +1,10 @@
 import React from 'react';
 import { Modal, Button, Container, Row, Col, Form } from 'react-bootstrap';
-import axios from 'axios';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { getApplied } from '../../../../actions/getApplied';
+import { updateJob } from '../../../../actions/updateApplied';
+import config from '../../../../config';
 
 class apply extends React.Component {
   state = { setShow: false, tprof_pic: '', data: [] };
@@ -38,31 +39,7 @@ class apply extends React.Component {
       data.idcompany != undefined &&
       data.status != undefined
     ) {
-      //set the with credentials to true
-      axios.defaults.withCredentials = true;
-      //make a post request with the user data
-      axios
-        .post('jobs/updateApplied', data)
-        .then(response => {
-          console.log('Status Code : ', response.status);
-          if (response.status === 200) {
-            this.setState({
-              error: '',
-              authFlag: true
-            });
-          } else {
-            this.setState({
-              error:
-                '<p style={{color: red}}>Please enter correct credentials</p>',
-              authFlag: false
-            });
-          }
-        })
-        .catch(e => {
-          this.setState({
-            error: 'Please enter correct credentials' + e
-          });
-        });
+      this.props.dispatch(updateJob(data));
     }
   };
 
@@ -79,6 +56,7 @@ class apply extends React.Component {
         comp_id: localStorage.getItem('user_id'),
         job_id: this.props.getAllJobs.jobs[0]._id
       };
+      this.props.dispatch(getApplied(data));
     }
   };
 
@@ -140,7 +118,7 @@ class apply extends React.Component {
                   target="_blank"
                   rel="noopener noreferrer"
                   href={
-                    `http://localhost:8000/prof_pic/` +
+                    `${config.apiURL}:8000/prof_pic/` +
                     resume.replace('resume', 'file') +
                     `.pdf`
                   }

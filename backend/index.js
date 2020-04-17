@@ -7,7 +7,7 @@ app.use(bodyParser.json());
 app.use("/prof_pic", express.static("public/uploads"));
 app.use(
   cors({
-    origin: "http://ec2-3-19-208-31.us-east-2.compute.amazonaws.com:3000",
+    origin: "http://localhost:3000",
     credentials: true,
   })
 );
@@ -114,3 +114,5 @@ app.use("/students", students);
 app.use("/messages", messages);
 
 app.listen(8000, () => console.log("Server Listening on port 8000"));
+
+module.exports = app;

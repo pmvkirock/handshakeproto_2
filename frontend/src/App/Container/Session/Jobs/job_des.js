@@ -3,6 +3,7 @@ import { Container, Button } from 'react-bootstrap';
 import Applyjobs from './applyjobs';
 import Applied from './applied';
 import { connect } from 'react-redux';
+import { Link } from 'react-router-dom';
 
 class JobDes extends React.Component {
   constructor(props) {
@@ -89,7 +90,9 @@ class JobDes extends React.Component {
     return (
       <Container className="padding-all">
         <h4>{this.state.data.title}</h4>
-        <p className="margin-b-2">{this.state.data.company_name}</p>
+        <Link to={`/comp_profile/` + this.props.idcompany}>
+          <p className="margin-b-2">{this.state.data.company_name}</p>
+        </Link>
         <p className="intern-type margin-b-2">{this.state.data.job_cat}</p>
         <p className="intern-type margin-b-2">{this.state.data.location}, CA</p>
         <p className="intern-type">{this.state.data.paid}</p>

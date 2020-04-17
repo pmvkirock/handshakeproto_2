@@ -4,15 +4,15 @@ const { checkAuth } = require("../backend/Utils/passport");
 var kafka = require("./kafka/client");
 
 router.post("/stud_profile", checkAuth, (req, res) => {
-  console.log(req.body);
+  //console.log(req.body);
   kafka.make_request("get_Profile", req.body, function (err, results) {
-    console.log("in result");
-    console.log(results);
+    //console.log("in result");
+    //console.log(results);
     if (err) {
       res.status(500).end("Error Occured");
     } else {
-      console.log("Inside else");
-      console.log(results);
+      //console.log("Inside else");
+      //console.log(results);
       var JSONStr = JSON.stringify(results);
       res.status(200).end(JSONStr);
     }

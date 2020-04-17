@@ -13,6 +13,7 @@ import Messages from './Session/Messages';
 import MyApp from './Session/Students/Jobs';
 import Events from './Session/Events';
 import MyEvents from './Session/Students/Events';
+import Company from './Session/AllCompanies/Profile/container';
 import { Route } from 'react-router-dom';
 import { connect } from 'react-redux';
 //import cookie from 'react-cookies';
@@ -40,6 +41,7 @@ class bodyCont extends React.Component {
             <Route path="/home">{jobs}</Route>
             <Route path="/stud_prof">{prof}</Route>
             <Route path="/student_prof/:id" component={Stud_Prof} />
+            <Route path="/comp_profile/:id" component={Company} />
             <Route path="/all_students">
               <Students />
             </Route>

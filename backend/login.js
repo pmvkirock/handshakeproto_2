@@ -8,10 +8,10 @@ auth();
 
 var login = class login {
   login_stud(req, res) {
-    console.log(req.body);
+    //console.log(req.body);
     kafka.make_request("login_stud", req.body, function (err, results) {
-      console.log("in result");
-      console.log(results);
+      //console.log("in result");
+      //console.log(results);
       if (err) {
         res.status(500).end("Error Occured");
       } else {
@@ -29,10 +29,10 @@ var login = class login {
   }
 
   login_comp(req, res) {
-    console.log(req.body);
+    //console.log(req.body);
     kafka.make_request("login_comp", req.body, function (err, results) {
-      console.log("in result");
-      console.log(results);
+      //console.log("in result");
+      //console.log(results);
       if (err) {
         res.status(500).end("Error Occured");
       } else {

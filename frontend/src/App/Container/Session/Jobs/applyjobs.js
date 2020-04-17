@@ -2,6 +2,8 @@ import React from 'react';
 import { Modal, Button, Form } from 'react-bootstrap';
 import axios from 'axios';
 import config from '../../../../config';
+import { applyJob } from '../../../../actions/applyJobs';
+import { connect } from 'react-redux';
 
 class apply extends React.Component {
   state = { setShow: false, tprof_pic: '' };
@@ -51,32 +53,7 @@ class apply extends React.Component {
       resume: this.state.tprof_pic,
       status: 'Pending'
     };
-    //set the with credentials to true
-    axios.defaults.withCredentials = true;
-    //make a post request with the user data
-    axios
-      .post('jobs/insertAppli', data)
-      .then(response => {
-        console.log('Status Code : ', response.status);
-        if (response.status === 200) {
-          this.setState({
-            error: '',
-            authFlag: true
-          });
-          this.handleClose();
-        } else {
-          this.setState({
-            error:
-              '<p style={{color: red}}>Please enter correct credentials</p>',
-            authFlag: false
-          });
-        }
-      })
-      .catch(e => {
-        this.setState({
-          error: 'Please enter correct credentials' + e
-        });
-      });
+    this.props.dispatch(applyJob(data));
   };
 
   render() {
@@ -109,4 +86,10 @@ class apply extends React.Component {
   }
 }
 
-export default apply;
+const mapStateToProps = state => {
+  return {
+    getType: state.getType
+  };
+};
+
+export default connect(mapStateToProps)(apply);
