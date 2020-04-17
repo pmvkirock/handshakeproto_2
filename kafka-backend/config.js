@@ -12,12 +12,14 @@ class Database {
       .connect(connectionString, {
         useNewUrlParser: true,
         useUnifiedTopology: true,
-        useCreateIndex: true
+        useCreateIndex: true,
+        poolSize: 500,
+        bufferMaxEntries: 0,
       })
       .then(() => {
         console.log("Database connection successful");
       })
-      .catch(err => {
+      .catch((err) => {
         console.error("Database connection error");
       });
   }
